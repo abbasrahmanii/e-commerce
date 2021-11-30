@@ -22,24 +22,6 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav className="flex flex-col items-center justify-center flex-1 w-full px-20 text-center">
-        <ul className="flex items-center justify-between">
-          <li className="p-3 mx-8">
-            <Link href="/">
-              <a>خانه</a>
-            </Link>
-          </li>
-          <li className="p-3 mx-8">
-            <Link href="/products">
-              <a>فروشگاه</a>
-            </Link>
-          </li>
-          <h1 className="p-3 mx-8 text-2xl font-bold">فروشگاه اینترنتی</h1>
-          <li className="p-3 mx-8">بلاگ</li>
-          <li className="p-3 mx-8">ارتباط با ما</li>
-        </ul>
-      </nav>
-
       <main
         className="w-full p-10 my-10 font-semibold text-center bg-red-200l"
         id="slider"
@@ -47,7 +29,7 @@ export default function Home(props) {
         <Slider />
       </main>
 
-      <main className="flex flex-row items-center justify-center flex-1 w-full px-20 text-center h-3/5">
+      <main className="flex flex-row flex-wrap items-center justify-center flex-1 w-full px-20 text-center h-3/5">
         <div className="flex flex-col items-center justify-between flex-1 h-48">
           <h3>فروشگاه آنلاین</h3>
           <p>
@@ -62,12 +44,7 @@ export default function Home(props) {
           </Link>
         </div>
         <div className="flex-1">
-          <Image
-            src="/images/asset22.jpeg"
-            alt="shop"
-            width={400}
-            height={400}
-          />
+          <Image src="/images/shop2.jpg" alt="shop" width={575} height={400} />
         </div>
       </main>
       <main className="flex flex-col w-7/12">
@@ -80,12 +57,6 @@ export default function Home(props) {
           <div className="card">P</div> */}
         </section>
       </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <div class="dokmeh-copyrights">
-          Made with <span>💛</span> by Abbas Rahmani
-        </div>
-      </footer>
     </div>
   );
 }
