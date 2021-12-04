@@ -21,7 +21,11 @@ const Header = () => {
             </h1>
           </Link>
           <li className="p-3 mx-8">بلاگ</li>
-          <li className="p-3 mx-8">ارتباط با ما</li>
+          <li className="p-3 mx-8">
+            <Link href="/cart">
+              <a>سبد خرید</a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

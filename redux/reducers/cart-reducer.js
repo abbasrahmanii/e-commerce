@@ -1,5 +1,11 @@
-export const SHOP_DATA = {
-  products: [
+// import { getAllProduct } from "../../data";
+import { BUY_PRODUCT } from "../action-type";
+
+// const dataArray = getAllProduct();
+
+const initialState = {
+  numOfProduct: 4,
+  data: [
     {
       id: "p1",
       title: "shoes",
@@ -88,7 +94,6 @@ export const SHOP_DATA = {
       brand: "Nothing",
       number: 0,
     },
-
     {
       id: "p9",
       title: "spray",
@@ -101,32 +106,30 @@ export const SHOP_DATA = {
       number: 0,
     },
   ],
-  sliders: [
-    { id: "s0", title: "slider 0", image: "/images/slider0.jpeg" },
-    { id: "s1", title: "slider 1", image: "/images/slider1.jpeg" },
-    { id: "s2", title: "slider 2", image: "/images/slider2.jpeg" },
-    { id: "s3", title: "slider 3", image: "/images/slider3.jpeg" },
-  ],
 };
 
-export const getAllProduct = () => {
-  return SHOP_DATA.products;
+// const allProduct = getAllProduct();
+
+export const cartReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case BUY_PRODUCT:
+      return {
+        ...state,
+        data: action.payload.data,
+      };
+    default:
+      return {
+        state,
+      };
+  }
 };
 
-export const getPopularProduct = () => {
-  return SHOP_DATA.products.filter((product) => product.popular);
-};
-
-export const getProductById = (productId) => {
-  return SHOP_DATA.products.filter((product) => product.id === productId);
-};
-
-export const getInCart = () => {
-  return SHOP_DATA.products.filter((product) => product.addCart);
-};
-
-//Slider
-
-export const getAllSlider = () => {
-  return SHOP_DATA.sliders;
-};
+// data: state.data.map((row) => {
+//   if (row.id === id) {
+//     return {
+//       number: 1,
+//     };
+//   } else {
+//     return row;
+//   }
+// }),
