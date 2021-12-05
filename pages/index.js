@@ -8,9 +8,7 @@ import Slider from "../components/slider";
 import { getPopularProduct } from "../data";
 
 export default function Home(props) {
-  // const popularProductsList = getPopularProduct();
   const popularProductsList = props.selectedProducts;
-
   if (!popularProductsList) {
     <p>Loading...</p>;
   }
@@ -51,10 +49,6 @@ export default function Home(props) {
         <h1 className="p-2 m-2 text-xl text-center">محبوب ترین محصولات</h1>
         <section className="flex justify-between mb-8">
           <ListItems products={popularProductsList} />
-          {/* <div className="card">P</div>
-          <div className="card">P</div>
-          <div className="card">P</div>
-          <div className="card">P</div> */}
         </section>
       </main>
     </div>

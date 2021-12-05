@@ -5,13 +5,13 @@ import { getAllProduct, getProductById } from "../../data";
 const Product = (props) => {
   const product = props.selectedProduct;
 
-  if (!product[0]) {
+  if (!product) {
     return <p>Invalid link</p>;
   }
 
   return (
     <div>
-      <h1>{product[0].title}</h1>
+      <h1>{product.name}</h1>
       {/* Taghir Bdahim Bdn */}
       {/* <Card
         id={productById[0].id}

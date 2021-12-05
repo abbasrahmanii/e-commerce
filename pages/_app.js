@@ -1,18 +1,17 @@
 import { Fragment } from "react";
-import "tailwindcss/tailwind.css";
-import { Provider } from "react-redux";
-import store from "../redux/store";
 import Footer from "../components/footer";
 import Header from "../components/header";
+import "tailwindcss/tailwind.css";
+import { StoreProvider } from "../context/Store";
 
 function MyApp({ Component, pageProps }) {
   return (
     <Fragment>
-      <Provider store={store}>
+      <StoreProvider>
         <Header />
         <Component {...pageProps} />
         <Footer />
-      </Provider>
+      </StoreProvider>
     </Fragment>
   );
 }

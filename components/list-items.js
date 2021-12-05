@@ -1,4 +1,4 @@
-import Card from "./ui/card";
+import Card from "./card";
 
 const ListItems = (props) => {
   const { products } = props;
@@ -8,11 +8,9 @@ const ListItems = (props) => {
         <Card
           key={product.id}
           id={product.id}
-          title={product.title}
+          name={product.name}
           image={product.image}
           price={product.price}
-          setAddCart={props.setAddCart}
-          addCart={props.addCart}
         />
       ))}
     </ul>
