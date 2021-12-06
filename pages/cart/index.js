@@ -2,9 +2,11 @@ import { useContext } from "react";
 import dynamic from "next/dynamic";
 import { Store } from "../../context/Store";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
+import { useRouter } from "next/router";
 
 const CartPage = () => {
+  const router = useRouter();
   const { state, dispatch } = useContext(Store);
   const { cart, products } = state;
 
@@ -23,6 +25,9 @@ const CartPage = () => {
   };
   const remoteItemHandler = (item) => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
+  };
+  const checkOutHandler = () => {
+    router.push("/shipping");
   };
   // if (cart.cartItems.length === 0) {
   //   return (
@@ -114,7 +119,9 @@ const CartPage = () => {
                 </h2>
               </div>
               <div>
-                <button>Check Out</button>
+                <button className="bg-red-100" onClick={checkOutHandler}>
+                  Check Out
+                </button>
               </div>
             </div>
           </div>
