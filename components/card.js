@@ -4,10 +4,9 @@ import { useRouter } from "next/router";
 
 import { useContext } from "react";
 import { Store } from "../context/Store";
-import loadConfig from "next/dist/server/config";
 
 const Card = (props) => {
-  const { id, name, image, price } = props;
+  const { id, name, price } = props;
   const router = useRouter();
 
   const { state, dispatch } = useContext(Store);
@@ -27,25 +26,23 @@ const Card = (props) => {
   };
 
   return (
-    <div className="flex flex-col justify-between w-1/4 h-64 p-4 bg-indigo-200 rounded-lg shadow-xl">
-      <div className="text-center">image c</div>
-      <div className="flex flex-col">
-        <h3>{name}</h3>
-        <p>{price} تـومـان</p>
-        <div className="flex justify-between gap-2">
-          <Link href={`products/${id}`}>
-            <a className="inline-block p-2 m-2 mx-auto text-sm text-white bg-yellow-600">
-              توضیحات بیشتر
-            </a>
-          </Link>
-          <button
-            className="inline-block p-2 m-2 mx-auto text-sm bg-green-600"
-            onClick={addToCartHandler}
-          >
-            افزودن به سبد خرید
-          </button>
-        </div>
-      </div>
+    <div className="flex flex-col justify-between w-1/4 p-4 bg-indigo-200 rounded-lg shadow-xl hover:bg-indigo-300">
+      <Link href={`products/${id}`}>
+        <a>
+          <div className="text-center w-full rounded-lg h-52 bg-green-700 mx-auto flex items-center justify-center text-white">
+            image c
+          </div>
+          {/* <Image src='/images'/> */}
+          <h3 className="my-2">{name}</h3>
+          <p className="my-2">{price} تـومـان</p>
+        </a>
+      </Link>
+      <button
+        className="bg-gray-700 text-white p-2 hover:bg-gray-600 focus:bg-gray-500 rounded-lg"
+        onClick={addToCartHandler}
+      >
+        افزودن به سبد خرید
+      </button>
     </div>
   );
 };

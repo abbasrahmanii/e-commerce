@@ -21,11 +21,6 @@ const Slider = () => {
     }
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     forwardHandler();
-  //   }, 7000);
-  // }, [sliderNum]);
   return (
     <div>
       <div className="relative">
@@ -35,7 +30,6 @@ const Slider = () => {
         >
           <p className="">Prev</p>
         </span>
-        {/* {allSlider[sliderNum].title} */}
         <div className="relative rounded-lg">
           <Image
             className="rounded-lg"
@@ -49,7 +43,7 @@ const Slider = () => {
           className="absolute z-10 p-3 bg-indigo-100 rounded-full cursor-pointer w-14 h-14 top-1/2 right-5"
           onClick={forwardHandler}
         >
-          <p className="">Next</p>
+          <p>Next</p>
         </span>
       </div>
     </div>

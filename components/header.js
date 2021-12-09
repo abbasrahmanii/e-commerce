@@ -3,7 +3,7 @@ import { Store } from "../context/Store";
 import { useContext } from "react";
 
 const Header = () => {
-  const { state, dispatch } = useContext(Store);
+  const { state } = useContext(Store);
   const { cart } = state;
   return (
     <header className="sticky top-0 left-0 z-50 p-3 bg-green-400 shadow-xl">

@@ -5,8 +5,6 @@ import { useContext } from "react";
 
 const ProductsPage = () => {
   const allProduct = getAllProduct();
-  const { state, dispatch } = useContext(Store);
-  const { cart } = state;
   return (
     <div className="w-full">
       <div className="flex flex-col w-3/4 pb-8 mx-auto">

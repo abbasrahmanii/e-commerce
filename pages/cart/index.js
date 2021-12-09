@@ -2,7 +2,6 @@ import { useContext } from "react";
 import dynamic from "next/dynamic";
 import { Store } from "../../context/Store";
 import Link from "next/link";
-// import Image from "next/image";
 import { useRouter } from "next/router";
 
 const CartPage = () => {
@@ -29,20 +28,8 @@ const CartPage = () => {
   const checkOutHandler = () => {
     router.push("/shipping");
   };
-  // if (cart.cartItems.length === 0) {
-  //   return (
-  //     <p className="p-4 m-2 text-2xl text-center text-red-500">Cart is Empty</p>
-  //   );
-  // }
+
   return (
-    // <div>
-    //   <h1 className="p-5 text-4xl text-center">The Cart Page</h1>
-    //   <div>
-    //     {cart.cartItems.map((item) => (
-    //       <div key={item.id}>{item.name}</div>
-    //     ))}
-    //   </div>
-    // </div>
     <div>
       <h1 className="p-4 m-2 text-3xl text-center">Shopping Cart</h1>
       {cart.cartItems.length === 0 ? (
@@ -99,7 +86,10 @@ const CartPage = () => {
                       </th>
                       <th>${item.price}</th>
                       <th>
-                        <button onClick={() => remoteItemHandler(item)}>
+                        <button
+                          className="bg-red-500 py-1 px-4 rounded-md text-white"
+                          onClick={() => remoteItemHandler(item)}
+                        >
                           x
                         </button>
                       </th>
