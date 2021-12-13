@@ -3,11 +3,22 @@ import { Store } from "../context/Store";
 
 const FilterList = () => {
   const [filterValue, setFilterValue] = useState("");
+  const [free, setFree] = useState(false);
   const { state, dispatch } = useContext(Store);
 
   const filterHandler = (e) => {
-    dispatch({ type: "FILTER_LIST", payload: e.target.value });
+    dispatch({
+      type: "FILTER_LIST",
+      payload: { filter: e.target.value, check: free },
+    });
     setFilterValue(e.target.value);
+  };
+  const checkboxHandler = (e) => {
+    dispatch({
+      type: "FILTER_LIST",
+      payload: { filter: filterValue, check: e.target.checked },
+    });
+    setFree((prev) => !prev);
   };
 
   return (
@@ -23,15 +34,15 @@ const FilterList = () => {
         <option value="Clothing">Clothing</option>
         <option value="Home Appliances">Home Appliances</option>
       </select>
-      {/* <label htmlFor="checkbox">
-        ersal rayegan
+      <label htmlFor="checkbox">
+        Free Delivery
         <input
           id="checkbox"
           type="checkbox"
           checked={free}
           onChange={checkboxHandler}
         />
-      </label> */}
+      </label>
     </div>
   );
 };

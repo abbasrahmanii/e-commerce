@@ -12,6 +12,7 @@ const initialState = {
   },
   products: getAllProduct(),
   menuStatus: false,
+  checkbox: false,
   fiteredProducts: getAllProduct(),
 };
 
@@ -49,30 +50,54 @@ const reducer = (state, action) => {
       };
     }
     case "FILTER_LIST":
-      if (action.payload === "") {
-        // Cookies.set("filter", JSON.stringify(state.products));
-        return {
-          ...state,
-          fiteredProducts: state.products,
-        };
+      if (action.payload.filter === "") {
+        if (action.payload.check === false) {
+          return {
+            ...state,
+            fiteredProducts: state.products,
+          };
+        } else {
+          const updated = state.products.filter((p) => p.freeDelivery === true);
+          return {
+            ...state,
+            fiteredProducts: updated,
+          };
+        }
       } else {
-        const updatedProducts = state.products.filter(
-          (p) => p.category === action.payload
-        );
-        // Cookies.set("filter", JSON.stringify(fiteredProducts));
-        return {
-          ...state,
-          fiteredProducts: updatedProducts,
-        };
+        if (action.payload.check === false) {
+          const updated = state.products.filter(
+            (p) => p.category === action.payload.filter
+          );
+          return {
+            ...state,
+            fiteredProducts: updated,
+          };
+        } else {
+          const updated = state.products.filter(
+            (p) =>
+              p.category === action.payload.filter && p.freeDelivery === true
+          );
+          // const updated = state.products.filter(
+          //   (p) => p.category === action.payload.filter
+          // );
+          // const newValue = updated.filter(
+          //   (d) => d.popular === action.payload.check
+          // );
+          return {
+            ...state,
+            fiteredProducts: updated,
+          };
+        }
       }
-    case "CHECKBOX":
-      const checkbox = state.fiteredProducts.filter(
-        (p) => p.popular === action.payload
-      );
-      return {
-        ...state,
-        fiteredProducts: checkbox,
-      };
+
+    // case "CHECKBOX":
+    //   const checkbox = state.fiteredProducts.filter(
+    //     (p) => p.popular === action.payload
+    //   );
+    //   return {
+    //     ...state,
+    //     fiteredProducts: checkbox,
+    //   };
     case "MENU":
       return {
         ...state,
@@ -88,3 +113,23 @@ export const StoreProvider = (props) => {
   const value = { state, dispatch };
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 };
+
+// case "FILTER_LIST":
+//       if (action.payload === "") {
+//         const checkboxCheck = state.products.filter(
+//           (p) => p.popular === state.checkbox
+//         );
+//         return {
+//           ...state,
+//           // fiteredProducts: state.products,
+//           fiteredProducts: checkboxCheck,
+//         };
+//       } else {
+//         const updatedProducts = state.products.filter(
+//           (p) => p.category === action.payload
+//         );
+//         return {
+//           ...state,
+//           fiteredProducts: updatedProducts,
+//         };
+//       }

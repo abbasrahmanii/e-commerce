@@ -10,6 +10,7 @@ export const SHOP_DATA = {
       category: "Clothing",
       quantity: 0,
       countInStock: 20,
+      freeDelivery: false,
     },
     {
       id: "p2",
@@ -21,6 +22,7 @@ export const SHOP_DATA = {
       category: "Personal",
       quantity: 0,
       countInStock: 20,
+      freeDelivery: false,
     },
     {
       id: "p3",
@@ -32,6 +34,7 @@ export const SHOP_DATA = {
       category: "Clothing",
       quantity: 0,
       countInStock: 20,
+      freeDelivery: true,
     },
     {
       id: "p4",
@@ -43,6 +46,7 @@ export const SHOP_DATA = {
       category: "Clothing",
       quantity: 0,
       countInStock: 20,
+      freeDelivery: true,
     },
     {
       id: "p5",
@@ -54,6 +58,7 @@ export const SHOP_DATA = {
       category: "Home Appliances",
       quantity: 0,
       countInStock: 20,
+      freeDelivery: false,
     },
     {
       id: "p6",
@@ -65,6 +70,7 @@ export const SHOP_DATA = {
       category: "Home Appliances",
       quantity: 0,
       countInStock: 20,
+      freeDelivery: true,
     },
     {
       id: "p7",
@@ -73,9 +79,10 @@ export const SHOP_DATA = {
       image: "/images/asset32.jpeg",
       popular: false,
       brand: "Nothing",
-      category: "Nothing",
+      category: "Home Appliances",
       quantity: 0,
       countInStock: 20,
+      freeDelivery: false,
     },
     {
       id: "p8",
@@ -87,6 +94,7 @@ export const SHOP_DATA = {
       category: "Clothing",
       quantity: 0,
       countInStock: 20,
+      freeDelivery: true,
     },
 
     {
@@ -99,6 +107,7 @@ export const SHOP_DATA = {
       category: "Home Appliances",
       quantity: 0,
       countInStock: 0,
+      freeDelivery: false,
     },
   ],
   sliders: [
