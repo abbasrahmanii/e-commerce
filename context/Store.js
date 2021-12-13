@@ -11,6 +11,8 @@ const initialState = {
       : [],
   },
   products: getAllProduct(),
+  menuStatus: false,
+  fiteredProducts: getAllProduct(),
 };
 
 const reducer = (state, action) => {
@@ -26,7 +28,6 @@ const reducer = (state, action) => {
           )
         : [...state.cart.cartItems, newItem];
       Cookies.set("cartItems", JSON.stringify(cartItems));
-
       return {
         ...state,
         cart: {
@@ -47,6 +48,36 @@ const reducer = (state, action) => {
         },
       };
     }
+    case "FILTER_LIST":
+      if (action.payload === "") {
+        // Cookies.set("filter", JSON.stringify(state.products));
+        return {
+          ...state,
+          fiteredProducts: state.products,
+        };
+      } else {
+        const updatedProducts = state.products.filter(
+          (p) => p.category === action.payload
+        );
+        // Cookies.set("filter", JSON.stringify(fiteredProducts));
+        return {
+          ...state,
+          fiteredProducts: updatedProducts,
+        };
+      }
+    case "CHECKBOX":
+      const checkbox = state.fiteredProducts.filter(
+        (p) => p.popular === action.payload
+      );
+      return {
+        ...state,
+        fiteredProducts: checkbox,
+      };
+    case "MENU":
+      return {
+        ...state,
+        menuStatus: !state.menuStatus,
+      };
     default:
       return state;
   }

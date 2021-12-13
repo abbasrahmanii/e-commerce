@@ -17,7 +17,7 @@ export default function Home(props) {
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <title>My E-Commerce</title>
+        <title>My Commerce</title>
       </Head>
 
       <main
@@ -31,9 +31,9 @@ export default function Home(props) {
         <div className="flex flex-col items-center justify-between flex-1 h-48">
           <h3>فروشگاه آنلاین</h3>
           <p>
-            فروشگاه اینترنتی ما با بیش از نیم قرن سابقه در زمینه فروش و پخش
-            ، برترین فروشگاه ایران و جهان میباشد که کیفیت و رضایت مشتریان
-            عزیز را مهمترین سرمشق فعالیت خود میداند.
+            فروشگاه اینترنتی ما با بیش از نیم قرن سابقه در زمینه فروش و پخش ،
+            برترین فروشگاه ایران و جهان میباشد که کیفیت و رضایت مشتریان عزیز را
+            مهمترین سرمشق فعالیت خود میداند.
           </p>
           <Link href="/products">
             <a className="inline-block px-4 py-2 my-4 bg-gray-700 text-white p-2 hover:bg-gray-600 focus:bg-gray-500 rounded-lg">

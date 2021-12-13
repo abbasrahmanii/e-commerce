@@ -24,12 +24,6 @@ const Slider = () => {
   return (
     <div>
       <div className="relative">
-        <span
-          className="absolute z-10 p-3 bg-indigo-100 rounded-full cursor-pointer w-14 h-14 top-1/2 left-5"
-          onClick={backwardHandler}
-        >
-          <p className="">Prev</p>
-        </span>
         <div className="relative rounded-lg">
           <Image
             className="rounded-lg"
@@ -38,9 +32,14 @@ const Slider = () => {
             height={790}
           />
         </div>
-
         <span
-          className="absolute z-10 p-3 bg-indigo-100 rounded-full cursor-pointer w-14 h-14 top-1/2 right-5"
+          className="absolute p-3 bg-indigo-100 rounded-full cursor-pointer w-14 h-14 top-1/2 left-5"
+          onClick={backwardHandler}
+        >
+          <p>Prev</p>
+        </span>
+        <span
+          className="absolute p-3 bg-indigo-100 rounded-full cursor-pointer w-14 h-14 top-1/2 right-5"
           onClick={forwardHandler}
         >
           <p>Next</p>

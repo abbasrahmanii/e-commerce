@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import dynamic from "next/dynamic";
-import { Store } from "../../context/Store";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { Store } from "../../context/Store";
 
 const CartPage = () => {
   const router = useRouter();
@@ -53,18 +54,17 @@ const CartPage = () => {
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody className="">
+                <tbody>
                   {cart.cartItems.map((item) => (
                     <tr key={item.id}>
                       <th>
                         <Link href={`/products/${item.id}`}>
-                          {/* <Image
+                          <Image
                             src={item.image}
                             alt={item.name}
                             width={50}
                             height={50}
-                          ></Image> */}
-                          image place
+                          ></Image>
                         </Link>
                       </th>
                       <th>

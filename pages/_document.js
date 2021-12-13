@@ -6,7 +6,7 @@ class MyDocument extends Document {
       <Html lang="fa-IR" dir="rtl">
         <Head>
           <meta charSet="utf-8" />
-          <title>My E-Commerce</title>
+          {/* <title>My E-Commerce</title> */}
         </Head>
         <body>
           <Main />
