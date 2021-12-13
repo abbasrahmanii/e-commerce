@@ -1,11 +1,9 @@
 import { useContext } from "react";
 import ListItems from "../../components/list-items";
-import { getAllProduct } from "../../data";
 import { Store } from "../../context/Store";
 import FilterList from "../../components/filter-list";
 
 const ProductsPage = () => {
-  // const allProduct = getAllProduct();
   const { state } = useContext(Store);
   const { fiteredProducts } = state;
 
@@ -19,10 +17,5 @@ const ProductsPage = () => {
     </div>
   );
 };
-// export async function getServerSideProps() {
-//   return {
-//     props: {},
-//   };
-// }
 
 export default ProductsPage;

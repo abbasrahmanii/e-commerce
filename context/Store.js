@@ -77,31 +77,21 @@ const reducer = (state, action) => {
             (p) =>
               p.category === action.payload.filter && p.freeDelivery === true
           );
-          // const updated = state.products.filter(
-          //   (p) => p.category === action.payload.filter
-          // );
-          // const newValue = updated.filter(
-          //   (d) => d.popular === action.payload.check
-          // );
           return {
             ...state,
             fiteredProducts: updated,
           };
         }
       }
-
-    // case "CHECKBOX":
-    //   const checkbox = state.fiteredProducts.filter(
-    //     (p) => p.popular === action.payload
-    //   );
-    //   return {
-    //     ...state,
-    //     fiteredProducts: checkbox,
-    //   };
     case "MENU":
       return {
         ...state,
         menuStatus: !state.menuStatus,
+      };
+    case "CLOSE_MENU":
+      return {
+        ...state,
+        menuStatus: false,
       };
     default:
       return state;

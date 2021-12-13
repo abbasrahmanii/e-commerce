@@ -22,8 +22,9 @@ const FilterList = () => {
   };
 
   return (
-    <div className="my-4">
+    <div className="my-4 flex flex-col bg-indigo-400 w-min p-3">
       <select
+        className="w-min p-2 focus:outline-none"
         name="category"
         id="category"
         value={filterValue}
@@ -34,14 +35,15 @@ const FilterList = () => {
         <option value="Clothing">Clothing</option>
         <option value="Home Appliances">Home Appliances</option>
       </select>
-      <label htmlFor="checkbox">
-        Free Delivery
+      <label htmlFor="checkbox" className="py-2 text-white">
         <input
+          className="ml-2"
           id="checkbox"
           type="checkbox"
           checked={free}
           onChange={checkboxHandler}
         />
+        ارسال رایگان
       </label>
     </div>
   );
