@@ -24,6 +24,10 @@ const Card = (props) => {
     dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity } });
     router.push("/cart");
   };
+  //add comma
+  const numberWithCommas = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   return (
     <div className="flex flex-col justify-between w-1/4 p-4 bg-indigo-200 rounded-lg shadow-xl hover:bg-indigo-300">
@@ -34,7 +38,7 @@ const Card = (props) => {
           </div> */}
           <Image src={image} width={250} height={250} className="rounded-lg" />
           <h3 className="my-2">{name}</h3>
-          <p className="my-2">{price} تـومـان</p>
+          <p className="my-2">{numberWithCommas(price)} تـومـان</p>
         </a>
       </Link>
       <button

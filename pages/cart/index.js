@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Store } from "../../context/Store";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 const CartPage = () => {
   const router = useRouter();
@@ -28,6 +29,10 @@ const CartPage = () => {
   };
   const checkOutHandler = () => {
     router.push("/shipping");
+  };
+  //add comma
+  const numberWithCommas = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   return (
@@ -78,20 +83,28 @@ const CartPage = () => {
                           onChange={(e) => updateCartHandler(item, e)}
                         >
                           {[...Array(item.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
+                            <option key={x + 1} value={x + 1} className="w-6">
                               {x + 1}
                             </option>
                           ))}
                         </select>
                       </th>
-                      <th>${item.price}</th>
-                      <th>
-                        <button
+                      <th>{numberWithCommas(item.price)} تومان</th>
+                      <th className="">
+                        <span className="flex justify-center items-center">
+                          <RiDeleteBinLine
+                            color="red"
+                            fontSize="1.2rem"
+                            cursor="pointer"
+                            onClick={() => remoteItemHandler(item)}
+                          />
+                        </span>
+                        {/* <button
                           className="bg-red-500 py-1 px-4 rounded-md text-white"
                           onClick={() => remoteItemHandler(item)}
                         >
                           x
-                        </button>
+                        </button> */}
                       </th>
                     </tr>
                   ))}
@@ -102,15 +115,24 @@ const CartPage = () => {
           <div className="flex items-center justify-around w-1/4 p-4 text-center bg-indigo-500">
             <div>
               <div>
-                <h2>
-                  Subtotal ({cart.cartItems.reduce((a, c) => a + c.quantity, 0)}{" "}
-                  items) : $
-                  {cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
+                <h2 className="text-white">
+                  جمع کل (
+                  {numberWithCommas(
+                    cart.cartItems.reduce((a, c) => a + c.quantity, 0)
+                  )}{" "}
+                  محصول) :
+                  {numberWithCommas(
+                    cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
+                  )}
+                  تومان
                 </h2>
               </div>
               <div>
-                <button className="bg-red-100" onClick={checkOutHandler}>
-                  Check Out
+                <button
+                  className="bg-white py-2 px-4 mt-6"
+                  onClick={checkOutHandler}
+                >
+                  پرداخت
                 </button>
               </div>
             </div>

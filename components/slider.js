@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { BiChevronLeftCircle, BiChevronRightCircle } from "react-icons/bi";
+import { RiFocusLine, RiFocusFill } from "react-icons/ri";
 
 import { getAllSlider } from "../data";
 
@@ -20,6 +22,14 @@ const Slider = () => {
       setSliderNum(allSlider.length - 1);
     }
   };
+  useEffect(() => {
+    let slider = setInterval(() => {
+      // setIndex(index + 1)
+      // setSliderNum((prev) => prev + 1);
+      forwardHandler();
+    }, 3500);
+    return () => clearInterval(slider);
+  }, [sliderNum]);
 
   return (
     <div>
@@ -33,17 +43,29 @@ const Slider = () => {
           />
         </div>
         <span
-          className="absolute p-3 bg-indigo-100 rounded-full cursor-pointer w-14 h-14 top-1/2 left-5"
+          className="absolute rounded-full cursor-pointer top-1/2 left-5"
           onClick={backwardHandler}
         >
-          <p>Prev</p>
+          <BiChevronLeftCircle color="white" fontSize="2.5rem" />
         </span>
         <span
-          className="absolute p-3 bg-indigo-100 rounded-full cursor-pointer w-14 h-14 top-1/2 right-5"
+          className="absolute rounded-full cursor-pointer top-1/2 right-5"
           onClick={forwardHandler}
         >
-          <p>Next</p>
+          <BiChevronRightCircle color="white" fontSize="2.5rem" />
         </span>
+        <div className="flex flex-row-reverse absolute bottom-2 right-1/2 translate-x-1/2">
+          {allSlider.map((p) => (
+            <div key={p.id}>
+              <span hidden={p.id === `s${sliderNum}`}>
+                <RiFocusLine fontSize="1.1rem" color="#eee" />
+              </span>
+              <span hidden={p.id !== `s${sliderNum}`}>
+                <RiFocusFill fontSize="1.1rem" color="#eee" />
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

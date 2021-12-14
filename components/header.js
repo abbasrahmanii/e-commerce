@@ -2,6 +2,7 @@ import { useContext, useState, useEffect, Fragment } from "react";
 import Link from "next/link";
 import { Store } from "../context/Store";
 import { BiMenu } from "react-icons/bi";
+import { BsCart3 } from "react-icons/bs";
 
 const Header = () => {
   const { state, dispatch } = useContext(Store);
@@ -17,7 +18,7 @@ const Header = () => {
   return (
     <Fragment>
       <header
-        className="sticky top-0 left-0 bg-green-400 shadow-xl h-20 transition-all flex w-full"
+        className="font-serif sticky top-0 left-0 bg-green-400 shadow-xl h-20 transition-all flex w-full"
         style={{ zIndex: 1 }}
       >
         <nav className="flex w-full relative justify-center items-center bg-gray-600">
@@ -33,45 +34,35 @@ const Header = () => {
             <ul onMouseLeave={closeMenuHandler}>
               <li className="p-1 m-1">
                 <Link href="/">
-                  <a className="block">خانه</a>
+                  <a className="block px-5">خانه</a>
                 </Link>
               </li>
+              <hr className="border-gray-600" />
               <li className="p-1 m-1">
                 <Link href="/products">
-                  <a className="block">فروشگاه</a>
+                  <a className="block px-5">فروشگاه</a>
                 </Link>
               </li>
+              <hr className="border-gray-600" />
               <li className="p-1 m-1" onClick={closeMenuHandler}>
                 <Link href="/products">
-                  <a className="block">بلاگ</a>
-                </Link>
-              </li>
-              <li className="p-1 m-1">
-                <Link href="/cart">
-                  <a className="block">
-                    سبد خرید
-                    {cart.cartItems.length > 0 && (
-                      <span className="px-2 py-1 text-white bg-red-600 rounded-full">
-                        {cart.cartItems.length}
-                      </span>
-                    )}
-                  </a>
+                  <a className="block px-5">بلاگ</a>
                 </Link>
               </li>
             </ul>
           </div>
           <ul className="w-3/4 flex items-center justify-between">
-            <li className="p-3 mx-8  md:hidden block">
+            <li className="p-3 mx-8 md:hidden block text-white">
               <span onClick={menuHandler}>
-                <BiMenu />
+                <BiMenu fontSize="1.7rem" />
               </span>
             </li>
-            <li className="p-3 mx-8 hidden md:block text-white">
+            <li className="p-3 mx-8 hidden md:block text-white text-xl hover:text-green-400">
               <Link href="/">
                 <a>خانه</a>
               </Link>
             </li>
-            <li className="mx-8 p-3 hidden md:block text-white">
+            <li className="mx-8 p-3 hidden md:block text-white text-xl hover:text-green-400">
               <Link href="/products">
                 <a>فروشگاه</a>
               </Link>
@@ -81,15 +72,17 @@ const Header = () => {
                 فروشگاه اینترنتی
               </h1>
             </Link>
-            <li className="p-3 mx-8  hidden md:block text-white">بلاگ</li>
-            <li className="p-3 mx-8 hidden md:block text-white">
+            <li className="p-3 mx-8  hidden md:block text-white text-xl hover:text-green-400">
+              بلاگ
+            </li>
+            <li className="p-3 mx-8 text-white relative hover:text-green-400">
               <Link href="/cart">
                 <a>
-                  سبد خرید
+                  <BsCart3 fontSize="1.3rem" />
                   {cart.cartItems.length > 0 && (
-                    <span className="px-2 py-1 text-white bg-red-600 rounded-full">
+                    <div className="text-indigo-900 w-4 h-4 bg-gray-300 rounded-full absolute top-0 right-1 flex justify-center items-center text-xs">
                       {cart.cartItems.length}
-                    </span>
+                    </div>
                   )}
                 </a>
               </Link>
