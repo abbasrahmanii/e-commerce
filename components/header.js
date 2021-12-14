@@ -18,39 +18,38 @@ const Header = () => {
   return (
     <Fragment>
       <header
-        className="font-serif sticky top-0 left-0 bg-green-400 shadow-xl h-20 transition-all flex w-full"
+        className="font-serif sticky top-0 left-0 bg-green-400  shadow-xl h-20 transition-all flex w-full"
         style={{ zIndex: 1 }}
       >
-        <nav className="flex w-full relative justify-center items-center bg-gray-600">
-          {/* <Menu /> */}
-          <div
-            className="w-full bg-green-400 top-20 absolute md:hidden duration-500 ease-in-out"
-            style={{
-              // transform: menuStatus ? `translateY(0%)` : `translateY(-100%)`,
-              visibility: menuStatus ? "visible" : "hidden",
-              opacity: menuStatus ? "1" : "0",
-            }}
-          >
-            <ul onMouseLeave={closeMenuHandler}>
-              <li className="p-1 m-1">
-                <Link href="/">
-                  <a className="block px-5">خانه</a>
-                </Link>
-              </li>
-              <hr className="border-gray-600" />
-              <li className="p-1 m-1">
-                <Link href="/products">
-                  <a className="block px-5">فروشگاه</a>
-                </Link>
-              </li>
-              <hr className="border-gray-600" />
-              <li className="p-1 m-1" onClick={closeMenuHandler}>
-                <Link href="/products">
-                  <a className="block px-5">بلاگ</a>
-                </Link>
-              </li>
-            </ul>
-          </div>
+        {/* <nav className="flex w-full relative justify-center items-center bg-gray-600 shadow-xl"> */}
+        <div
+          className="w-full bg-green-400 top-20 absolute md:hidden duration-500 ease-in-out"
+          style={{
+            visibility: menuStatus ? "visible" : "hidden",
+            opacity: menuStatus ? "1" : "0",
+          }}
+        >
+          <ul onMouseLeave={closeMenuHandler}>
+            <li className="p-2 hover:bg-green-500">
+              <Link href="/">
+                <a className="block px-5">خانه</a>
+              </Link>
+            </li>
+            <hr className="border-gray-600" />
+            <li className="p-2 hover:bg-green-500">
+              <Link href="/products">
+                <a className="block px-5">فروشگاه</a>
+              </Link>
+            </li>
+            <hr className="border-gray-600" />
+            <li className="p-2 hover:bg-green-500">
+              <Link href="/products">
+                <a className="block px-5">بلاگ</a>
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <nav className="flex w-full relative justify-center items-center bg-gray-600 shadow-xl">
           <ul className="w-3/4 flex items-center justify-between">
             <li className="p-3 mx-8 md:hidden block text-white">
               <span onClick={menuHandler}>

@@ -103,23 +103,3 @@ export const StoreProvider = (props) => {
   const value = { state, dispatch };
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 };
-
-// case "FILTER_LIST":
-//       if (action.payload === "") {
-//         const checkboxCheck = state.products.filter(
-//           (p) => p.popular === state.checkbox
-//         );
-//         return {
-//           ...state,
-//           // fiteredProducts: state.products,
-//           fiteredProducts: checkboxCheck,
-//         };
-//       } else {
-//         const updatedProducts = state.products.filter(
-//           (p) => p.category === action.payload
-//         );
-//         return {
-//           ...state,
-//           fiteredProducts: updatedProducts,
-//         };
-//       }

@@ -111,10 +111,30 @@ export const SHOP_DATA = {
     },
   ],
   sliders: [
-    { id: "s0", title: "slider 0", image: "/images/slider0.jpeg" },
-    { id: "s1", title: "slider 1", image: "/images/slider1.jpeg" },
-    { id: "s2", title: "slider 2", image: "/images/slider2.jpeg" },
-    { id: "s3", title: "slider 3", image: "/images/slider3.jpeg" },
+    {
+      id: "s1",
+      title: "slider 1",
+      image: "/images/slider1.jpeg",
+      url: "/products",
+    },
+    {
+      id: "s2",
+      title: "slider 2",
+      image: "/images/slider2.jpeg",
+      url: "/products",
+    },
+    {
+      id: "s0",
+      title: "slider 0",
+      image: "/images/slider0.jpeg",
+      url: "/products",
+    },
+    {
+      id: "s3",
+      title: "slider 3",
+      image: "/images/slider3.jpeg",
+      url: "/products",
+    },
   ],
 };
 
