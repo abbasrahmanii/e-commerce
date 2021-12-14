@@ -8,6 +8,12 @@ import { getAllSlider } from "../data";
 const Slider = () => {
   const allSlider = getAllSlider();
   const [sliderNum, setSliderNum] = useState(0);
+
+  const indicatorHandler = (indicatorNum) => {
+    const indicator = +indicatorNum[1];
+    setSliderNum(indicator);
+  };
+
   const forwardHandler = () => {
     if (sliderNum < allSlider.length - 1) {
       setSliderNum((prev) => prev + 1);
@@ -15,6 +21,7 @@ const Slider = () => {
       setSliderNum(0);
     }
   };
+
   const backwardHandler = () => {
     if (sliderNum !== 0) {
       setSliderNum((prev) => prev - 1);
@@ -22,10 +29,9 @@ const Slider = () => {
       setSliderNum(allSlider.length - 1);
     }
   };
+
   useEffect(() => {
     let slider = setInterval(() => {
-      // setIndex(index + 1)
-      // setSliderNum((prev) => prev + 1);
       forwardHandler();
     }, 3500);
     return () => clearInterval(slider);
@@ -54,10 +60,13 @@ const Slider = () => {
         >
           <BiChevronRightCircle color="white" fontSize="2.5rem" />
         </span>
-        <div className="flex flex-row-reverse absolute bottom-2 right-1/2 translate-x-1/2">
+        <div className="flex flex-row-reverse absolute bottom-4 right-1/2 translate-x-1/2">
           {allSlider.map((p) => (
             <div key={p.id}>
-              <span hidden={p.id === `s${sliderNum}`}>
+              <span
+                hidden={p.id === `s${sliderNum}`}
+                onClick={(e) => indicatorHandler(p.id)}
+              >
                 <RiFocusLine fontSize="1.1rem" color="#eee" />
               </span>
               <span hidden={p.id !== `s${sliderNum}`}>
