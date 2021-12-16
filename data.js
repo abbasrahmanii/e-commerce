@@ -2,7 +2,7 @@ export const SHOP_DATA = {
   products: [
     {
       id: "p1",
-      name: "shoes",
+      name: "دمپایی",
       price: 146250,
       image: "/images/asset21.jpeg",
       popular: true,
@@ -14,7 +14,7 @@ export const SHOP_DATA = {
     },
     {
       id: "p2",
-      name: "book",
+      name: "کتاب",
       price: 45000,
       image: "/images/asset22.jpeg",
       popular: false,
@@ -26,7 +26,7 @@ export const SHOP_DATA = {
     },
     {
       id: "p3",
-      name: "watch",
+      name: "ساعت هوشمند",
       price: 396000,
       image: "/images/asset23.jpeg",
       popular: false,
@@ -38,7 +38,7 @@ export const SHOP_DATA = {
     },
     {
       id: "p4",
-      name: "shirt",
+      name: "پولوشرت",
       price: 159000,
       image: "/images/asset24.jpeg",
       popular: true,
@@ -50,7 +50,7 @@ export const SHOP_DATA = {
     },
     {
       id: "p5",
-      name: "carpet",
+      name: "فرش",
       price: 1250000,
       image: "/images/asset28.jpeg",
       popular: false,
@@ -62,7 +62,7 @@ export const SHOP_DATA = {
     },
     {
       id: "p6",
-      name: "knife",
+      name: "چاقو آشپزخانه",
       price: 318000,
       image: "/images/asset30.jpeg",
       popular: true,
@@ -74,7 +74,7 @@ export const SHOP_DATA = {
     },
     {
       id: "p7",
-      name: "fan",
+      name: "پنکه",
       price: 1850000,
       image: "/images/asset32.jpeg",
       popular: false,
@@ -86,7 +86,7 @@ export const SHOP_DATA = {
     },
     {
       id: "p8",
-      name: "bag",
+      name: "کیف",
       price: 365250,
       image: "/images/asset33.jpeg",
       popular: false,
@@ -99,7 +99,7 @@ export const SHOP_DATA = {
 
     {
       id: "p9",
-      name: "spray",
+      name: "شیشه شور",
       price: 23000,
       image: "/images/asset44.jpeg",
       popular: true,
@@ -112,6 +112,12 @@ export const SHOP_DATA = {
   ],
   sliders: [
     {
+      id: "s0",
+      title: "slider 0",
+      image: "/images/slider0.jpeg",
+      url: "/products",
+    },
+    {
       id: "s1",
       title: "slider 1",
       image: "/images/slider1.jpeg",
@@ -121,12 +127,6 @@ export const SHOP_DATA = {
       id: "s2",
       title: "slider 2",
       image: "/images/slider2.jpeg",
-      url: "/products",
-    },
-    {
-      id: "s0",
-      title: "slider 0",
-      image: "/images/slider0.jpeg",
       url: "/products",
     },
     {

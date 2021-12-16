@@ -5,7 +5,7 @@ import { getAllProduct, getProductById } from "../../data";
 const Product = (props) => {
   const product = props.selectedProduct;
 
-  if (!product) {
+  if (props.length === 0) {
     return <p>Invalid link</p>;
   }
 

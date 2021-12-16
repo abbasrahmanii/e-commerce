@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { BiChevronLeftCircle, BiChevronRightCircle } from "react-icons/bi";
 import { RiFocusLine, RiFocusFill } from "react-icons/ri";
 
@@ -40,14 +41,16 @@ const Slider = () => {
   return (
     <div>
       <div className="relative">
-        <div className="relative rounded-lg">
+        <Link href="/products" className="relative rounded-lg">
           <Image
             className="rounded-lg"
             src={`/images/slider${sliderNum}.jpeg`}
-            width={1780}
-            height={790}
+            // width={1780}
+            // height={790}
+            width={1650}
+            height={660}
           />
-        </div>
+        </Link>
         <span
           className="absolute rounded-full cursor-pointer top-1/2 left-5"
           onClick={backwardHandler}

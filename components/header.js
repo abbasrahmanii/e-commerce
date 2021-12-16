@@ -30,19 +30,19 @@ const Header = () => {
           }}
         >
           <ul onMouseLeave={closeMenuHandler}>
-            <li className="p-2 hover:bg-green-500">
+            <li className="p-2 hover:bg-green-500" onClick={closeMenuHandler}>
               <Link href="/">
                 <a className="block px-5">خانه</a>
               </Link>
             </li>
             <hr className="border-gray-600" />
-            <li className="p-2 hover:bg-green-500">
+            <li className="p-2 hover:bg-green-500" onClick={closeMenuHandler}>
               <Link href="/products">
                 <a className="block px-5">فروشگاه</a>
               </Link>
             </li>
             <hr className="border-gray-600" />
-            <li className="p-2 hover:bg-green-500">
+            <li className="p-2 hover:bg-green-500" onClick={closeMenuHandler}>
               <Link href="/products">
                 <a className="block px-5">بلاگ</a>
               </Link>
