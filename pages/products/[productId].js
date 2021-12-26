@@ -37,10 +37,10 @@ const Product = (props) => {
   }
 
   return (
-    <div className="w-full bg-gray-100">
+    <div className="w-full bg-gray-100 dark:bg-gray-800">
       <div className="w-5/6 flex mx-auto py-6">
-        <div className="ss w-3/4 flex bg-gray-50">
-          <div className="w-5/12 flex flex-col items-center px-4 ss bg-gray-100 ">
+        <div className="w-3/4 flex bg-gray-50 dark:bg-gray-700 rounded">
+          <div className="w-5/12 flex flex-col items-center px-4 bg-gray-100 dark:bg-gray-800 ">
             <div className="rounded overflow-hidden transition-all">
               <Image
                 src={product.image}
@@ -66,11 +66,11 @@ const Product = (props) => {
                 src={product.image}
                 width={110}
                 height={110}
-                className="rounded border-2 border-gray-200"
+                className="rounded border-2 border-gray-200 dark:border-gray-800"
               />
             </div>
           </div>
-          <div className="w-7/12 flex flex-col p-4 border-2 border-gray-200 rounded">
+          <div className="w-7/12 flex flex-col p-4 border-2 border-gray-200 rounded dark:border-gray-800">
             <div className="mb-4">
               <Link href="/">
                 <a className="text-blue-400">Home</a>
@@ -86,7 +86,7 @@ const Product = (props) => {
                 </a>
               </Link>
             </div>
-            <div>
+            <div className="dark:text-white">
               <div className="flex items-center my-1">
                 <BsDot color="#2c9c16" />
                 <h4 className="mx-2">نام محصول:</h4>
@@ -110,7 +110,9 @@ const Product = (props) => {
               {product.freeDelivery ? (
                 <div className="flex items-center my-1">
                   <FiGift size={15} color="#2c9c16" />
-                  <h4 className="mr-2 text-green-600">ارسال رایگان</h4>
+                  <h4 className="mr-2 text-green-600 dark:text-green-300">
+                    ارسال رایگان
+                  </h4>
                 </div>
               ) : (
                 ""
@@ -118,8 +120,8 @@ const Product = (props) => {
             </div>
           </div>
         </div>
-        <div className="w-1/4 bg-gray-100 px-4">
-          <div className="flex flex-col items-center min-h-full bg-white justify-start p-4 border-2 border-gray-200 rounded">
+        <div className="w-1/4 bg-gray-100 px-4 dark:bg-gray-800">
+          <div className="flex flex-col items-center min-h-full bg-white justify-start p-4 border-2 border-gray-200 rounded dark:bg-gray-700 dark:text-white dark:border-gray-800">
             <div className="flex mb-8">
               <h4 className="ml-2">قیمت محصول:</h4>
               <p>{numberWithCommas(product.price)} تومـان</p>

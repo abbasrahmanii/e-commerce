@@ -10,7 +10,6 @@ const ProductsPage = () => {
   return (
     <div className="w-full">
       <div className="flex flex-col w-3/4 pb-8 mx-auto dark:bg-gray-800">
-        {/* <div className="p-2 m-2 text-center">تمامی محصولات فروشگاه</div> */}
         <FilterList />
         <ListItems products={fiteredProducts} />
       </div>

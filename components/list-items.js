@@ -12,15 +12,7 @@ const ListItems = (props) => {
     //taghir dadim az flex be grid
     <ul className="grid grid-cols-1 justify-items-center content-center sm:grid-cols-2 md:grid-cols-3 w-full gap-12">
       {products.map((product) => (
-        <Card
-          // key={product.id}
-          // id={product.id}
-          // name={product.name}
-          // image={product.image}
-          // price={product.price}
-          // freeDelivery={product.freeDelivery}
-          product={product}
-        />
+        <Card key={product.id} product={product} />
       ))}
     </ul>
   );

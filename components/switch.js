@@ -3,7 +3,7 @@ import { useTheme } from "next-themes";
 
 const Switch = () => {
   const [toggle, setToggle] = useState(true);
-  const toggleClass = "transform -translate-x-2 bg-white";
+  const toggleClass = "transform -translate-x-5";
   //dark mode
   const { theme, setTheme } = useTheme();
 
@@ -11,17 +11,18 @@ const Switch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
     setToggle(!toggle);
   };
-
   return (
     <div>
       <div
-        className="md:w-8 md:h-4 w-12 h-6 flex items-center bg-indigo-400 dark:bg-white rounded-full p-1 cursor-pointer"
+        className="md:w-10 md:h-4 w-10 h-4 flex items-center bg-indigo-500 dark:bg-indigo-200 rounded-full cursor-pointer relative"
         onClick={switchHandler}
       >
+        <p className="text-xs absolute left-1">🌙</p>
+        <p className="text-xs absolute right-1">☀️</p>
         <div
           className={
-            "dark:bg-indigo-400 md:w-4 md:h-4 h-5 w-5 rounded-full shadow-md transform" +
-            (toggle ? null : toggleClass)
+            " bg-white dark:bg-indigo-600 md:w-4 md:h-4 h-4 w-4 rounded-full shadow-md z-30 absolute duration-500 ease-out transition-all" +
+            (toggle ? "transform -translate-x-1" : toggleClass)
           }
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         ></div>

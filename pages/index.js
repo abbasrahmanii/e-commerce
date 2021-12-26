@@ -36,7 +36,7 @@ export default function Home(props) {
             مهمترین سرمشق فعالیت خود میداند.
           </p>
           <Link href="/products">
-            <a className="inline-block px-4 py-2 my-4 bg-gray-700 text-white p-2 hover:bg-gray-600 focus:bg-gray-500 rounded-lg">
+            <a className="inline-block px-4 py-2 my-4 bg-gray-700 text-white p-2 hover:bg-gray-600 focus:bg-gray-500 rounded-lg dark:bg-indigo-500">
               ورود به فروشگاه
             </a>
           </Link>
