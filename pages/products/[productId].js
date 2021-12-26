@@ -1,28 +1,138 @@
 import Link from "next/link";
+import Image from "next/image";
+import { BsDot } from "react-icons/bs";
+import { FiGift } from "react-icons/fi";
 
 import { getAllProduct, getProductById } from "../../data";
 
+import { useContext } from "react";
+import { Store } from "../../context/Store";
+import { useRouter } from "next/router";
+
 const Product = (props) => {
+  const router = useRouter();
   const product = props.selectedProduct;
 
-  if (props.length === 0) {
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+
+  const addToCartHandler = () => {
+    const existItem = cart.cartItems.find((item) => item.id === product.id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    if (product.countInStock < quantity) {
+      window.alert("Sorry. Product is out of stock");
+      return;
+    }
+    dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity } });
+    router.push("/cart");
+  };
+
+  //add comma
+  const numberWithCommas = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  if (!product) {
     return <p>Invalid link</p>;
   }
 
   return (
-    <div>
-      <h1>{product.name}</h1>
-      {/* Taghir Bdahim Bdn */}
-      {/* <Card
-        id={productById[0].id}
-        title={productById[0].title}
-        image={productById[0].image}
-        price={productById[0].price}
-      /> */}
-      {/* Taghir Bdahim Bdn */}
-      <Link href="/products">
-        <a>برگشت به فروشگاه</a>
-      </Link>
+    <div className="w-full bg-gray-100">
+      <div className="w-5/6 flex mx-auto py-6">
+        <div className="ss w-3/4 flex bg-gray-50">
+          <div className="w-5/12 flex flex-col items-center px-4 ss bg-gray-100 ">
+            <div className="rounded overflow-hidden transition-all">
+              <Image
+                src={product.image}
+                width={440}
+                height={440}
+                className="scale-100 hover:scale-110 duration-300"
+              />
+            </div>
+            <div className="mx-auto flex justify-between w-full">
+              <Image
+                src={product.image}
+                width={110}
+                height={110}
+                className="rounded"
+              />
+              <Image
+                src={product.image}
+                width={110}
+                height={110}
+                className="rounded"
+              />
+              <Image
+                src={product.image}
+                width={110}
+                height={110}
+                className="rounded border-2 border-gray-200"
+              />
+            </div>
+          </div>
+          <div className="w-7/12 flex flex-col p-4 border-2 border-gray-200 rounded">
+            <div className="mb-4">
+              <Link href="/">
+                <a className="text-blue-400">Home</a>
+              </Link>
+              <span className="mx-4">/</span>
+              <Link href="/products">
+                <a className="text-blue-400">{product.category}</a>
+              </Link>
+              <span className="mx-4">/</span>
+              <Link href="/products">
+                <a className="text-gray-500 pointer-events-none ">
+                  {product.brand}
+                </a>
+              </Link>
+            </div>
+            <div>
+              <div className="flex items-center my-1">
+                <BsDot color="#2c9c16" />
+                <h4 className="mx-2">نام محصول:</h4>
+                <p>{product.name}</p>
+              </div>
+              <div className="flex items-center my-1">
+                <BsDot color="#2c9c16" />
+                <h4 className="mx-2">دسته بندی:</h4>
+                <p>{product.category}</p>
+              </div>
+              <div className="flex items-center my-1">
+                <BsDot color="#2c9c16" />
+                <h4 className="mx-2">برند:</h4>
+                <p>{product.brand}</p>
+              </div>
+              <div className="flex items-center my-1">
+                <BsDot color="#2c9c16" />
+                <h4 className="mx-2">تعداد موجودی در انبار:</h4>
+                <p>{product.countInStock} عدد</p>
+              </div>
+              {product.freeDelivery ? (
+                <div className="flex items-center my-1">
+                  <FiGift size={15} color="#2c9c16" />
+                  <h4 className="mr-2 text-green-600">ارسال رایگان</h4>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="w-1/4 bg-gray-100 px-4">
+          <div className="flex flex-col items-center min-h-full bg-white justify-start p-4 border-2 border-gray-200 rounded">
+            <div className="flex mb-8">
+              <h4 className="ml-2">قیمت محصول:</h4>
+              <p>{numberWithCommas(product.price)} تومـان</p>
+            </div>
+            <button
+              className="bg-red-500 text-white p-2 focus:bg-red-600 rounded-lg"
+              onClick={addToCartHandler}
+            >
+              افزودن به سبد خرید
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

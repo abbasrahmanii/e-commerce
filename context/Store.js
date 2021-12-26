@@ -14,6 +14,7 @@ const initialState = {
   menuStatus: false,
   checkbox: false,
   fiteredProducts: getAllProduct(),
+  // darkTheme: false,
 };
 
 const reducer = (state, action) => {
@@ -93,6 +94,11 @@ const reducer = (state, action) => {
         ...state,
         menuStatus: false,
       };
+    // case "DARK_MODE":
+    //   return {
+    //     ...state,
+    //     darkTheme: !state.darkTheme,
+    //   };
     default:
       return state;
   }

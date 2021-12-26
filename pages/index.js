@@ -21,7 +21,7 @@ export default function Home(props) {
       </Head>
 
       <main
-        className="w-full p-10 my-10 font-semibold text-center bg-red-200l"
+        className="w-full p-4 mt-4 mb-10 font-semibold text-center bg-red-200l"
         id="slider"
       >
         <Slider />
@@ -29,8 +29,8 @@ export default function Home(props) {
 
       <main className="flex flex-row flex-wrap items-center justify-center flex-1 w-full px-20 text-center h-3/5">
         <div className="flex flex-col items-center justify-between flex-1 h-48">
-          <h3>فروشگاه آنلاین</h3>
-          <p>
+          <h3 className="dark:text-white">فروشگاه آنلاین</h3>
+          <p className="dark:text-gray-300">
             فروشگاه اینترنتی ما با بیش از نیم قرن سابقه در زمینه فروش و پخش ،
             برترین فروشگاه ایران و جهان میباشد که کیفیت و رضایت مشتریان عزیز را
             مهمترین سرمشق فعالیت خود میداند.
@@ -41,12 +41,14 @@ export default function Home(props) {
             </a>
           </Link>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 ">
           <Image src="/images/shop2.jpg" alt="shop" width={575} height={400} />
         </div>
       </main>
       <main className="flex flex-col w-7/12">
-        <h1 className="p-2 m-2 text-xl text-center">محبوب ترین محصولات</h1>
+        <h1 className="p-2 m-2 text-xl text-center dark:text-white">
+          محبوب ترین محصولات
+        </h1>
         <section className="flex justify-between mb-8">
           <ListItems products={popularProductsList} />
         </section>

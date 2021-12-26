@@ -6,7 +6,7 @@ import { Fragment, useContext } from "react";
 import { Store } from "../context/Store";
 
 const Card = (props) => {
-  const { id, name, price, image } = props;
+  const { id, name, price, image, freeDelivery } = props.product;
   const router = useRouter();
 
   const { state, dispatch } = useContext(Store);
@@ -31,7 +31,7 @@ const Card = (props) => {
 
   return (
     <Fragment>
-      <li className="flex flex-col justify-between p-4 bg-indigo-200 rounded-lg shadow-xl hover:bg-indigo-300">
+      <li className="flex flex-col justify-between p-4 dark:bg-indigo-300 rounded-lg shadow-xl dark:hover:bg-indigo-400 bg-indigo-500 hover:bg-indigo-600">
         <Link href={`products/${id}`}>
           <a>
             <Image
@@ -40,12 +40,23 @@ const Card = (props) => {
               height={250}
               className="rounded-lg"
             />
-            <h3 className="my-2">{name}</h3>
-            <p className="my-2">{numberWithCommas(price)} تـومـان</p>
+            <h3 className="my-2 text-indigo-50 dark:text-black">{name}</h3>
+            <p className="my-2 text-indigo-50 dark:text-black">
+              {numberWithCommas(price)} تـومـان
+            </p>
+            {freeDelivery ? (
+              <div className="my-2">
+                <h5 className="text-sm dark:text-yellow-900 text-red-200">
+                  ارسال رایگان
+                </h5>
+              </div>
+            ) : (
+              ""
+            )}
           </a>
         </Link>
         <button
-          className="bg-gray-700 text-white p-2 hover:bg-gray-600 focus:bg-gray-500 rounded-lg"
+          className="dark:bg-gray-700 dark:text-white p-2 dark:hover:bg-gray-600 dark:focus:bg-gray-500 rounded-lg bg-gray-300 text-indigo-900 hover:bg-gray-200 focus:bg-gray-100"
           onClick={addToCartHandler}
         >
           افزودن به سبد خرید

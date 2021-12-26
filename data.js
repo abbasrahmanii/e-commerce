@@ -5,12 +5,17 @@ export const SHOP_DATA = {
       name: "دمپایی",
       price: 146250,
       image: "/images/asset21.jpeg",
+      images: [
+        "/images/asset 25.jpeg",
+        "/images/asset 27.jpeg",
+        "/images/asset 29.jpeg",
+      ],
       popular: true,
       brand: "Nothing",
       category: "Clothing",
       quantity: 0,
       countInStock: 18,
-      freeDelivery: false,
+      freeDelivery: true,
     },
     {
       id: "p2",
@@ -34,7 +39,7 @@ export const SHOP_DATA = {
       category: "Clothing",
       quantity: 0,
       countInStock: 5,
-      freeDelivery: true,
+      freeDelivery: false,
     },
     {
       id: "p4",

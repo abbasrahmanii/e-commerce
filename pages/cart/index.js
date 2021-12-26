@@ -41,10 +41,10 @@ const CartPage = () => {
     return (
       <div>
         <h1 className="p-4 m-2 text-3xl text-center">Shopping Cart</h1>
-        <div>
-          Cart is Empty.{" "}
+        <div className="flex flex-col justify-center items-center p-6">
+          سبد خرید شما خالـی است.{" "}
           <Link href="/products">
-            <a>Go to Shop</a>
+            <a className="mt-3 text-blue-600">به فروشگاه بروید.</a>
           </Link>
         </div>
       </div>
@@ -58,7 +58,7 @@ const CartPage = () => {
           <div className="w-full">
             <table className="table w-full">
               <thead className="table-header-group">
-                <tr className="table-row h-20 font-serif">
+                <tr className="table-row h-20 font-serif dark:text-white">
                   <th className="table-cell">تصویر</th>
                   <th>نام محصول</th>
                   <th>تعداد</th>
@@ -76,36 +76,37 @@ const CartPage = () => {
                           alt={item.name}
                           width={60}
                           height={60}
+                          className="cursor-pointer"
                         ></Image>
                       </Link>
                     </th>
                     <th>
                       <Link href={`/products/${item.id}`}>
-                        <h1 className="font-mono">{item.name}</h1>
+                        <h1 className="font-mono cursor-pointer dark:text-indigo-50">
+                          {item.name}
+                        </h1>
                       </Link>
                     </th>
                     <th>
                       <select
                         value={item.quantity}
                         onChange={(e) => updateCartHandler(item, e)}
-                        className="cursor-pointer bg-indigo-100"
+                        className="cursor-pointer bg-indigo-400 text-white dark:text-black dark:bg-indigo-100 focus:outline-none"
                       >
                         {[...Array(item.countInStock).keys()].map((x) => (
-                          <option
-                            key={x + 1}
-                            value={x + 1}
-                            className="w-6 bg-indigo-50"
-                          >
+                          <option key={x + 1} value={x + 1} className="w-6">
                             {x + 1}
                           </option>
                         ))}
                       </select>
                     </th>
-                    <th>{numberWithCommas(item.price)} تومان</th>
-                    <th className="">
-                      <span className="flex justify-center items-center">
+                    <th className="dark:text-indigo-50">
+                      {numberWithCommas(item.price)} تومان
+                    </th>
+                    <th>
+                      <span className="flex justify-center items-center text-red-600 dark:text-red-200">
                         <RiDeleteBinLine
-                          color="red"
+                          // color="red"
                           fontSize="1.2rem"
                           cursor="pointer"
                           onClick={() => removeItemHandler(item)}
@@ -124,10 +125,10 @@ const CartPage = () => {
             </table>
           </div>
         </div>
-        <div className="flex items-start justify-center w-1/4 p-4 text-center">
+        <div className="flex items-start justify-center w-1/4 p-4 text-center ">
           <div className="">
-            <div className="bg-indigo-100 p-6 rounded-lg">
-              <div className="flex flex-col items-start space-y-4">
+            <div className="dark:bg-indigo-200 p-6 rounded-lg bg-indigo-500">
+              <div className="flex flex-col items-start space-y-4 text-indigo-50 dark:text-black">
                 <p>
                   تعداد محصولات:{" "}
                   {numberWithCommas(
@@ -144,7 +145,7 @@ const CartPage = () => {
               </div>
               <div>
                 <button
-                  className="bg-gray-700 text-white p-2 hover:bg-gray-600 focus:bg-gray-500 rounded-lg py-2 px-4 mt-6"
+                  className="dark:bg-gray-700 dark:text-white p-2 dark:hover:bg-gray-600 dark:focus:bg-gray-500 rounded-lg py-2 px-4 mt-6 bg-gray-300 text-indigo-900"
                   onClick={checkOutHandler}
                 >
                   پرداخت
