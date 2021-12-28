@@ -1,6 +1,4 @@
 import { Fragment } from "react";
-import Footer from "../components/footer";
-import Header from "../components/header";
 import "tailwindcss/tailwind.css";
 import { StoreProvider } from "../context/Store";
 //dark mode
@@ -10,11 +8,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <Fragment>
       <StoreProvider>
-        <ThemeProvider attribute="class">
-          <Header />
-          <Component {...pageProps} />
-          <Footer />{" "}
-        </ThemeProvider>
+        <div className="min-h-screen relative">
+          <ThemeProvider attribute="class">
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </div>
       </StoreProvider>
     </Fragment>
   );
