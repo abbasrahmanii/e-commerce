@@ -52,18 +52,18 @@ const Slider = () => {
           />
         </Link>
         <span
-          className="absolute rounded-full cursor-pointer top-1/2 left-5"
+          className="absolute rounded-full cursor-pointer top-1/2 left-5 hidden md:block"
           onClick={backwardHandler}
         >
           <BiChevronLeftCircle color="white" fontSize="2.5rem" />
         </span>
         <span
-          className="absolute rounded-full cursor-pointer top-1/2 right-5"
+          className="absolute rounded-full cursor-pointer top-1/2 right-5 hidden md:block"
           onClick={forwardHandler}
         >
           <BiChevronRightCircle color="white" fontSize="2.5rem" />
         </span>
-        <div className="flex flex-row-reverse absolute bottom-4 right-1/2 translate-x-1/2">
+        <div className="flex-row-reverse absolute bottom-4 right-1/2 translate-x-1/2 hidden md:flex">
           {allSlider.map((p) => (
             <div key={p.id}>
               <span

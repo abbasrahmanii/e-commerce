@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment } from "react";
+import Layout from "../components/layout";
 
 const Custom404 = () => {
   return (
-    <Fragment>
+    <Layout>
       <div className="w-2/3 max-h-full mx-auto flex flex-col transition-all">
         <Image src="/images/404.jpg" alt="404" width={1100} height={500} />
         <Link href="/">
@@ -13,7 +13,7 @@ const Custom404 = () => {
           </a>
         </Link>
       </div>
-    </Fragment>
+    </Layout>
   );
 };
 

@@ -1,15 +1,26 @@
-export const SHOP_DATA = {
+import bcrypt from "bcryptjs";
+
+const SHOP_DATA = {
+  users: [
+    {
+      name: "John",
+      email: "admin@example.com ",
+      password: bcrypt.hashSync("123456"),
+      isAdmin: true,
+    },
+    {
+      name: "Joane",
+      email: "user@example.com ",
+      password: bcrypt.hashSync("123456"),
+      isAdmin: false,
+    },
+  ],
   products: [
     {
       id: "p1",
       name: "دمپایی",
       price: 146250,
       image: "/images/asset21.jpeg",
-      images: [
-        "/images/asset 25.jpeg",
-        "/images/asset 27.jpeg",
-        "/images/asset 29.jpeg",
-      ],
       popular: true,
       brand: "Nothing",
       category: "Clothing",
@@ -167,3 +178,5 @@ export const getInCart = () => {
 export const getAllSlider = () => {
   return SHOP_DATA.sliders;
 };
+
+export default SHOP_DATA;

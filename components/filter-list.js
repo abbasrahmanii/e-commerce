@@ -23,13 +23,13 @@ const FilterList = () => {
   };
 
   return (
-    <div className="my-4 flex flex-col dark:bg-indigo-400 w-min p-3 rounded-md bg-indigo-500">
+    <div className="my-8 flex flex-col dark:bg-indigo-400 w-min p-3 rounded-md bg-indigo-500">
       <div className="flex items-center text-white dark:text-black mb-4">
         <FiFilter />
         <h4 className="mr-2 dark:text-black">فیلتر محصولات</h4>
       </div>
       <select
-        className="w-min p-2 focus:outline-none bg-indigo-100"
+        className="w-min p-2 focus:outline-none bg-indigo-100 text-black"
         name="category"
         id="category"
         value={filterValue}

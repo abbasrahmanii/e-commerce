@@ -57,40 +57,49 @@ const Header = () => {
             </li>
           </ul>
           <div
-            className="w-full top-20 absolute md:hidden duration-500 ease-in-out bg-green-600"
+            className="w-full top-20 absolute md:hidden duration-500 ease-in-out bg-green-600 dark:bg-green-400 text-white dark:text-black"
             style={{
               visibility: menuStatus ? "visible" : "hidden",
               opacity: menuStatus ? "1" : "0",
             }}
           >
             <ul onMouseLeave={closeMenuHandler}>
-              <li className="p-2 hover:bg-green-500" onClick={closeMenuHandler}>
+              <li
+                className="p-2 hover:bg-green-500 h-10"
+                onClick={closeMenuHandler}
+              >
                 <Link href="/">
                   <a className="block px-5">خانه</a>
                 </Link>
               </li>
               <hr className="border-gray-600" />
-              <li className="p-2 hover:bg-green-500" onClick={closeMenuHandler}>
+              <li
+                className="p-2 hover:bg-green-500 h-10"
+                onClick={closeMenuHandler}
+              >
                 <Link href="/products">
                   <a className="block px-5">فروشگاه</a>
                 </Link>
               </li>
-              <hr className="border-gray-600" />
-              <li className="p-2 hover:bg-green-500" onClick={closeMenuHandler}>
+              {/* <hr className="border-gray-600" />
+              <li
+                className="p-2 hover:bg-green-500 h-10"
+                onClick={closeMenuHandler}
+              >
                 <Link href="/products">
                   <a className="block px-5">بلاگ</a>
                 </Link>
-              </li>
+              </li> */}
               <hr className="border-gray-600" />
-              <li className="p-2 hover:bg-green-500">
-                <div className="block px-5">
+              <li className="p-2 hover:bg-green-500 h-10 flex items-center">
+                <div className="flex items-center px-5">
                   <Switch />
                 </div>
               </li>
             </ul>
           </div>
         </header>
-        <header className="hidden md:flex justify-center items-center">
+        <header className="hidden md:flex justify-center items-center shadow-2xl">
           <nav className="flex w-full relative justify-center items-center bg-gray-600 shadow-xl dark:bg-indigo-900">
             <ul className="w-3/4 flex items-center justify-between">
               <li className="p-3 mx-8 md:hidden block text-white">

@@ -18,7 +18,8 @@ const Card = (props) => {
     const existItem = cart.cartItems.find((item) => item.id === id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     if (product.countInStock < quantity) {
-      window.alert("Sorry. Product is out of stock");
+      // window.alert("Sorry. Product is out of stock");
+      window.alert("متاسفانه محصول در انبار موجود نمی‌باشد.");
       return;
     }
     dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity } });
@@ -31,7 +32,7 @@ const Card = (props) => {
 
   return (
     <Fragment>
-      <li className="flex flex-col justify-between p-4 dark:bg-indigo-300 rounded-lg shadow-xl dark:hover:bg-indigo-400 bg-indigo-500 hover:bg-indigo-600">
+      <li className="flex flex-col justify-between p-4 dark:bg-indigo-300 rounded-lg shadow-xl dark:hover:bg-indigo-400 bg-indigo-500 hover:bg-indigo-600 w-64">
         <Link href={`products/${id}`}>
           <a>
             <Image
