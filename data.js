@@ -4,13 +4,13 @@ const SHOP_DATA = {
   users: [
     {
       name: "John",
-      email: "admin@example.com ",
+      email: "admin@example.com",
       password: bcrypt.hashSync("123456"),
       isAdmin: true,
     },
     {
-      name: "Joane",
-      email: "user@example.com ",
+      name: "Jane",
+      email: "user@example.com",
       password: bcrypt.hashSync("123456"),
       isAdmin: false,
     },

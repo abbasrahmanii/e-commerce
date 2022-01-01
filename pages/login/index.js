@@ -1,3 +1,5 @@
+import { useState } from "react";
+import axios from "axios";
 import LinkNext from "next/link";
 import {
   Avatar,
@@ -19,6 +21,10 @@ import { useTheme } from "next-themes";
 import { useMemo } from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Layout from "../../components/layout";
+import { useContext } from "react";
+import { Store } from "../../context/Store";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const useStyles = makeStyles({
   button: {
@@ -27,11 +33,20 @@ const useStyles = makeStyles({
 });
 
 const LoginPage = () => {
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  // };
+  const router = useRouter();
+  const { redirect } = router.query; // login?redirect=/shipping
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/");
+    }
+  }, []);
+
+  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   //dark mode
   const { theme, setTheme } = useTheme();
   console.log(theme);
@@ -64,143 +79,119 @@ const LoginPage = () => {
 
   const classes = useStyles();
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("/api/users/login", {
+        email,
+        password,
+      });
+      dispatch({ type: "USER_LOGIN", payload: data });
+      Cookies.set("userInfo", data);
+      router.push(redirect || "/");
+    } catch (err) {
+      alert(err.response.data ? err.response.data.message : err.message);
+    }
+  };
+
   return (
     <Layout>
       <div className="my-14">
-        {/* <div className="mb-6">
         <form onSubmit={submitHandler}>
-          <h1 className="text-center text-2xl p-4 dark:text-white">Login</h1>
-          <div className="w-1/4 mx-auto">
-            <div className="flex flex-col my-2 justify-between h-14 dark:text-white">
-              <label htmlFor="email" className="mb-2">
-                ایمیل:
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="bg-indigo-200 py-1 px-3"
-                placeholder="📧"
-              />
-            </div>
-            <div className="flex flex-col my-2 justify-between h-14 dark:text-white">
-              <label htmlFor="password" className="mb-2">
-                رمز عبور:
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="bg-indigo-200 py-1 px-3"
-                placeholder="🔒"
-              />
-            </div>
-            <button
-              type="submit"
-              className="block bg-indigo-600 w-full my-6 p-2 rounded text-white dark:bg-indigo-300 dark:text-gray-900"
-            >
-              ورود
-            </button>
-            <div className="dark:text-white">
-              <p>
-                آیا هنوز در سایت ثبت نام نکردی؟{" "}
-                <Link href="/register">
-                  <a>بازیابی رمز</a>
-                </Link>
-              </p>
-            </div>
-          </div>
-        </form>
-      </div> */}
-        <ThemeProvider theme={themeOne} attribute="class">
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <Box
-              sx={{
-                marginTop: 8,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <LockOutlined color="secondary" />
-              </Avatar>
-              <Typography
-                component="h1"
-                variant="h5"
-                className="dark:text-white"
-              >
-                Login Page
-              </Typography>
+          <ThemeProvider theme={themeOne} attribute="class">
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
               <Box
-                component="form"
-                onSubmit={handleSubmit}
-                noValidate
-                sx={{ mt: 1 }}
+                sx={{
+                  marginTop: 8,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                <TextField
-                  margin="normal"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                  dir="ltr"
-                />
-                <TextField
-                  margin="normal"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  dir="ltr"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value="remember"
-                      color="secondary"
-                      className="dark:text-white"
-                    />
-                  }
-                  label="Remember me"
+                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                  <LockOutlined color="secondary" />
+                </Avatar>
+                <Typography
+                  component="h1"
+                  variant="h5"
                   className="dark:text-white"
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                  color="primary"
-                  // className={classes.button}
-                  className="dark:bg-red-400"
                 >
-                  Login
-                </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link variant="body2">
-                      <LinkNext href="/">Forgot password?</LinkNext>
-                    </Link>
+                  Login Page
+                </Typography>
+                <Box
+                  component="form"
+                  onSubmit={handleSubmit}
+                  noValidate
+                  sx={{ mt: 1 }}
+                >
+                  <TextField
+                    margin="normal"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    dir="ltr"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <TextField
+                    margin="normal"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    dir="ltr"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value="remember"
+                        color="secondary"
+                        className="dark:text-white"
+                      />
+                    }
+                    label="Remember me"
+                    className="dark:text-white"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    color="primary"
+                    // className={classes.button}
+                    className="dark:bg-red-400"
+                  >
+                    Login
+                  </Button>
+                  <Grid container>
+                    <Grid item xs>
+                      <Link variant="body2">
+                        <LinkNext href="/">Forgot password?</LinkNext>
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Link variant="body2">
+                        <LinkNext href="/register">
+                          Don't have an account? Sign Up
+                        </LinkNext>
+                      </Link>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Link variant="body2">
-                      <LinkNext href="/register">
-                        Don't have an account? Sign Up
-                      </LinkNext>
-                    </Link>
-                  </Grid>
-                </Grid>
+                </Box>
               </Box>
-            </Box>
-          </Container>
-        </ThemeProvider>
+            </Container>
+          </ThemeProvider>
+        </form>
       </div>
     </Layout>
   );

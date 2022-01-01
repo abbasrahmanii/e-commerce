@@ -10,6 +10,9 @@ const initialState = {
       ? JSON.parse(Cookies.get("cartItems"))
       : [],
   },
+  userInfo: Cookies.get("userInfo")
+    ? JSON.parse(Cookies.get("userInfo"))
+    : null,
   products: getAllProduct(),
   menuStatus: false,
   checkbox: false,
@@ -92,6 +95,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         menuStatus: false,
+      };
+    case "USER_LOGIN":
+      return {
+        ...state,
+        userInfo: action.payload,
       };
     default:
       return state;
