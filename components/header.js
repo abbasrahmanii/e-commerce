@@ -5,10 +5,14 @@ import { Store } from "../context/Store";
 import { BiMenu } from "react-icons/bi";
 import { BsCart3 } from "react-icons/bs";
 import Switch from "./switch";
+import AuthContext from "../context/authContext";
 
 const Header = () => {
   const { state, dispatch } = useContext(Store);
   const { cart, menuStatus } = state;
+
+  const { user, login } = useContext(AuthContext);
+  console.log(user);
 
   const menuHandler = () => {
     dispatch({ type: "MENU" });
@@ -27,22 +31,9 @@ const Header = () => {
                 <BiMenu fontSize="1.7rem" />
               </span>
             </li>
-            <li className="p-3 mx-8 hidden md:block text-white text-xl hover:text-green-400 w-18">
-              <Link href="/">
-                <a>خانه</a>
-              </Link>
-            </li>
-            <li className="mx-8 p-3 hidden md:block text-white text-xl hover:text-green-400 w-18">
-              <Link href="/products">
-                <a>فروشگاه</a>
-              </Link>
-            </li>
             <Link href="/">
               <Image src="/images/asset 12.svg" width={100} height={100} />
             </Link>
-            <li className="mx-8 p-3 hidden md:flex md:items-center text-white text-xl hover:text-green-400 w-18 ">
-              <Switch />
-            </li>
             <li className="p-3 mx-8 text-white relative hover:text-green-400 w-18">
               <Link href="/cart">
                 <a>
@@ -120,8 +111,11 @@ const Header = () => {
               <Link href="/">
                 <Image src="/images/asset 12.svg" width={100} height={100} />
               </Link>
-              <li className="mx-8 p-3 hidden md:flex md:items-center text-white text-xl hover:text-green-400 w-18 ">
+              {/* <li className="mx-8 p-3 hidden md:flex md:items-center text-white text-xl hover:text-green-400 w-18 ">
                 <Switch />
+              </li> */}
+              <li className="text-white" onClick={login}>
+                Login/Signup
               </li>
               <li className="p-3 mx-8 text-white relative hover:text-green-400 w-18">
                 <Link href="/cart">
@@ -144,3 +138,84 @@ const Header = () => {
 };
 
 export default Header;
+
+// import Link from "next/link";
+// import { useUser } from "../lib/hooks";
+
+// export default function Header() {
+//   const [user, { mutate }] = useUser();
+
+//   async function handleLogout() {
+//     await fetch("/api/logout");
+//     mutate({ user: null });
+//   }
+
+//   return (
+//     <header>
+//       <nav>
+//         <ul>
+//           <li>
+//             <Link href="/">
+//               <a>Home</a>
+//             </Link>
+//           </li>
+//           {user ? (
+//             <>
+//               <li>
+//                 <Link href="/profile">
+//                   <a>Profile</a>
+//                 </Link>
+//               </li>
+//               <li>
+//                 <a role="button" onClick={handleLogout}>
+//                   Logout
+//                 </a>
+//               </li>
+//             </>
+//           ) : (
+//             <>
+//               <li>
+//                 <Link href="/signup">
+//                   <a>Sign up</a>
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link href="/login">
+//                   <a>Login</a>
+//                 </Link>
+//               </li>
+//             </>
+//           )}
+//         </ul>
+//       </nav>
+//       <style jsx>{`
+//         nav {
+//           max-width: 42rem;
+//           margin: 0 auto;
+//           padding: 0.2rem 1.25rem;
+//         }
+//         ul {
+//           display: flex;
+//           list-style: none;
+//           margin-left: 0;
+//           padding-left: 0;
+//         }
+//         li {
+//           margin-right: 1rem;
+//         }
+//         li:first-child {
+//           margin-left: auto;
+//         }
+//         a {
+//           color: #fff;
+//           text-decoration: none;
+//           cursor: pointer;
+//         }
+//         header {
+//           color: #fff;
+//           background-color: #333;
+//         }
+//       `}</style>
+//     </header>
+//   );
+// }
