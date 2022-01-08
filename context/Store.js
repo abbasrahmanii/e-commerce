@@ -53,36 +53,51 @@ const reducer = (state, action) => {
       };
     }
     case "FILTER_LIST":
-      if (action.payload.filter === "") {
+      if (action.payload.selectFilter === "") {
         if (action.payload.check === false) {
+          const rangedProducts = state.products.filter(
+            (p) => p.price >= action.payload.rangeValue
+          );
           return {
             ...state,
-            fiteredProducts: state.products,
+            fiteredProducts: rangedProducts,
           };
         } else {
-          const updated = state.products.filter((p) => p.freeDelivery === true);
+          const freeDeliveryProducts = state.products.filter(
+            (p) => p.freeDelivery === true
+          );
+          const fiteredProducts = freeDeliveryProducts.filter(
+            (p) => p.price >= action.payload.rangeValue
+          );
           return {
             ...state,
-            fiteredProducts: updated,
+            fiteredProducts,
           };
         }
       } else {
         if (action.payload.check === false) {
-          const updated = state.products.filter(
-            (p) => p.category === action.payload.filter
+          const categoryFiltered = state.products.filter(
+            (p) => p.category === action.payload.selectFilter
+          );
+          const fiteredProducts = categoryFiltered.filter(
+            (p) => p.price >= action.payload.rangeValue
           );
           return {
             ...state,
-            fiteredProducts: updated,
+            fiteredProducts,
           };
         } else {
-          const updated = state.products.filter(
+          const filteredProducts = state.products.filter(
             (p) =>
-              p.category === action.payload.filter && p.freeDelivery === true
+              p.category === action.payload.selectFilter &&
+              p.freeDelivery === true
+          );
+          const fiteredProducts = filteredProducts.filter(
+            (p) => p.price >= action.payload.rangeValue
           );
           return {
             ...state,
-            fiteredProducts: updated,
+            fiteredProducts,
           };
         }
       }

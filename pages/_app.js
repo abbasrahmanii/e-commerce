@@ -1,22 +1,22 @@
-import { Fragment } from "react";
 import "tailwindcss/tailwind.css";
+import { Fragment } from "react";
 import { StoreProvider } from "../context/Store";
-import { AuthContextProvider } from "../context/authContext";
+import { SessionProvider } from "next-auth/react";
 //dark mode
 import { ThemeProvider } from "next-themes";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <Fragment>
-      <StoreProvider>
-        <AuthContextProvider>
+      <SessionProvider session={session}>
+        <StoreProvider>
           <div className="min-h-screen relative">
             <ThemeProvider attribute="class">
               <Component {...pageProps} />
             </ThemeProvider>
           </div>
-        </AuthContextProvider>
-      </StoreProvider>
+        </StoreProvider>
+      </SessionProvider>
     </Fragment>
   );
 }

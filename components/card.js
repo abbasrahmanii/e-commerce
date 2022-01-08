@@ -18,7 +18,6 @@ const Card = (props) => {
     const existItem = cart.cartItems.find((item) => item.id === id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     if (product.countInStock < quantity) {
-      // window.alert("Sorry. Product is out of stock");
       window.alert("متاسفانه محصول در انبار موجود نمی‌باشد.");
       return;
     }

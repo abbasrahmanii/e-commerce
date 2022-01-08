@@ -17,7 +17,7 @@ const CartPage = () => {
     const quantity = +e.target.value;
 
     if (product.countInStock < quantity) {
-      window.alert("Sorry. Product is out of stock");
+      window.alert("متاسفانه محصول در انبار موجود نمی‌باشد.");
       return;
     }
     dispatch({
