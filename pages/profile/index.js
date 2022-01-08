@@ -1,4 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 import Layout from "../../components/layout";
 
 const ProfilePage = () => {
@@ -9,7 +10,12 @@ const ProfilePage = () => {
       {session ? (
         <>
           <div className="flex justify-center p-10">
-            <img src={session.user.image} width={180} alt="user" />
+            <Image
+              src={session.user.image}
+              width={180}
+              height={180}
+              alt="user"
+            />
           </div>
           <h1 className="text-center p-6">Name: {session.user.name}</h1>
           <h1 className="text-center p-6">Email: {session.user.email}</h1>
