@@ -3,9 +3,9 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Store } from "../../context/Store";
+import { Store } from "../context/Store";
 import { RiDeleteBinLine } from "react-icons/ri";
-import Layout from "../../components/layout";
+import Layout from "../components/layout";
 
 const CartPage = () => {
   const router = useRouter();

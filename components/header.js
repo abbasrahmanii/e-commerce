@@ -1,5 +1,5 @@
-import { useContext, Fragment } from "react";
-import Link from "next/link";
+import { useState, useContext, Fragment } from "react";
+import NextLink from "next/link";
 import Image from "next/image";
 import { Store } from "../context/Store";
 import { BiMenu } from "react-icons/bi";
@@ -9,19 +9,37 @@ import {
   BsFillPersonPlusFill,
 } from "react-icons/bs";
 import Switch from "./switch";
-import { useSession, signIn } from "next-auth/react";
+import { Button, Menu, MenuItem, Link } from "@material-ui/core";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 const Header = () => {
-  const { data: session } = useSession();
+  const router = useRouter();
 
   const { state, dispatch } = useContext(Store);
-  const { cart, menuStatus } = state;
+  const { cart, menuStatus, userInfo } = state;
 
   const menuHandler = () => {
     dispatch({ type: "MENU" });
   };
   const closeMenuHandler = () => {
     dispatch({ type: "CLOSE_MENU" });
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const loginClickHandler = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+  const loginMenuCloseHandler = () => {
+    setAnchorEl(null);
+  };
+  const logoutClickHandler = () => {
+    setAnchorEl(null);
+    dispatch({ type: "USER_LOGOUT" });
+    Cookies.remove("userInfo");
+    Cookies.remove("cartItems");
+    router.push("/");
+    window.location.reload();
   };
 
   return (
@@ -34,17 +52,17 @@ const Header = () => {
                 <BiMenu fontSize="1.7rem" />
               </span>
             </li>
-            <Link href="/">
+            <NextLink href="/">
               <Image
                 src="/images/asset 12.svg"
                 width={100}
                 height={100}
                 className="cursor-pointer"
               />
-            </Link>
+            </NextLink>
             <li className="text-white w-24 flex items-center justify-between">
               <div className="p-3 relative hover:text-green-400">
-                <Link href="/cart">
+                <NextLink href="/cart">
                   <a>
                     <BsCart3 fontSize="1.3rem" />
                     {cart.cartItems.length > 0 && (
@@ -53,27 +71,38 @@ const Header = () => {
                       </div>
                     )}
                   </a>
-                </Link>
+                </NextLink>
               </div>
               <div className="hover:text-green-400 flex justify-center items-center">
-                {session ? (
-                  <Link href="/profile">
-                    <Image
-                      src={session.user.image}
-                      width={28}
-                      height={28}
-                      alt="user"
-                      className="rounded-full"
-                      title={session.user.name}
-                    />
-                  </Link>
+                {userInfo ? (
+                  <>
+                    <Button
+                      aria-controls="simple-menu"
+                      aria-haspopup="true"
+                      onClick={loginClickHandler}
+                    >
+                      {userInfo.name}
+                    </Button>
+                    <Menu
+                      id="simple-menu"
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl)}
+                      onClose={loginMenuCloseHandler}
+                    >
+                      <MenuItem onClick={loginMenuCloseHandler}>
+                        Profile
+                      </MenuItem>
+                      <MenuItem onClick={loginMenuCloseHandler}>
+                        My account
+                      </MenuItem>
+                      <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
+                    </Menu>
+                  </>
                 ) : (
-                  <BsFillPersonPlusFill
-                    fontSize="1.3rem"
-                    onClick={() => signIn()}
-                    className="cursor-pointer"
-                    title="Sign in"
-                  />
+                  <NextLink href="/login" passHref>
+                    <Link>Login</Link>
+                  </NextLink>
                 )}
               </div>
             </li>
@@ -90,18 +119,18 @@ const Header = () => {
                 className="p-2 hover:bg-green-500 h-10"
                 onClick={closeMenuHandler}
               >
-                <Link href="/">
+                <NextLink href="/">
                   <a className="block px-5">خانه</a>
-                </Link>
+                </NextLink>
               </li>
               <hr className="border-gray-600" />
               <li
                 className="p-2 hover:bg-green-500 h-10"
                 onClick={closeMenuHandler}
               >
-                <Link href="/products">
+                <NextLink href="/products">
                   <a className="block px-5">فروشگاه</a>
-                </Link>
+                </NextLink>
               </li>
               <hr className="border-gray-600" />
               <li className="p-2 hover:bg-green-500 h-10 flex items-center">
@@ -116,29 +145,29 @@ const Header = () => {
           <nav className="flex w-full relative justify-center items-center bg-gray-600 shadow-xl dark:bg-indigo-900">
             <ul className="w-3/4 flex items-center justify-between">
               <li className="p-3 mx-8 hidden md:block text-white text-xl hover:text-green-400 w-24 text-center">
-                <Link href="/">
+                <NextLink href="/">
                   <a>خانه</a>
-                </Link>
+                </NextLink>
               </li>
               <li className="mx-8 p-3 hidden md:block text-white text-xl hover:text-green-400 w-24 text-center">
-                <Link href="/products">
+                <NextLink href="/products">
                   <a>فروشگاه</a>
-                </Link>
+                </NextLink>
               </li>
-              <Link href="/">
+              <NextLink href="/">
                 <Image
                   src="/images/asset 12.svg"
                   width={100}
                   height={100}
                   className="cursor-pointer"
                 />
-              </Link>
+              </NextLink>
               <li className="mx-8 p-3 hidden md:flex justify-center items-center text-white text-xl hover:text-green-400 w-24">
                 <Switch />
               </li>
               <li className="text-white w-24 flex items-center justify-between">
                 <div className="p-3 relative hover:text-green-400">
-                  <Link href="/cart">
+                  <NextLink href="/cart">
                     <a>
                       <BsCart3 fontSize="1.3rem" />
                       {cart.cartItems.length > 0 && (
@@ -147,27 +176,38 @@ const Header = () => {
                         </div>
                       )}
                     </a>
-                  </Link>
+                  </NextLink>
                 </div>
                 <div className="hover:text-green-400 flex justify-center items-center">
-                  {session ? (
-                    <Link href="/profile">
-                      <Image
-                        src={session.user.image}
-                        width={28}
-                        height={28}
-                        alt="user"
-                        className="rounded-full"
-                        title={session.user.name}
-                      />
-                    </Link>
+                  {userInfo ? (
+                    <>
+                      <Button
+                        aria-controls="simple-menu"
+                        aria-haspopup="true"
+                        onClick={loginClickHandler}
+                      >
+                        {userInfo.name}
+                      </Button>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={loginMenuCloseHandler}
+                      >
+                        <MenuItem onClick={loginMenuCloseHandler}>
+                          Profile
+                        </MenuItem>
+                        <MenuItem onClick={loginMenuCloseHandler}>
+                          My account
+                        </MenuItem>
+                        <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
+                      </Menu>
+                    </>
                   ) : (
-                    <BsFillPersonPlusFill
-                      fontSize="1.3rem"
-                      onClick={() => signIn()}
-                      className="cursor-pointer"
-                      title="Sign in"
-                    />
+                    <NextLink href="/login" passHref>
+                      <Link>Login</Link>
+                    </NextLink>
                   )}
                 </div>
               </li>

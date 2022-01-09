@@ -20,7 +20,6 @@ async function connect() {
     useUnifiedTopology: true,
     // useCreateIndex: true,
   });
-
   console.log("new connection");
   connection.isConnected = db.connections[0].readyState;
 }
@@ -44,5 +43,4 @@ function convertDocToObj(doc) {
 }
 
 const db = { connect, disconnect, convertDocToObj };
-
 export default db;
