@@ -8,7 +8,7 @@ import {
   BsFillPersonFill,
   BsFillPersonPlusFill,
 } from "react-icons/bs";
-import Switch from "./switch";
+import Switch from "./Switch";
 import { Button, Menu, MenuItem, Link } from "@material-ui/core";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import dynamic from "next/dynamic";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import { Store } from "../context/Store";
 import NextLink from "next/link";
 import Image from "next/image";
