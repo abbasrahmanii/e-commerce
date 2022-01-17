@@ -74,6 +74,7 @@ const FilterList = () => {
         name="range"
         min={0}
         max={1500000}
+        defaultValue={0}
         dir="ltr"
         ref={rangeValueRef}
         className="form-range appearance-none w-full h-2 p-0 bg-white focus:outline-none focus:ring-0 focus:shadow-none rounded-xl"

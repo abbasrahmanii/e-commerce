@@ -15,6 +15,8 @@ import { Store } from "../context/Store";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
+import useStyles from "../utils/styles";
+import { getError } from "../utils/error";
 
 export default function Register() {
   const {
@@ -33,6 +35,8 @@ export default function Register() {
     }
   }, []);
 
+  const classes = useStyles();
+
   const submitHandler = async ({ name, email, password, confirmPassword }) => {
     closeSnackbar();
     if (password !== confirmPassword) {
@@ -49,16 +53,13 @@ export default function Register() {
       Cookies.set("userInfo", data);
       router.push(redirect || "/");
     } catch (err) {
-      enqueueSnackbar(
-        err.response.data ? err.response.data.message : err.message,
-        { variant: "error" }
-      );
+      enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
   return (
     <Layout title="Register">
-      <form onSubmit={handleSubmit(submitHandler)} className="w-1/2 mx-auto">
-        <Typography component="h1" variant="h1">
+      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
+        <Typography component="h1" variant="h4">
           Register
         </Typography>
         <List>
@@ -78,6 +79,7 @@ export default function Register() {
                   id="name"
                   label="Name"
                   type="text"
+                  dir="ltr"
                   error={Boolean(errors.name)}
                   helperText={
                     errors.name
@@ -107,6 +109,7 @@ export default function Register() {
                   id="email"
                   label="Email"
                   type="email"
+                  dir="ltr"
                   error={Boolean(errors.email)}
                   helperText={
                     errors.email
@@ -136,6 +139,7 @@ export default function Register() {
                   id="password"
                   label="Password"
                   type="password"
+                  dir="ltr"
                   error={Boolean(errors.password)}
                   helperText={
                     errors.password
@@ -165,6 +169,7 @@ export default function Register() {
                   id="confirmPassword"
                   label="Confirm Password"
                   type="password"
+                  dir="ltr"
                   error={Boolean(errors.confirmPassword)}
                   helperText={
                     errors.confirmPassword

@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import ListItems from "../../components/list-items";
+import ListItems from "../../components/ListItems";
 import { Store } from "../../context/Store";
-import FilterList from "../../components/filter-list";
-import Layout from "../../components/layout";
+import FilterList from "../../components/FilterList";
+import Layout from "../../components/Layout";
 
-const ProductsPage = (props) => {
+const ProductsPage = () => {
   const { state } = useContext(Store);
   const { fiteredProducts } = state;
 
@@ -23,7 +23,7 @@ const ProductsPage = (props) => {
 export async function getStaticProps() {
   return {
     props: {},
-    revalidate: 2000,
+    revalidate: 8000,
   };
 }
 

@@ -17,11 +17,15 @@ const initialState = {
       ? Cookies.get("paymentMethod")
       : "",
   },
-  userInfo: Cookies.get("userInfo") ? Cookies.get("userInfo") : null,
-  products: getAllProduct(),
+  // userInfo: Cookies.get("userInfo") ? Cookies.get("userInfo") : null,
+  userInfo: Cookies.get("userInfo")
+    ? JSON.parse(Cookies.get("userInfo"))
+    : null,
   menuStatus: false,
   checkbox: false,
+  products: getAllProduct(),
   fiteredProducts: getAllProduct(),
+  darkMode: Cookies.get("darkMode") ? Cookies.get("darkMode") : false,
 };
 
 const reducer = (state, action) => {
@@ -66,6 +70,20 @@ const reducer = (state, action) => {
       return {
         ...state,
         cart: { ...state.cart, paymentMethod: action.payload },
+      };
+    case "CART_CLEAR":
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
+    case "USER_LOGIN":
+      return {
+        ...state,
+        userInfo: action.payload,
+        cart: { cartItems: [] },
+      };
+    case "USER_LOGOUT":
+      return {
+        ...state,
+        userInfo: null,
+        cart: { cartItems: [], shippingAddress: {}, paymentMethod: "" },
       };
     case "FILTER_LIST":
       if (action.payload.selectFilter === "") {
@@ -116,6 +134,11 @@ const reducer = (state, action) => {
           };
         }
       }
+    case "USER_LOGIN":
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
     case "MENU":
       return {
         ...state,
@@ -126,17 +149,8 @@ const reducer = (state, action) => {
         ...state,
         menuStatus: false,
       };
-    case "USER_LOGIN":
-      return {
-        ...state,
-        userInfo: action.payload,
-      };
-    case "USER_LOGIN":
-      return {
-        ...state,
-        userInfo: null,
-        cart: { cartItems: [] },
-      };
+    case "DARK_MODE":
+      return { ...state, darkMode: !state.darkMode };
     default:
       return state;
   }

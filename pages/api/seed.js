@@ -1,7 +1,7 @@
 import nextConnect from "next-connect";
 import User from "../../models/User";
 import Product from "../../models/Product";
-import db from "../../db";
+import db from "../../utils/db";
 import data from "../../data";
 
 const handler = nextConnect();

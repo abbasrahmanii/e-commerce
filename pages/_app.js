@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { StoreProvider } from "../context/Store";
 import { SessionProvider } from "next-auth/react";
 //dark mode
-import { ThemeProvider } from "next-themes";
+// import { ThemeProvider } from "next-themes";
 import { SnackbarProvider } from "notistack";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
@@ -15,9 +15,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <SessionProvider session={session}>
           <StoreProvider>
             <div className="min-h-screen relative">
-              <ThemeProvider attribute="class">
-                <Component {...pageProps} />
-              </ThemeProvider>
+              {/* <ThemeProvider attribute="class"> */}
+              <Component {...pageProps} />
+              {/* </ThemeProvider> */}
             </div>
           </StoreProvider>
         </SessionProvider>

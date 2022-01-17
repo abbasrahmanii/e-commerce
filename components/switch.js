@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useTheme } from "next-themes";
+import { Store } from "../context/Store";
+import Cookies from "js-cookie";
 
 const Switch = () => {
-  const [toggle, setToggle] = useState(true);
-  const toggleClass = "transform -translate-x-5";
+  const { state, dispatch } = useContext(Store);
+  const { darkMode } = state;
   //dark mode
   const { theme, setTheme } = useTheme();
 
   const switchHandler = () => {
     setTheme(theme === "dark" ? "light" : "dark");
-    setToggle(!toggle);
+    dispatch({ type: "DARK_MODE" });
+    Cookies.set("darkMode", !darkMode);
   };
   return (
     <div>
@@ -21,10 +24,9 @@ const Switch = () => {
         <p className="text-xs absolute right-1">☀️</p>
         <div
           className={
-            " bg-white dark:bg-indigo-600 md:w-4 md:h-4 h-4 w-4 rounded-full shadow-md z-30 absolute duration-500 ease-out transition-all" +
-            (toggle ? "transform -translate-x-1" : toggleClass)
+            "pointer-events-none bg-white dark:bg-indigo-600 md:w-4 md:h-4 h-4 w-4 rounded-full shadow-md z-30 absolute duration-500 ease-out transition-all" +
+            (darkMode ? "transform -translate-x-5" : "transform -translate-x-1")
           }
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         ></div>
       </div>
     </div>

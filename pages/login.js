@@ -15,6 +15,8 @@ import { Store } from "../context/Store";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
+import useStyles from "../utils/styles";
+import { getError } from "../utils/error";
 
 export default function Login() {
   const {
@@ -33,6 +35,7 @@ export default function Login() {
     }
   }, []);
 
+  const classes = useStyles();
   const submitHandler = async ({ email, password }) => {
     closeSnackbar();
     try {
@@ -42,18 +45,16 @@ export default function Login() {
       });
       console.log(data);
       dispatch({ type: "USER_LOGIN", payload: data });
-      Cookies.set("userInfo", data);
+      // Cookies.set("userInfo", data);
+      Cookies.set("userInfo", JSON.stringify(data));
       router.push(redirect || "/");
     } catch (err) {
-      enqueueSnackbar(
-        err.response.data ? err.response.data.message : err.message,
-        { variant: "error" }
-      );
+      enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
   return (
     <Layout>
-      <form onSubmit={handleSubmit(submitHandler)} className="w-1/2 mx-auto">
+      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component="h1" variant="h1">
           Login
         </Typography>
@@ -74,6 +75,7 @@ export default function Login() {
                   id="email"
                   label="Email"
                   type="email"
+                  dir="ltr"
                   error={Boolean(errors.email)}
                   helperText={
                     errors.email
@@ -103,6 +105,7 @@ export default function Login() {
                   id="password"
                   label="Password"
                   type="password"
+                  dir="ltr"
                   error={Boolean(errors.password)}
                   helperText={
                     errors.password

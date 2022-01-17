@@ -1,4 +1,4 @@
-import Card from "./card";
+import Card from "./Card";
 
 const ListItems = (props) => {
   const { products } = props;

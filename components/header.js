@@ -3,17 +3,15 @@ import NextLink from "next/link";
 import Image from "next/image";
 import { Store } from "../context/Store";
 import { BiMenu } from "react-icons/bi";
-import {
-  BsCart3,
-  BsFillPersonFill,
-  BsFillPersonPlusFill,
-} from "react-icons/bs";
+import { BsCart3 } from "react-icons/bs";
 import Switch from "./Switch";
 import { Button, Menu, MenuItem, Link } from "@material-ui/core";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import useStyles from "../utils/styles";
 
 const Header = () => {
+  const classes = useStyles();
   const router = useRouter();
 
   const { state, dispatch } = useContext(Store);
@@ -30,22 +28,29 @@ const Header = () => {
   const loginClickHandler = (e) => {
     setAnchorEl(e.currentTarget);
   };
-  const loginMenuCloseHandler = () => {
+
+  const loginMenuCloseHandler = (e, redirect) => {
+    console.log(e.currentTarget);
     setAnchorEl(null);
+    if (redirect !== "backdropClick") {
+      router.push(redirect);
+    }
   };
+
   const logoutClickHandler = () => {
     setAnchorEl(null);
     dispatch({ type: "USER_LOGOUT" });
     Cookies.remove("userInfo");
     Cookies.remove("cartItems");
+    Cookies.remove("shippinhAddress");
+    Cookies.remove("paymentMethod");
     router.push("/");
-    window.location.reload();
   };
 
   return (
     <Fragment>
-      <div className="font-serif sticky top-0 left-0 shadow-xl h-20 transition-all z-50">
-        <header className="md:hidden bg-gray-600 shadow-xl dark:bg-indigo-900 flex justify-center items-center relative h-20">
+      <div className="font-serif sticky top-0 left-0 right-0 shadow-xl h-20 transition-all z-50">
+        <header className="md:hidden bg-gray-600 shadow-xl dark:bg-indigo-900 flex justify-center items-center relative">
           <ul className="w-3/4 flex items-center justify-between">
             <li className="w-24 md:hidden block text-white">
               <span onClick={menuHandler}>
@@ -73,35 +78,21 @@ const Header = () => {
                   </a>
                 </NextLink>
               </div>
-              <div className="hover:text-green-400 flex justify-center items-center">
+              <div className="hover:text-green-400 flex justify-center items-center h-20">
                 {userInfo ? (
                   <>
                     <Button
                       aria-controls="simple-menu"
                       aria-haspopup="true"
                       onClick={loginClickHandler}
+                      className={classes.navbarButton}
                     >
                       {userInfo.name}
                     </Button>
-                    <Menu
-                      id="simple-menu"
-                      anchorEl={anchorEl}
-                      keepMounted
-                      open={Boolean(anchorEl)}
-                      onClose={loginMenuCloseHandler}
-                    >
-                      <MenuItem onClick={loginMenuCloseHandler}>
-                        Profile
-                      </MenuItem>
-                      <MenuItem onClick={loginMenuCloseHandler}>
-                        My account
-                      </MenuItem>
-                      <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
-                    </Menu>
                   </>
                 ) : (
                   <NextLink href="/login" passHref>
-                    <Link>Login</Link>
+                    <Link className={classes.navbarButton}>Login</Link>
                   </NextLink>
                 )}
               </div>
@@ -185,6 +176,7 @@ const Header = () => {
                         aria-controls="simple-menu"
                         aria-haspopup="true"
                         onClick={loginClickHandler}
+                        className={classes.navbarButton}
                       >
                         {userInfo.name}
                       </Button>
@@ -195,18 +187,33 @@ const Header = () => {
                         open={Boolean(anchorEl)}
                         onClose={loginMenuCloseHandler}
                       >
-                        <MenuItem onClick={loginMenuCloseHandler}>
+                        <MenuItem
+                          onClick={(e) => loginMenuCloseHandler(e, "/profile")}
+                        >
                           Profile
                         </MenuItem>
-                        <MenuItem onClick={loginMenuCloseHandler}>
-                          My account
+                        <MenuItem
+                          onClick={(e) =>
+                            loginMenuCloseHandler(e, "/order-history")
+                          }
+                        >
+                          Order Hisotry
                         </MenuItem>
+                        {userInfo.isAdmin && (
+                          <MenuItem
+                            onClick={(e) =>
+                              loginMenuCloseHandler(e, "/admin/dashboard")
+                            }
+                          >
+                            Admin Dashboard
+                          </MenuItem>
+                        )}
                         <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
                       </Menu>
                     </>
                   ) : (
                     <NextLink href="/login" passHref>
-                      <Link>Login</Link>
+                      <Link className={classes.navbarButton}>Login</Link>
                     </NextLink>
                   )}
                 </div>

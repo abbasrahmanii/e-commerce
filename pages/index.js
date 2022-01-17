@@ -2,13 +2,10 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-
-import ListItems from "../components/list-items";
-import Slider from "../components/slider";
-
-// import { getPopularProduct } from "../data";
-import Layout from "../components/layout";
-import db from "../db";
+import ListItems from "../components/ListItems";
+import Slider from "../components/Slider";
+import Layout from "../components/Layout";
+import db from "../utils/db";
 import Product from "../models/Product";
 
 export default function Home(props) {

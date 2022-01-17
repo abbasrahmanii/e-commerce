@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../components/Layout";
 import { Store } from "../context/Store";
@@ -14,8 +14,6 @@ import {
   TableRow,
   TableCell,
   Link,
-  Select,
-  MenuItem,
   Button,
   Card,
   List,
@@ -27,6 +25,8 @@ import useStyles from "../utils/styles";
 import CheckoutWizard from "../components/CheckoutWizard";
 import { useSnackbar } from "notistack";
 import { getError } from "../utils/error";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 function PlaceOrder() {
   const classes = useStyles();
@@ -61,7 +61,7 @@ function PlaceOrder() {
       const { data } = await axios.post(
         "/api/orders",
         {
-          orderOItems: cartItems,
+          orderItems: cartItems,
           shippingAddress,
           paymentMethod,
           itemsPrice,

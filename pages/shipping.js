@@ -4,6 +4,8 @@ import {
   Typography,
   TextField,
   Button,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
@@ -33,24 +35,24 @@ const ShippingPage = () => {
     if (!userInfo) {
       router.push("/login?redirect=/shipping");
     }
-    setValue("fullName", shippingAddress.fullName);
-    setValue("address", shippingAddress.address);
-    setValue("city", shippingAddress.city);
-    setValue("postalCode", shippingAddress.postalCode);
-    setValue("country", shippingAddress.country);
+    // setValue("fullName", shippingAddress.fullName);
+    // setValue("address", shippingAddress.address);
+    // setValue("province", shippingAddress.province);
+    // setValue("city", shippingAddress.city);
+    // setValue("postalCode", shippingAddress.postalCode);
   }, []);
 
-  const submitHandler = ({ fullName, address, city, postalCode, country }) => {
+  const submitHandler = ({ fullName, address, province, city, postalCode }) => {
     dispatch({
       type: "SAVE_SHIPPING_ADDRESS",
-      payload: { fullName, address, city, postalCode, country },
+      payload: { fullName, address, province, city, postalCode },
     });
     Cookies.set("shippingAddress", {
       fullName,
       address,
+      province,
       city,
       postalCode,
-      country,
     });
     router.push("/payment");
   };
@@ -59,8 +61,9 @@ const ShippingPage = () => {
       <CheckoutWizard activeStep={1} />
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component="h4" variant="h4">
-          Shipping Address
+          ثبت آدرس
         </Typography>
+        {/* <h1 className="text-lg dark:text-white">ثبت آدرس</h1> */}
         <List>
           <ListItem>
             <Controller
@@ -76,7 +79,7 @@ const ShippingPage = () => {
                   variant="outlined"
                   fullWidth
                   id="fullName"
-                  label="Full Name"
+                  label="نام و نام خانوادگی"
                   error={Boolean(errors.fullName)}
                   helperText={
                     errors.fullName
@@ -104,7 +107,7 @@ const ShippingPage = () => {
                   variant="outlined"
                   fullWidth
                   id="address"
-                  label="Address"
+                  label="آدرس"
                   error={Boolean(errors.address)}
                   helperText={
                     errors.address
@@ -115,6 +118,38 @@ const ShippingPage = () => {
                   }
                   {...field}
                 ></TextField>
+              )}
+            ></Controller>
+          </ListItem>
+          <ListItem>
+            <Controller
+              name="province"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: true,
+              }}
+              render={({ field }) => (
+                <Select
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-simple-select-helper"
+                  variant="outlined"
+                  label="استان"
+                  // value={age}
+                  // onChange={handleChange}
+                  helperText={
+                    errors.province
+                      ? errors.province.type === "minLength"
+                        ? "province length is more than 1"
+                        : "Province is required"
+                      : ""
+                  }
+                  {...field}
+                >
+                  <MenuItem value="Qom">قم</MenuItem>
+                  <MenuItem value="Tehran">تهران</MenuItem>
+                  <MenuItem value="Markazi">مرکزی</MenuItem>
+                </Select>
               )}
             ></Controller>
           </ListItem>
@@ -132,7 +167,7 @@ const ShippingPage = () => {
                   variant="outlined"
                   fullWidth
                   id="city"
-                  label="City"
+                  label="شهر"
                   error={Boolean(errors.city)}
                   helperText={
                     errors.city
@@ -160,41 +195,13 @@ const ShippingPage = () => {
                   variant="outlined"
                   fullWidth
                   id="postalCode"
-                  label="Postal Code"
+                  label="کد پستی"
                   error={Boolean(errors.postalCode)}
                   helperText={
                     errors.postalCode
                       ? errors.postalCode.type === "minLength"
                         ? "Postal Code length is more than 1"
                         : "Postal Code is required"
-                      : ""
-                  }
-                  {...field}
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-          <ListItem>
-            <Controller
-              name="country"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="country"
-                  label="Country"
-                  error={Boolean(errors.country)}
-                  helperText={
-                    errors.country
-                      ? errors.country.type === "minLength"
-                        ? "Country length is more than 1"
-                        : "Country is required"
                       : ""
                   }
                   {...field}
