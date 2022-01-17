@@ -4,7 +4,7 @@ class MyDocument extends Document {
   render() {
     return (
       // <Html lang="fa-IR" dir="rtl" className="dark">
-      <Html lang="fa-IR" dir="rtl">
+      <Html lang="fa-IR">
         <Head>
           <link
             rel="stylesheet"
@@ -17,7 +17,8 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
           <title>My E-Commerce</title>
         </Head>
-        <body className="dark:bg-gray-800">
+        {/* <body className="dark:bg-gray-800"> */}
+        <body className="dark:bg-gray-800" dir="rtl">
           <Main />
           <NextScript />
         </body>

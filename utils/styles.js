@@ -100,5 +100,12 @@ const useStyles = makeStyles((theme) => ({
       width: 250,
     },
   },
+  affected: {
+    textAlign: "right",
+  },
+  unaffected: {
+    flip: false,
+    textAlign: "right",
+  },
 }));
 export default useStyles;

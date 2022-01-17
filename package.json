@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/cache": "^11.7.1",
     "@emotion/core": "^10.1.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -42,6 +43,8 @@
     "react-jss": "^10.9.0",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
+    "stylis": "^4.0.13",
+    "stylis-plugin-rtl": "^2.1.1",
     "swc-loader": "^0.1.15",
     "swr": "^1.1.2",
     "uuidv4": "^6.2.12"
