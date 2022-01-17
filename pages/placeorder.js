@@ -102,8 +102,9 @@ function PlaceOrder() {
               </ListItem>
               <ListItem>
                 {shippingAddress.fullName}, {shippingAddress.address},{" "}
-                {shippingAddress.city}, {shippingAddress.postalCode},{" "}
-                {shippingAddress.country}
+                {shippingAddress.province}, {shippingAddress.city},{" "}
+                {shippingAddress.postalCode}, {shippingAddress.mobileNumber},
+                {""},{shippingAddress.phoneNumber}
               </ListItem>
             </List>
           </Card>
@@ -139,7 +140,7 @@ function PlaceOrder() {
                       {cartItems.map((item) => (
                         <TableRow key={item._id}>
                           <TableCell>
-                            <NextLink href={`/product/${item.slug}`} passHref>
+                            <NextLink href={`/product/${item.id}`} passHref>
                               <Link>
                                 <Image
                                   src={item.image}

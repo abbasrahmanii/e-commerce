@@ -5,8 +5,6 @@ import { Store } from "../context/Store";
 import { useContext } from "react";
 
 const Layout = ({ children }) => {
-  const { state, dispatch } = useContext(Store);
-  const { darkMode } = state;
   //dark mode
   // const theme = createTheme({
   //   palette: {
