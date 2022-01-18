@@ -109,8 +109,8 @@ function PlaceOrder() {
                   </Typography>
                 </ListItem>
                 <ListItem>
-                  {shippingAddress.fullName}, {shippingAddress.address},{" "}
-                  {shippingAddress.province}, {shippingAddress.city},{" "}
+                  {shippingAddress.fullName}, {shippingAddress.province},{" "}
+                  {shippingAddress.city}, {shippingAddress.address},{" "}
                   {shippingAddress.postalCode}, {shippingAddress.mobileNumber},
                   {""}
                   {shippingAddress.phoneNumber}

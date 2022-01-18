@@ -48,7 +48,7 @@ const FilterList = () => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  const freeDeliveryTextColor = checkboxRef.current.checked
+  const freeDeliveryTextColor = checkboxRef.current?.checked
     ? "text-green-300"
     : "";
 

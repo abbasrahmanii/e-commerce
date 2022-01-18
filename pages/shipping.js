@@ -136,7 +136,7 @@ const ShippingPage = () => {
             </ListItem>
             <ListItem>
               <Grid container spacing={2}>
-                <Grid item sm={6}>
+                <Grid item xs={12} md={6}>
                   <Controller
                     name="mobileNumber"
                     control={control}
@@ -171,7 +171,7 @@ const ShippingPage = () => {
                     )}
                   ></Controller>
                 </Grid>
-                <Grid item sm={6}>
+                <Grid item xs={12} md={6}>
                   <Controller
                     name="phoneNumber"
                     control={control}
@@ -209,7 +209,7 @@ const ShippingPage = () => {
             </ListItem>
             <ListItem>
               <Grid container spacing={2}>
-                <Grid item sm={6}>
+                <Grid item xs={12} md={6}>
                   <Controller
                     name="province"
                     control={control}
@@ -238,7 +238,7 @@ const ShippingPage = () => {
                     )}
                   ></Controller>
                 </Grid>
-                <Grid item sm={6}>
+                <Grid item xs={12} md={6}>
                   <Controller
                     name="city"
                     control={control}
