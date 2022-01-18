@@ -56,7 +56,7 @@ const Card = (props) => {
           </a>
         </Link>
         <button
-          className="dark:bg-gray-700 dark:text-white p-2 dark:hover:bg-gray-600 dark:focus:bg-gray-500 rounded-lg bg-gray-300 text-indigo-900 hover:bg-gray-200 focus:bg-gray-100"
+          className="text-base dark:bg-gray-700 dark:text-white p-2 dark:hover:bg-gray-600 dark:focus:bg-gray-500 rounded-lg bg-gray-300 text-dark hover:bg-gray-200 focus:bg-gray-100"
           onClick={addToCartHandler}
         >
           افزودن به سبد خرید

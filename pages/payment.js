@@ -16,6 +16,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useSnackbar } from "notistack";
+import RTL from "../components/RTL";
 
 const Payment = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -46,55 +47,62 @@ const Payment = () => {
   };
   return (
     <Layout>
-      <CheckoutWizard activeStep={2}></CheckoutWizard>
-      <form className={classes.form} onSubmit={submitHandler}>
-        <Typography component="h4" variant="h4">
-          Payment Method
-        </Typography>
-        <List>
-          <ListItem>
-            <FormControl component="fieldset">
-              <RadioGroup
-                aria-label="Payment Method"
-                name="paymentMethod"
-                value={paymentMethod}
-                onChange={(e) => setPaymentMethod(e.target.value)}
+      <RTL>
+        <CheckoutWizard activeStep={2}></CheckoutWizard>
+        <form className={classes.form} onSubmit={submitHandler}>
+          <Typography component="h4" variant="h4">
+            روش پرداخت
+          </Typography>
+          <List>
+            <ListItem>
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="Payment Method"
+                  name="paymentMethod"
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                >
+                  <FormControlLabel
+                    label="با کارت عضو شتاب"
+                    value="Cart"
+                    control={<Radio />}
+                  ></FormControlLabel>
+                  <FormControlLabel
+                    label="بصورت چکی"
+                    value="Check"
+                    control={<Radio />}
+                  ></FormControlLabel>
+                  <FormControlLabel
+                    label="نقدی"
+                    value="Cash"
+                    control={<Radio />}
+                  ></FormControlLabel>
+                </RadioGroup>
+              </FormControl>
+            </ListItem>
+            <ListItem>
+              <Button
+                fullWidth
+                type="submit"
+                variant="contained"
+                color="primary"
               >
-                <FormControlLabel
-                  label="PayPal"
-                  value="PayPal"
-                  control={<Radio />}
-                ></FormControlLabel>
-                <FormControlLabel
-                  label="Stripe"
-                  value="Stripe"
-                  control={<Radio />}
-                ></FormControlLabel>
-                <FormControlLabel
-                  label="Cash"
-                  value="Cash"
-                  control={<Radio />}
-                ></FormControlLabel>
-              </RadioGroup>
-            </FormControl>
-          </ListItem>
-          <ListItem>
-            <Button fullWidth type="submit" variant="contained" color="primary">
-              Continue
-            </Button>
-          </ListItem>
-          <ListItem>
-            <Button
-              fullWidth
-              type="button"
-              variant="contained"
-              onClick={() => router.push("/shipping")}
-            >
-              Back
-            </Button>
-          </ListItem>
-        </List>
-      </form>
+                ادامه
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                fullWidth
+                type="button"
+                variant="contained"
+                onClick={() => router.push("/shipping")}
+              >
+                مرحله قبل
+              </Button>
+            </ListItem>
+          </List>
+        </form>
+      </RTL>
     </Layout>
   );
 };

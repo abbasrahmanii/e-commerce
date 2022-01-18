@@ -15,12 +15,30 @@ import {
   CardContent,
   CardActions,
 } from "@material-ui/core";
-import { Bar } from "react-chartjs-2";
 import { getError } from "../../utils/error";
 import { Store } from "../../context/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
-import { CategoryScale } from "chart.js";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
+import {
+  BarElement,
+  CategoryScale,
+  Legend,
+  LinearScale,
+  Title,
+  Tooltip,
+} from "chart.js";
+import { Chart as ChartJS, defaults } from "chart.js";
+import { Chart } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function reducer(state, action) {
   switch (action.type) {
@@ -170,7 +188,7 @@ function AdminDashboard() {
                 </Typography>
               </ListItem>
               <ListItem>
-                {/* <Bar
+                <Bar
                   data={{
                     labels: summary.salesData.map((x) => x._id),
                     datasets: [
@@ -184,7 +202,7 @@ function AdminDashboard() {
                   options={{
                     legend: { display: true, position: "right" },
                   }}
-                ></Bar> */}
+                />
               </ListItem>
             </List>
           </Card>

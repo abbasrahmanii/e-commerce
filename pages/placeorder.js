@@ -27,6 +27,7 @@ import { useSnackbar } from "notistack";
 import { getError } from "../utils/error";
 import Cookies from "js-cookie";
 import axios from "axios";
+import RTL from "../components/RTL";
 
 function PlaceOrder() {
   const classes = useStyles();
@@ -84,165 +85,191 @@ function PlaceOrder() {
       enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
+
+  //add comma
+  const numberWithCommas = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <Layout>
-      <CheckoutWizard activeStep={3}></CheckoutWizard>
-      <Typography component="h4" variant="h4">
-        Place Order
-      </Typography>
+      <RTL>
+        <CheckoutWizard activeStep={3}></CheckoutWizard>
+        <Typography component="h4" variant="h4">
+          ثبت سفارش
+        </Typography>
 
-      <Grid container spacing={1}>
-        <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography component="h5" variant="h5">
-                  Shipping Address
-                </Typography>
-              </ListItem>
-              <ListItem>
-                {shippingAddress.fullName}, {shippingAddress.address},{" "}
-                {shippingAddress.province}, {shippingAddress.city},{" "}
-                {shippingAddress.postalCode}, {shippingAddress.mobileNumber},
-                {""},{shippingAddress.phoneNumber}
-              </ListItem>
-            </List>
-          </Card>
-          <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography component="h5" variant="h5">
-                  Payment Method
-                </Typography>
-              </ListItem>
-              <ListItem>{paymentMethod}</ListItem>
-            </List>
-          </Card>
-          <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography component="h5" variant="h5">
-                  Order Items
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <TableContainer>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Image</TableCell>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Quantity</TableCell>
-                        <TableCell align="right">Price</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {cartItems.map((item) => (
-                        <TableRow key={item._id}>
-                          <TableCell>
-                            <NextLink href={`/product/${item.id}`} passHref>
-                              <Link>
-                                <Image
-                                  src={item.image}
-                                  alt={item.name}
-                                  width={50}
-                                  height={50}
-                                ></Image>
-                              </Link>
-                            </NextLink>
-                          </TableCell>
-
-                          <TableCell>
-                            <NextLink href={`products/${item.id}`} passHref>
-                              <Link>
-                                <Typography>{item.name}</Typography>
-                              </Link>
-                            </NextLink>
-                          </TableCell>
-                          <TableCell align="right">
-                            <Typography>{item.quantity}</Typography>
-                          </TableCell>
-                          <TableCell align="right">
-                            <Typography>${item.price}</Typography>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </ListItem>
-            </List>
-          </Card>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography variant="h2">Order Summary</Typography>
-              </ListItem>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>Items:</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography align="right">${itemsPrice}</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>Tax:</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography align="right">${taxPrice}</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>Shipping:</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography align="right">${shippingPrice}</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>
-                      <strong>Total:</strong>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography align="right">
-                      <strong>${totalPrice}</strong>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Button
-                  onClick={placeOrderHandler}
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                >
-                  Place Order
-                </Button>
-              </ListItem>
-              {loading && (
+        <Grid container spacing={2}>
+          <Grid item md={9} xs={12}>
+            <Card className={classes.section}>
+              <List>
                 <ListItem>
-                  <CircularProgress />
+                  <Typography component="h5" variant="h5">
+                    آدرس سفارش
+                  </Typography>
                 </ListItem>
-              )}
-            </List>
-          </Card>
+                <ListItem>
+                  {shippingAddress.fullName}, {shippingAddress.address},{" "}
+                  {shippingAddress.province}, {shippingAddress.city},{" "}
+                  {shippingAddress.postalCode}, {shippingAddress.mobileNumber},
+                  {""}
+                  {shippingAddress.phoneNumber}
+                </ListItem>
+              </List>
+            </Card>
+            <Card className={classes.section}>
+              <List>
+                <ListItem>
+                  <Typography component="h5" variant="h5">
+                    روش پرداخت
+                  </Typography>
+                </ListItem>
+                <ListItem>
+                  {paymentMethod === "Cart"
+                    ? "با کارت عضو شتاب"
+                    : paymentMethod === "Check"
+                    ? "بصورت چکی"
+                    : "نقدی"}
+                </ListItem>
+              </List>
+            </Card>
+            <Card className={classes.section}>
+              <List>
+                <ListItem>
+                  <Typography component="h5" variant="h5">
+                    محصولات سبد خرید
+                  </Typography>
+                </ListItem>
+                <ListItem>
+                  <TableContainer>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell align="center">تصویر</TableCell>
+                          <TableCell align="center">نام محصول</TableCell>
+                          <TableCell align="center">تعداد</TableCell>
+                          <TableCell align="center">قیمت</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {cartItems.map((item) => (
+                          <TableRow key={item._id}>
+                            <TableCell align="center">
+                              <NextLink href={`/product/${item.id}`} passHref>
+                                <Link>
+                                  <Image
+                                    src={item.image}
+                                    alt={item.name}
+                                    width={50}
+                                    height={50}
+                                  ></Image>
+                                </Link>
+                              </NextLink>
+                            </TableCell>
+
+                            <TableCell align="center">
+                              <NextLink href={`products/${item.id}`} passHref>
+                                <Link>
+                                  <Typography>{item.name}</Typography>
+                                </Link>
+                              </NextLink>
+                            </TableCell>
+                            <TableCell align="center">
+                              <Typography>{item.quantity}</Typography>
+                            </TableCell>
+                            <TableCell align="center">
+                              <Typography>
+                                {numberWithCommas(item.price)} تومان
+                              </Typography>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </ListItem>
+              </List>
+            </Card>
+          </Grid>
+          <Grid item md={3} xs={12}>
+            <Card className={classes.section}>
+              <List>
+                <ListItem>
+                  <Typography variant="h5">خلاصه سفارش ها</Typography>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography align="left">قیمت محصولات:</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography>
+                        {numberWithCommas(itemsPrice)} تومان
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography align="left">مالیات:</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography>
+                        {numberWithCommas(taxPrice)} تومان
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography align="left">هزینه ارسال:</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography>
+                        {shippingPrice
+                          ? `${numberWithCommas(shippingPrice)} تومان`
+                          : "رایـگان"}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography align="left">
+                        <strong>جمع:</strong>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography>
+                        <strong>{numberWithCommas(totalPrice)} تومان</strong>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <ListItem>
+                  <Button
+                    onClick={placeOrderHandler}
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    className={classes.mainButton}
+                  >
+                    ثبت سفارش
+                  </Button>
+                </ListItem>
+                {loading && (
+                  <ListItem>
+                    <CircularProgress />
+                  </ListItem>
+                )}
+              </List>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
+      </RTL>
     </Layout>
   );
 }

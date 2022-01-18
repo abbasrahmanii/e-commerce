@@ -86,9 +86,14 @@ function Order({ params }) {
   }, [order]);
   const { closeSnackbar, enqueueSnackbar } = useSnackbar();
 
+  //add comma
+  const numberWithCommas = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <Layout title={`Order ${orderId}`}>
-      <Typography component="h1" variant="h1">
+      <Typography component="h5" variant="h5">
         Order {orderId}
       </Typography>
       {loading ? (
@@ -101,8 +106,8 @@ function Order({ params }) {
             <Card className={classes.section}>
               <List>
                 <ListItem>
-                  <Typography component="h2" variant="h2">
-                    Shipping Address
+                  <Typography component="h5" variant="h5">
+                    آدرس سفارش
                   </Typography>
                 </ListItem>
                 <ListItem>
@@ -113,31 +118,38 @@ function Order({ params }) {
                   {shippingAddress.phoneNumber}
                 </ListItem>
                 <ListItem>
-                  Status:{" "}
+                  وضعیت ارسال:{" "}
                   {isDelivered
-                    ? `delivered at ${deliveredAt}`
-                    : "not delivered"}
+                    ? `در تاریخ ${deliveredAt} تحویل داده شد`
+                    : "تحویل داده نشده"}
                 </ListItem>
               </List>
             </Card>
             <Card className={classes.section}>
               <List>
                 <ListItem>
-                  <Typography component="h2" variant="h2">
-                    Payment Method
+                  <Typography component="h5" variant="h5">
+                    روش پرداخت
                   </Typography>
                 </ListItem>
-                <ListItem>{paymentMethod}</ListItem>
                 <ListItem>
-                  Status: {isPaid ? `paid at ${paidAt}` : "not paid"}
+                  {paymentMethod === "Cart"
+                    ? "با کارت عضو شتاب"
+                    : paymentMethod === "Check"
+                    ? "بصورت چکی"
+                    : "نقدی"}
+                </ListItem>
+                <ListItem>
+                  وضعیت پرداخت:{" "}
+                  {isPaid ? `در تاریخ ${paidAt} پرداخت شد` : "پرداخت نشده"}
                 </ListItem>
               </List>
             </Card>
             <Card className={classes.section}>
               <List>
                 <ListItem>
-                  <Typography component="h2" variant="h2">
-                    Order Items
+                  <Typography component="h5" variant="h5">
+                    محصولات
                   </Typography>
                 </ListItem>
                 <ListItem>
@@ -145,10 +157,10 @@ function Order({ params }) {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell>Image</TableCell>
-                          <TableCell>Name</TableCell>
-                          <TableCell align="right">Quantity</TableCell>
-                          <TableCell align="right">Price</TableCell>
+                          <TableCell>تصویر</TableCell>
+                          <TableCell>نام محصول</TableCell>
+                          <TableCell align="right">تعداد</TableCell>
+                          <TableCell align="right">قیمت</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -178,7 +190,9 @@ function Order({ params }) {
                               <Typography>{item.quantity}</Typography>
                             </TableCell>
                             <TableCell align="right">
-                              <Typography>${item.price}</Typography>
+                              <Typography>
+                                {numberWithCommas(item.price)} تومان
+                              </Typography>
                             </TableCell>
                           </TableRow>
                         ))}
@@ -193,48 +207,56 @@ function Order({ params }) {
             <Card className={classes.section}>
               <List>
                 <ListItem>
-                  <Typography variant="h2">Order Summary</Typography>
+                  <Typography variant="h5">خلاصه سفارش ها</Typography>
                 </ListItem>
                 <ListItem>
                   <Grid container>
                     <Grid item xs={6}>
-                      <Typography>Items:</Typography>
+                      <Typography align="left">قیمت محصولات:</Typography>
                     </Grid>
-                    <Grid item xs={6}>
-                      <Typography align="right">${itemsPrice}</Typography>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-                <ListItem>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <Typography>Tax:</Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Typography align="right">${taxPrice}</Typography>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-                <ListItem>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <Typography>Shipping:</Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Typography align="right">${shippingPrice}</Typography>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-                <ListItem>
-                  <Grid container>
                     <Grid item xs={6}>
                       <Typography>
-                        <strong>Total:</strong>
+                        {numberWithCommas(itemsPrice)} تومان
                       </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography align="left">مالیات:</Typography>
                     </Grid>
                     <Grid item xs={6}>
                       <Typography align="right">
-                        <strong>${totalPrice}</strong>
+                        {numberWithCommas(taxPrice)} تومان
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography align="left">هزینه ارسال:</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography>
+                        {shippingPrice
+                          ? `${numberWithCommas(shippingPrice)} تومان`
+                          : "رایـگان"}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography align="left">
+                        <strong>جمع:</strong>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography>
+                        <strong>{numberWithCommas(totalPrice)} تومان</strong>
                       </Typography>
                     </Grid>
                   </Grid>

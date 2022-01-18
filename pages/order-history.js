@@ -66,6 +66,12 @@ const OrderHistory = () => {
     };
     fetchOrders();
   }, []);
+
+  //add comma
+  const numberWithCommas = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <Layout title="Order History">
       <Grid container spacing={1}>
@@ -74,12 +80,12 @@ const OrderHistory = () => {
             <List>
               <NexLink href="/profile" passHref>
                 <ListItem button component="a">
-                  <ListItemText primary="User Profile"></ListItemText>
+                  <ListItemText primary="پروفایل کاربر"></ListItemText>
                 </ListItem>
               </NexLink>
               <NexLink href="/order-history" passHref>
                 <ListItem selected button component="a">
-                  <ListItemText primary="Order History"></ListItemText>
+                  <ListItemText primary="تاریخچه سفارش ها"></ListItemText>
                 </ListItem>
               </NexLink>
             </List>
@@ -88,14 +94,18 @@ const OrderHistory = () => {
         <Grid item md={9} xs={12}>
           <Card className={classes.section}>
             <List>
-              <ListItem>
-                <Typography component="h1" variant="h1">
-                  Order History
-                </Typography>
-              </ListItem>
+              {/* <ListItem> */}
+              <Typography
+                component="h1"
+                variant="h4"
+                className={classes.alignCenter}
+              >
+                تاریخچه سفارش ها
+              </Typography>
+              {/* </ListItem> */}
               <ListItem>
                 {loading ? (
-                  <CircularProgress />
+                  <CircularProgress className={classes.alignCenter} />
                 ) : error ? (
                   <Typography className={classes.error}>{error}</Typography>
                 ) : (
@@ -103,33 +113,39 @@ const OrderHistory = () => {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell>ID</TableCell>
-                          <TableCell>DATE</TableCell>
-                          <TableCell>TOTAL</TableCell>
-                          <TableCell>PAID</TableCell>
-                          <TableCell>DELIVERED</TableCell>
-                          <TableCell>ACTION</TableCell>
+                          <TableCell align="center">شناسه</TableCell>
+                          <TableCell align="center">تاریخ سفارش</TableCell>
+                          <TableCell align="center">جمع قیمت</TableCell>
+                          <TableCell align="center">وضعیت پرداخت</TableCell>
+                          <TableCell align="center">وضعیت ارسال</TableCell>
+                          <TableCell align="center">جزئیات</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {orders.map((order) => (
                           <TableRow key={order._id}>
-                            <TableCell>{order._id.substring(20, 24)}</TableCell>
-                            <TableCell>{order.createdAt}</TableCell>
-                            <TableCell>${order.totalPrice}</TableCell>
-                            <TableCell>
+                            <TableCell align="center">
+                              {order._id.substring(20, 24)}
+                            </TableCell>
+                            <TableCell align="center">
+                              {order.createdAt}
+                            </TableCell>
+                            <TableCell align="center">
+                              {numberWithCommas(order.totalPrice)} تومان
+                            </TableCell>
+                            <TableCell align="center">
                               {order.isPaid
-                                ? `paid at ${order.paidAt}`
-                                : "not paid"}
+                                ? `در تاریخ ${order.paidAt} پرداخت شد`
+                                : "پرداخت نشده"}
                             </TableCell>
-                            <TableCell>
+                            <TableCell align="center">
                               {order.isDelivered
-                                ? `delivered at ${order.deliveredAt}`
-                                : "not delivered"}
+                                ? `در تاریخ ${order.deliveredAt} تحویل داده شد`
+                                : "تحویل داده نشده"}
                             </TableCell>
-                            <TableCell>
+                            <TableCell align="center">
                               <NexLink href={`/order/${order._id}`} passHref>
-                                <Button variant="contained">Details</Button>
+                                <Button variant="contained">جزئیات</Button>
                               </NexLink>
                             </TableCell>
                           </TableRow>

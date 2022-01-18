@@ -1,13 +1,16 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { Store } from "../context/Store";
 import { FiFilter } from "react-icons/fi";
+import { Slider } from "@material-ui/core";
 
 const FilterList = () => {
   const [filterValue, setFilterValue] = useState("");
   const [isFree, setIsFree] = useState(false);
-  const [rangeValue, setRangeValue] = useState(0);
-  const rangeValueRef = useRef();
+  // const [rangeValue, setRangeValue] = useState(0);
+  const [rangeValue, setRangeValue] = useState([0, 1500000]);
   const { dispatch } = useContext(Store);
+
+  const checkboxRef = useRef();
 
   const filterHandler = (e) => {
     dispatch({
@@ -27,16 +30,17 @@ const FilterList = () => {
     });
     setIsFree((prev) => !prev);
   };
-  const rangeHandler = () => {
+  const rangeHandler = (e, newValue) => {
     dispatch({
       type: "FILTER_LIST",
       payload: {
         selectFilter: filterValue,
         check: isFree,
-        rangeValue: rangeValueRef.current.value,
+        rangeValue: newValue,
       },
     });
-    setRangeValue(rangeValueRef.current.value);
+    console.log(newValue);
+    setRangeValue(newValue);
   };
 
   //add comma
@@ -44,49 +48,58 @@ const FilterList = () => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  const freeDeliveryTextColor = checkboxRef.current.checked
+    ? "text-green-300"
+    : "";
+
   return (
-    <div className="my-8 flex flex-col dark:bg-indigo-400 w-max p-3 rounded-md bg-indigo-500">
+    <div className="my-8 flex flex-col dark:bg-indigo-400 w-max p-6 rounded-md bg-indigo-500">
       <div className="flex items-center text-white dark:text-black mb-4">
-        <FiFilter />
-        <h4 className="mr-2 dark:text-black">فیلتر محصولات</h4>
+        <FiFilter fontSize="1.2rem" />
+        <h4 className="mr-2 dark:text-black text-base">فیلتر محصولات</h4>
       </div>
       <select
-        className="w-min p-2 focus:outline-none bg-indigo-100 text-black"
+        className="w-full p-2 focus:outline-none bg-indigo-100 text-black"
         name="category"
         id="category"
         value={filterValue}
         onChange={filterHandler}
       >
-        <option value="">All</option>
-        <option value="Personal">Personal</option>
-        <option value="Clothing">Clothing</option>
-        <option value="Home Appliances">Home Appliances</option>
+        <option value="">همه محصولات</option>
+        <option value="Entertainment">سرگرمی</option>
+        <option value="Clothing">پوشاک</option>
+        <option value="Home Appliances">لوازم منزل</option>
       </select>
-      <label
-        htmlFor="range"
-        className="my-3 text-white dark:text-black text-sm"
-      >
-        حداقل قیمت: {numberWithCommas(rangeValue)} تومان
+      <label htmlFor="range" className="my-3 text-white dark:text-black">
+        حداقل قیمت: {numberWithCommas(rangeValue[0])} تومان
+        <br />
+        حداکثر قیمت: {numberWithCommas(rangeValue[1])} تومان
       </label>
-      <input
+
+      <Slider
+        onChange={rangeHandler}
+        // valueLabelDisplay="auto"
+        aria-labelledby="range-slider"
         type="range"
         id="range"
         name="range"
         min={0}
         max={1500000}
-        defaultValue={0}
+        defaultValue={[0, 1500000]}
         dir="ltr"
-        ref={rangeValueRef}
-        className="form-range appearance-none w-full h-2 p-0 bg-white focus:outline-none focus:ring-0 focus:shadow-none rounded-xl"
-        onChange={rangeHandler}
       />
-      <label htmlFor="checkbox" className="py-2 text-white dark:text-gray-900">
+      <label
+        htmlFor="checkbox"
+        className={`py-2 text-white dark:text-gray-900 ${freeDeliveryTextColor}`}
+      >
         <input
           className="ml-2"
+          style={{ accentColor: "#2aff3d" }}
           id="checkbox"
           type="checkbox"
           checked={isFree}
           onChange={checkboxHandler}
+          ref={checkboxRef}
         />
         ارسال رایگان
       </label>

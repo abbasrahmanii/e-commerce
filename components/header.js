@@ -162,7 +162,7 @@ const Header = () => {
                     <a>
                       <BsCart3 fontSize="1.3rem" />
                       {cart.cartItems.length > 0 && (
-                        <div className="text-indigo-900 w-4 h-4 bg-gray-300 rounded-full absolute top-0 right-1 flex justify-center items-center text-xs">
+                        <div className="text-indigo-900 w-4 h-4 bg-green-400 rounded-full absolute top-0 right-1 flex justify-center items-center text-xs">
                           {cart.cartItems.length}
                         </div>
                       )}

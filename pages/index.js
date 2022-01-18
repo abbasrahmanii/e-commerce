@@ -17,13 +17,12 @@ export default function Home(props) {
 
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-center min-h-screen py-2 pb-36">
+      <div className="flex flex-col items-center justify-center min-h-screen py-2">
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <title>My Commerce</title>
           <meta name="theme-color" content="#FC334A" />
         </Head>
-
         <main
           className="w-full p-4 mt-4 mb-10 font-semibold text-center bg-red-200l"
           id="slider"

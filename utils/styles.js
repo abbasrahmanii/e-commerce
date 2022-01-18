@@ -100,12 +100,11 @@ const useStyles = makeStyles((theme) => ({
       width: 250,
     },
   },
-  affected: {
-    textAlign: "right",
+  mainButton: {
+    fontSize: "1.1rem",
   },
-  unaffected: {
-    flip: false,
-    textAlign: "right",
+  alignCenter: {
+    textAlign: "center",
   },
 }));
 export default useStyles;

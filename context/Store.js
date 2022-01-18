@@ -9,18 +9,13 @@ const initialState = {
     cartItems: Cookies.get("cartItems")
       ? JSON.parse(Cookies.get("cartItems"))
       : [],
-    // shippingAddress: Cookies.get("shippingAddress")
-    //   ? JSON.parse(Cookies.get("shippingAddress"))
-    //   : {},
     shippingAddress: Cookies.get("shippingAddress")
       ? Cookies.get("shippingAddress")
       : {},
-    // shippingAddress: {},
     paymentMethod: Cookies.get("paymentMethod")
       ? Cookies.get("paymentMethod")
       : "",
   },
-  // userInfo: Cookies.get("userInfo") ? Cookies.get("userInfo") : null,
   userInfo: Cookies.get("userInfo")
     ? JSON.parse(Cookies.get("userInfo"))
     : null,
@@ -92,7 +87,9 @@ const reducer = (state, action) => {
       if (action.payload.selectFilter === "") {
         if (action.payload.check === false) {
           const rangedProducts = state.products.filter(
-            (p) => p.price >= action.payload.rangeValue
+            (p) =>
+              p.price >= action.payload.rangeValue[0] &&
+              p.price <= action.payload.rangeValue[1]
           );
           return {
             ...state,
@@ -103,7 +100,9 @@ const reducer = (state, action) => {
             (p) => p.freeDelivery === true
           );
           const fiteredProducts = freeDeliveryProducts.filter(
-            (p) => p.price >= action.payload.rangeValue
+            (p) =>
+              p.price >= action.payload.rangeValue[0] &&
+              p.price <= action.payload.rangeValue[1]
           );
           return {
             ...state,
@@ -116,7 +115,9 @@ const reducer = (state, action) => {
             (p) => p.category === action.payload.selectFilter
           );
           const fiteredProducts = categoryFiltered.filter(
-            (p) => p.price >= action.payload.rangeValue
+            (p) =>
+              p.price >= action.payload.rangeValue[0] &&
+              p.price <= action.payload.rangeValue[1]
           );
           return {
             ...state,
@@ -129,7 +130,9 @@ const reducer = (state, action) => {
               p.freeDelivery === true
           );
           const fiteredProducts = filteredProducts.filter(
-            (p) => p.price >= action.payload.rangeValue
+            (p) =>
+              p.price >= action.payload.rangeValue[0] &&
+              p.price <= action.payload.rangeValue[1]
           );
           return {
             ...state,
