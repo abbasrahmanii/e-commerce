@@ -84,7 +84,7 @@ const reducer = (state, action) => {
         cart: { cartItems: [], shippingAddress: {}, paymentMethod: "" },
       };
     case "FILTER_LIST":
-      if (action.payload.selectFilter === "") {
+      if (action.payload.selectFilter === "All") {
         if (action.payload.check === false) {
           const rangedProducts = state.products.filter(
             (p) =>

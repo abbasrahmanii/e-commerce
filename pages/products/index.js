@@ -3,6 +3,7 @@ import ListItems from "../../components/ListItems";
 import { Store } from "../../context/Store";
 import FilterList from "../../components/FilterList";
 import Layout from "../../components/Layout";
+import { Grid } from "@material-ui/core";
 
 const ProductsPage = () => {
   const { state } = useContext(Store);

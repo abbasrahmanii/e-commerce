@@ -5,14 +5,12 @@ import { useRouter } from "next/router";
 import { Fragment, useContext } from "react";
 import { Store } from "../context/Store";
 
-const Card = (props) => {
-  const { id, name, price, image, freeDelivery } = props.product;
+const Card = ({ product }) => {
+  const { id, name, price, image, freeDelivery } = product;
   const router = useRouter();
 
   const { state, dispatch } = useContext(Store);
-  const { products, cart } = state;
-
-  const product = products.find((item) => item.id === id);
+  const { cart } = state;
 
   const addToCartHandler = () => {
     const existItem = cart.cartItems.find((item) => item.id === id);

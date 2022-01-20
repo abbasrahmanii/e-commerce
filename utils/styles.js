@@ -106,5 +106,17 @@ const useStyles = makeStyles((theme) => ({
   alignCenter: {
     textAlign: "center",
   },
+  filterList: {
+    // padding: "1rem 1.5rem",
+    backgroundColor: "#7CD1B8",
+    margin: "0rem auto 2rem auto",
+  },
+  cardAction: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  cartText: {
+    margin: "1rem 0",
+  },
 }));
 export default useStyles;

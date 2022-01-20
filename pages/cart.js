@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { Store } from "../context/Store";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Layout from "../components/layout";
+import { MenuItem, TextField } from "@material-ui/core";
 
 const CartPage = () => {
   const router = useRouter();
@@ -96,7 +97,7 @@ const CartPage = () => {
                         </Link>
                       </th>
                       <th>
-                        <select
+                        {/* <select
                           value={item.quantity}
                           onChange={(e) => updateCartHandler(item, e)}
                           className="cursor-pointer bg-indigo-400 text-white dark:text-black dark:bg-indigo-100 focus:outline-none"
@@ -106,7 +107,23 @@ const CartPage = () => {
                               {x + 1}
                             </option>
                           ))}
-                        </select>
+                        </select> */}
+                        <TextField
+                          select
+                          variant="outlined"
+                          // label="دسته بندی"
+
+                          value={item.quantity}
+                          onChange={(e) => updateCartHandler(item, e)}
+                          color="primary"
+                          // className={classes.select}
+                        >
+                          {[...Array(item.countInStock).keys()].map((x) => (
+                            <MenuItem key={x + 1} value={x + 1} className="w-6">
+                              {x + 1}
+                            </MenuItem>
+                          ))}
+                        </TextField>
                       </th>
                       <th className="dark:text-indigo-50">
                         {numberWithCommas(item.price)} تومان

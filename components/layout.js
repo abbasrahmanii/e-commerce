@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
       <CssBaseline />
       {/* <ThemeProvider theme={theme}> */}
       <Header />
-      <main className="mt-8 px-4">{children}</main>
+      <main className="mt-10 px-4">{children}</main>
       <Footer />
       {/* </ThemeProvider> */}
     </>
