@@ -1,12 +1,25 @@
 import { useContext } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
+import NextLink from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Store } from "../context/Store";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Layout from "../components/layout";
-import { MenuItem, TextField } from "@material-ui/core";
+import {
+  IconButton,
+  Link,
+  MenuItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 const CartPage = () => {
   const router = useRouter();
@@ -48,11 +61,11 @@ const CartPage = () => {
           </h1>
           <div className="flex flex-col justify-center items-center p-6 dark:text-white">
             سبد خرید شما خالـی است.{" "}
-            <Link href="/products">
+            <NextLink href="/products">
               <a className="mt-3 text-blue-600 dark:text-blue-400">
                 به فروشگاه بروید.
               </a>
-            </Link>
+            </NextLink>
           </div>
         </div>
       </Layout>
@@ -65,7 +78,7 @@ const CartPage = () => {
         <div className="flex w-full pb-36 flex-wrap">
           <div className="w-full md:w-3/4 mt-6">
             <div className="w-full">
-              <table className="table w-full">
+              {/* <table className="table w-full">
                 <thead className="table-header-group">
                   <tr className="table-row h-20 font-serif dark:text-white">
                     <th className="hidden md:table-cell">تصویر</th>
@@ -79,7 +92,7 @@ const CartPage = () => {
                   {cart.cartItems.map((item) => (
                     <tr key={item.id}>
                       <th className="hidden md:table-cell">
-                        <Link href={`/products/${item.id}`}>
+                        <NextLink href={`/products/${item.id}`}>
                           <Image
                             src={item.image}
                             alt={item.name}
@@ -87,14 +100,14 @@ const CartPage = () => {
                             height={60}
                             className="cursor-pointer"
                           ></Image>
-                        </Link>
+                        </NextLink>
                       </th>
                       <th>
-                        <Link href={`/products/${item.id}`}>
+                        <NextLink href={`/products/${item.id}`}>
                           <h1 className="font-mono cursor-pointer dark:text-indigo-50">
                             {item.name}
                           </h1>
-                        </Link>
+                        </NextLink>
                       </th>
                       <th>
                         {/* <select
@@ -108,7 +121,7 @@ const CartPage = () => {
                             </option>
                           ))}
                         </select> */}
-                        <TextField
+              {/* <TextField
                           select
                           variant="outlined"
                           // label="دسته بندی"
@@ -141,7 +154,82 @@ const CartPage = () => {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table> */}
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">تصویر</TableCell>
+                      <TableCell align="center">نام محصول</TableCell>
+                      <TableCell align="center">تعداد</TableCell>
+                      <TableCell align="center">قیمت</TableCell>
+                      <TableCell align="center">حذف</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {cart.cartItems.map((item) => (
+                      <TableRow key={item._id}>
+                        <TableCell align="center">
+                          <NextLink href={`/product/${item.id}`} passHref>
+                            <Link>
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                width={50}
+                                height={50}
+                              ></Image>
+                            </Link>
+                          </NextLink>
+                        </TableCell>
+                        <TableCell align="center">
+                          <NextLink href={`products/${item.id}`} passHref>
+                            <Link>
+                              <Typography>{item.name}</Typography>
+                            </Link>
+                          </NextLink>
+                        </TableCell>
+                        <TableCell align="center">
+                          <TextField
+                            select
+                            variant="outlined"
+                            // label="دسته بندی"
+
+                            value={item.quantity}
+                            onChange={(e) => updateCartHandler(item, e)}
+                            color="primary"
+                            // className={classes.select}
+                          >
+                            {[...Array(item.countInStock).keys()].map((x) => (
+                              <MenuItem
+                                key={x + 1}
+                                value={x + 1}
+                                className="w-6"
+                              >
+                                {x + 1}
+                              </MenuItem>
+                            ))}
+                          </TextField>
+                        </TableCell>
+                        <TableCell align="center">
+                          <Typography>
+                            {numberWithCommas(item.price)} تومان
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="center">
+                          <IconButton
+                            color="secondary"
+                            aria-label="upload picture"
+                            component="span"
+                            onClick={() => removeItemHandler(item)}
+                          >
+                            <DeleteForeverIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </div>
           </div>
           <div className="flex items-start justify-center w-full md:w-1/4 p-4 text-center mt-8">

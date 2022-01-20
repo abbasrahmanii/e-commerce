@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Button,
   Card,
@@ -44,38 +45,39 @@ const CartTwo = ({ product }) => {
 
   return (
     <Card elevation={8}>
-      <CardActionArea onClick={cartActionHandler}>
-        <CardMedia
-          component="img"
-          alt={name}
-          height="140"
-          image={image}
-          title={name}
-        />
-        <CardContent>
-          <Typography component="p" className={classes.cartText}>
-            {name}
-          </Typography>
-          <Typography>{numberWithCommas(price)} تـومـان</Typography>
-          {freeDelivery ? (
-            <Typography
-              component="p"
-              className={classes.cartText}
-              color="secondary"
-            >
-              ارسال رایگان
-            </Typography>
-          ) : (
+      <Link href={`/products/${id}`}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt={name}
+            height="140"
+            image={image}
+            title={name}
+          />
+          <CardContent>
             <Typography component="p" className={classes.cartText}>
-              <br />
+              {name}
             </Typography>
-          )}
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+            <Typography>{numberWithCommas(price)} تـومـان</Typography>
+            {freeDelivery ? (
+              <Typography
+                component="p"
+                className={classes.cartText}
+                color="secondary"
+              >
+                ارسال رایگان
+              </Typography>
+            ) : (
+              <Typography component="p" className={classes.cartText}>
+                <br />
+              </Typography>
+            )}
+            <Typography variant="body2" color="textSecondary" component="p">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است.
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Link>
       <CardActions className={classes.cardAction}>
         <Button
           size="small"
