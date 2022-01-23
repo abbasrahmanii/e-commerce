@@ -1,4 +1,4 @@
-import { Step, StepLabel, Stepper } from "@material-ui/core";
+import { Step, StepLabel, Stepper } from "@mui/material";
 import useStyles from "../utils/styles";
 import RTL from "./RTL";
 

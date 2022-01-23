@@ -14,7 +14,7 @@ import {
   Radio,
   RadioGroup,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useSnackbar } from "notistack";
 import RTL from "../components/RTL";
 

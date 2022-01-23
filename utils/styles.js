@@ -1,4 +1,5 @@
-import { makeStyles } from "@material-ui/core";
+// import { makeStyles } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
@@ -60,9 +61,9 @@ const useStyles = makeStyles((theme) => ({
   // search
   searchSection: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
+    // [theme.breakpoints.up("md")]: {
+    //   display: "flex",
+    // },
   },
   searchForm: {
     border: "1px solid #ffffff",
@@ -114,9 +115,11 @@ const useStyles = makeStyles((theme) => ({
   cardAction: {
     display: "flex",
     justifyContent: "space-around",
+    justifySelf: "flex-end",
+    padding: "0.75rem",
   },
   cartText: {
-    margin: "1rem 0",
+    margin: "0.5rem 0",
   },
 }));
 export default useStyles;

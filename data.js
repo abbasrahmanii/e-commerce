@@ -21,6 +21,11 @@ const SHOP_DATA = {
       name: "دمپایی",
       price: 146250,
       image: "/images/asset21.jpeg",
+      otherImages: [
+        "/images/asset22.jpeg",
+        "/images/asset23.jpeg",
+        "/images/asset24.jpeg",
+      ],
       popular: true,
       brand: "Nothing",
       category: "Clothing",

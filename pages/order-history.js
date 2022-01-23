@@ -18,7 +18,7 @@ import {
   TableBody,
   Button,
   ListItemText,
-} from "@material-ui/core";
+} from "@mui/material";
 import { getError } from "../utils/error";
 import { Store } from "../context/Store";
 import Layout from "../components/Layout";

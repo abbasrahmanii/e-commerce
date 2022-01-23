@@ -2,8 +2,6 @@ import { useState, useContext, Fragment } from "react";
 import NextLink from "next/link";
 import Image from "next/image";
 import { Store } from "../context/Store";
-import { BiMenu } from "react-icons/bi";
-import { BsCart3 } from "react-icons/bs";
 import Switch from "./Switch";
 import {
   Button,
@@ -15,20 +13,19 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
-} from "@material-ui/core";
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import HomeIcon from "@material-ui/icons/Home";
-import StoreIcon from "@material-ui/icons/Store";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import HomeIcon from "@mui/icons-material/Home";
+import StoreIcon from "@mui/icons-material/Store";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { FiLogIn } from "react-icons/fi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import useStyles from "../utils/styles";
-import { list } from "postcss";
 import RTL from "./RTL";
 
 const Header = () => {
@@ -69,10 +66,6 @@ const Header = () => {
     router.push("/");
   };
 
-  function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-  }
-
   return (
     <Fragment>
       <div className="font-serif sticky top-0 left-0 right-0 shadow-xl h-20 transition-all z-50">
@@ -103,7 +96,7 @@ const Header = () => {
                   <a>
                     <Badge
                       badgeContent={cart.cartItems.length}
-                      color="secondary"
+                      color="error"
                       className="hover:text-green-400"
                     >
                       <ShoppingCartIcon color="#fff" titleAccess="سبد خرید" />
@@ -232,7 +225,7 @@ const Header = () => {
                       )} */}
                     <Badge
                       badgeContent={cart.cartItems.length}
-                      color="secondary"
+                      color="error"
                       className="hover:text-green-400"
                     >
                       <ShoppingCartIcon color="#fff" titleAccess="سبد خرید" />

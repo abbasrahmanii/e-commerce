@@ -4,10 +4,9 @@ import {
   Typography,
   TextField,
   Button,
-  Select,
   MenuItem,
   Grid,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import Layout from "../components/Layout";
@@ -20,12 +19,6 @@ import dynamic from "next/dynamic";
 import RTL from "../components/RTL";
 
 const ShippingPage = () => {
-  // const theme = createTheme({
-  //   direction: "rtl",
-  // });
-  // // Configure JSS
-  // const jss = create({ plugins: [...jssPreset().plugins, jssRTL()] });
-
   const classes = useStyles();
 
   const {

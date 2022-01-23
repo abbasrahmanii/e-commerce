@@ -19,7 +19,7 @@ import {
   Card,
   List,
   ListItem,
-} from "@material-ui/core";
+} from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/router";
 import useStyles from "../../utils/styles";

@@ -6,10 +6,8 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Grid,
   Typography,
-} from "@material-ui/core";
-import { mergeClasses } from "@material-ui/styles";
+} from "@mui/material";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { Store } from "../context/Store";
@@ -46,11 +44,12 @@ const CartTwo = ({ product }) => {
   return (
     <Card elevation={8}>
       <Link href={`/products/${id}`}>
-        <CardActionArea>
+        <CardActionArea className="p-2">
           <CardMedia
+            className="p-5"
             component="img"
             alt={name}
-            height="140"
+            height="120"
             image={image}
             title={name}
           />
@@ -63,7 +62,7 @@ const CartTwo = ({ product }) => {
               <Typography
                 component="p"
                 className={classes.cartText}
-                color="secondary"
+                color="darkgreen"
               >
                 ارسال رایگان
               </Typography>

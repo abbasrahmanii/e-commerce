@@ -12,13 +12,13 @@ import {
   Typography,
   TextField,
   MenuItem,
-} from "@material-ui/core";
-import FilterListIcon from "@material-ui/icons/FilterList";
+} from "@mui/material";
+import FilterListIcon from "@mui/icons-material/FilterList";
 import useStyles from "../utils/styles";
 import RTL from "./RTL";
 
 const FilterList = () => {
-  const [filterValue, setFilterValue] = useState("");
+  const [filterValue, setFilterValue] = useState("All");
   const [isFree, setIsFree] = useState(false);
   // const [rangeValue, setRangeValue] = useState(0);
   const [rangeValue, setRangeValue] = useState([0, 1500000]);

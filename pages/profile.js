@@ -12,10 +12,7 @@ import {
   Button,
   ListItemText,
   TextField,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-} from "@material-ui/core";
+} from "@mui/material";
 import { getError } from "../utils/error";
 import { Store } from "../context/Store";
 import Layout from "../components/Layout";

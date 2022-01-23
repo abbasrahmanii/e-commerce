@@ -14,7 +14,7 @@ import {
   ListItemText,
   CardContent,
   CardActions,
-} from "@material-ui/core";
+} from "@mui/material";
 import { getError } from "../../utils/error";
 import { Store } from "../../context/Store";
 import Layout from "../../components/Layout";
@@ -29,7 +29,6 @@ import {
   Tooltip,
 } from "chart.js";
 import { Chart as ChartJS, defaults } from "chart.js";
-import { Chart } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -90,12 +89,12 @@ function AdminDashboard() {
             <List>
               <NextLink href="/admin/dashboard" passHref>
                 <ListItem selected button component="a">
-                  <ListItemText primary="Admin Dashboard"></ListItemText>
+                  <ListItemText primary="داشبورد ادمین"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/orders" passHref>
                 <ListItem button component="a">
-                  <ListItemText primary="Orders"></ListItemText>
+                  <ListItemText primary="سفارش ها"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -114,15 +113,15 @@ function AdminDashboard() {
                     <Grid item md={3}>
                       <Card raised>
                         <CardContent>
-                          <Typography variant="h1">
-                            ${summary.ordersPrice}
+                          <Typography variant="h4">
+                            {summary.ordersPrice} تومان
                           </Typography>
-                          <Typography>Sales</Typography>
+                          <Typography>فروش</Typography>
                         </CardContent>
                         <CardActions>
                           <NextLink href="/admin/orders" passHref>
                             <Button size="small" color="primary">
-                              View sales
+                              نمایش فروش ها
                             </Button>
                           </NextLink>
                         </CardActions>
@@ -131,15 +130,15 @@ function AdminDashboard() {
                     <Grid item md={3}>
                       <Card raised>
                         <CardContent>
-                          <Typography variant="h1">
+                          <Typography variant="h4">
                             {summary.ordersCount}
                           </Typography>
-                          <Typography>Orders</Typography>
+                          <Typography>سفارش</Typography>
                         </CardContent>
                         <CardActions>
                           <NextLink href="/admin/orders" passHref>
                             <Button size="small" color="primary">
-                              View orders
+                              نمایش سفارش ها
                             </Button>
                           </NextLink>
                         </CardActions>
@@ -148,15 +147,15 @@ function AdminDashboard() {
                     <Grid item md={3}>
                       <Card raised>
                         <CardContent>
-                          <Typography variant="h1">
+                          <Typography variant="h4">
                             {summary.productsCount}
                           </Typography>
-                          <Typography>Products</Typography>
+                          <Typography>محصول</Typography>
                         </CardContent>
                         <CardActions>
                           <NextLink href="/admin/products" passHref>
                             <Button size="small" color="primary">
-                              View products
+                              نمایش محصولات
                             </Button>
                           </NextLink>
                         </CardActions>
@@ -165,15 +164,15 @@ function AdminDashboard() {
                     <Grid item md={3}>
                       <Card raised>
                         <CardContent>
-                          <Typography variant="h1">
+                          <Typography variant="h4">
                             {summary.usersCount}
                           </Typography>
-                          <Typography>Users</Typography>
+                          <Typography>کاربر</Typography>
                         </CardContent>
                         <CardActions>
                           <NextLink href="/admin/users" passHref>
                             <Button size="small" color="primary">
-                              View users
+                              نمایش کاربران
                             </Button>
                           </NextLink>
                         </CardActions>
@@ -183,8 +182,8 @@ function AdminDashboard() {
                 )}
               </ListItem>
               <ListItem>
-                <Typography component="h1" variant="h1">
-                  Sales Chart
+                <Typography component="h1" variant="h4">
+                  نمودار فروش
                 </Typography>
               </ListItem>
               <ListItem>

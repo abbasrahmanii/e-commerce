@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useTheme } from "next-themes";
 import { Store } from "../context/Store";
 import Cookies from "js-cookie";

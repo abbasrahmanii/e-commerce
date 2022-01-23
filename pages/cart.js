@@ -4,7 +4,6 @@ import NextLink from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Store } from "../context/Store";
-import { RiDeleteBinLine } from "react-icons/ri";
 import Layout from "../components/layout";
 import {
   IconButton,
@@ -18,8 +17,8 @@ import {
   TableRow,
   TextField,
   Typography,
-} from "@material-ui/core";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+} from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const CartPage = () => {
   const router = useRouter();
@@ -170,7 +169,7 @@ const CartPage = () => {
                     {cart.cartItems.map((item) => (
                       <TableRow key={item._id}>
                         <TableCell align="center">
-                          <NextLink href={`/product/${item.id}`} passHref>
+                          <NextLink href={`/products/${item.id}`} passHref>
                             <Link>
                               <Image
                                 src={item.image}
@@ -192,8 +191,6 @@ const CartPage = () => {
                           <TextField
                             select
                             variant="outlined"
-                            // label="دسته بندی"
-
                             value={item.quantity}
                             onChange={(e) => updateCartHandler(item, e)}
                             color="primary"
@@ -217,7 +214,7 @@ const CartPage = () => {
                         </TableCell>
                         <TableCell align="center">
                           <IconButton
-                            color="secondary"
+                            color="error"
                             aria-label="upload picture"
                             component="span"
                             onClick={() => removeItemHandler(item)}

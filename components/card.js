@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-
 import { Fragment, useContext } from "react";
 import { Store } from "../context/Store";
 

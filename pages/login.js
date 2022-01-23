@@ -5,7 +5,7 @@ import {
   TextField,
   Button,
   Link,
-} from "@material-ui/core";
+} from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
@@ -82,6 +82,7 @@ export default function Login() {
                     label="پست الکترونیکی"
                     type="email"
                     error={Boolean(errors.email)}
+                    dir="rtl"
                     helperText={
                       errors.email
                         ? errors.email.type === "pattern"
