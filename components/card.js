@@ -5,7 +5,7 @@ import { Fragment, useContext } from "react";
 import { Store } from "../context/Store";
 
 const Card = ({ product }) => {
-  const { id, name, price, image, freeDelivery } = product;
+  const { id, name, price, image, isFreeDelivery } = product;
   const router = useRouter();
 
   const { state, dispatch } = useContext(Store);
@@ -41,7 +41,7 @@ const Card = ({ product }) => {
             <p className="my-2 text-indigo-50 dark:text-black">
               {numberWithCommas(price)} تـومـان
             </p>
-            {freeDelivery ? (
+            {isFreeDelivery ? (
               <div className="my-2">
                 <h5 className="text-sm dark:text-yellow-900 text-red-200">
                   ارسال رایگان

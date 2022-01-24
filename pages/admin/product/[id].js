@@ -89,7 +89,7 @@ function ProductEdit({ params }) {
           setValue("brand", data.brand);
           setValue("category", data.category);
           setValue("countInStock", data.countInStock);
-          setValue("freeDelivery", data.freeDelivery);
+          setValue("isFreeDelivery", data.isFreeDelivery);
         } catch (err) {
           dispatch({ type: "FETCH_FAIL", payload: getError(err) });
         }
@@ -127,7 +127,7 @@ function ProductEdit({ params }) {
     brand,
     category,
     countInStock,
-    freeDelivery,
+    isFreeDelivery,
   }) => {
     closeSnackbar();
     try {
@@ -143,7 +143,7 @@ function ProductEdit({ params }) {
           brand,
           category,
           countInStock,
-          freeDelivery,
+          isFreeDelivery,
         },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
@@ -392,7 +392,7 @@ function ProductEdit({ params }) {
                       </ListItem>
                       <ListItem>
                         <Controller
-                          name="freeDelivery"
+                          name="isFreeDelivery"
                           control={control}
                           defaultValue=""
                           rules={{
@@ -402,11 +402,11 @@ function ProductEdit({ params }) {
                             <TextField
                               variant="outlined"
                               fullWidth
-                              id="freeDelivery"
+                              id="isFreeDelivery"
                               label="Free Delivery"
-                              error={Boolean(errors.freeDelivery)}
+                              error={Boolean(errors.isFreeDelivery)}
                               helperText={
-                                errors.freeDelivery
+                                errors.isFreeDelivery
                                   ? "Free Delivery is required"
                                   : ""
                               }

@@ -223,7 +223,7 @@ function AdminDashboard() {
                               {product.countInStock}
                             </TableCell>
                             <TableCell align="center">
-                              {product.freeDelivery ? "رایـگان" : "-"}
+                              {product.isFreeDelivery ? "رایـگان" : "-"}
                             </TableCell>
                             <TableCell align="center">
                               <NextLink

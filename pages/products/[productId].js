@@ -178,7 +178,7 @@ const ProductId = (props) => {
             </Box>
           </ListItem>
           <ListItem>
-            {product.freeDelivery ? (
+            {product.isFreeDelivery ? (
               <Box>
                 <LocalShipping fontSize="0.3rem" color="success" />
                 <Typography variant="p" color="green" className="mr-2">

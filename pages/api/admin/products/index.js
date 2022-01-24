@@ -25,7 +25,7 @@ handler.post(async (req, res) => {
     category: "sample category",
     quantity: 0,
     countInStock: 0,
-    freeDelivery: false,
+    isFreeDelivery: false,
   });
 
   const product = await newProduct.save();

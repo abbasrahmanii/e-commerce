@@ -26,7 +26,7 @@ const SHOP_DATA = {
       category: "Clothing",
       quantity: 0,
       countInStock: 18,
-      freeDelivery: true,
+      isFreeDelivery: true,
     },
     {
       id: "p2",
@@ -38,7 +38,7 @@ const SHOP_DATA = {
       category: "Entertainment",
       quantity: 0,
       countInStock: 22,
-      freeDelivery: false,
+      isFreeDelivery: false,
     },
     {
       id: "p3",
@@ -50,7 +50,7 @@ const SHOP_DATA = {
       category: "Clothing",
       quantity: 0,
       countInStock: 5,
-      freeDelivery: false,
+      isFreeDelivery: false,
     },
     {
       id: "p4",
@@ -62,7 +62,7 @@ const SHOP_DATA = {
       category: "Clothing",
       quantity: 0,
       countInStock: 17,
-      freeDelivery: true,
+      isFreeDelivery: true,
     },
     {
       id: "p5",
@@ -74,7 +74,7 @@ const SHOP_DATA = {
       category: "Home Appliances",
       quantity: 0,
       countInStock: 4,
-      freeDelivery: false,
+      isFreeDelivery: false,
     },
     {
       id: "p6",
@@ -86,7 +86,7 @@ const SHOP_DATA = {
       category: "Home Appliances",
       quantity: 0,
       countInStock: 12,
-      freeDelivery: true,
+      isFreeDelivery: true,
     },
     {
       id: "p7",
@@ -98,7 +98,7 @@ const SHOP_DATA = {
       category: "Home Appliances",
       quantity: 0,
       countInStock: 10,
-      freeDelivery: false,
+      isFreeDelivery: false,
     },
     {
       id: "p8",
@@ -110,7 +110,7 @@ const SHOP_DATA = {
       category: "Clothing",
       quantity: 0,
       countInStock: 13,
-      freeDelivery: true,
+      isFreeDelivery: true,
     },
 
     {
@@ -123,7 +123,7 @@ const SHOP_DATA = {
       category: "Home Appliances",
       quantity: 0,
       countInStock: 0,
-      freeDelivery: false,
+      isFreeDelivery: false,
     },
   ],
   sliders: [

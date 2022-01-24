@@ -14,7 +14,7 @@ import { Store } from "../context/Store";
 import useStyles from "../utils/styles";
 
 const CartTwo = ({ product }) => {
-  const { id, name, price, image, freeDelivery } = product;
+  const { id, name, price, image, isFreeDelivery } = product;
   const router = useRouter();
 
   const { state, dispatch } = useContext(Store);
@@ -58,7 +58,7 @@ const CartTwo = ({ product }) => {
               {name}
             </Typography>
             <Typography>{numberWithCommas(price)} تـومـان</Typography>
-            {freeDelivery ? (
+            {isFreeDelivery ? (
               <Typography
                 component="p"
                 className={classes.cartText}

@@ -97,7 +97,7 @@ const reducer = (state, action) => {
           };
         } else {
           const freeDeliveryProducts = state.products.filter(
-            (p) => p.freeDelivery === true
+            (p) => p.isFreeDelivery === true
           );
           const fiteredProducts = freeDeliveryProducts.filter(
             (p) =>
@@ -127,7 +127,7 @@ const reducer = (state, action) => {
           const filteredProducts = state.products.filter(
             (p) =>
               p.category === action.payload.selectFilter &&
-              p.freeDelivery === true
+              p.isFreeDelivery === true
           );
           const fiteredProducts = filteredProducts.filter(
             (p) =>

@@ -111,7 +111,7 @@ const Product = (props) => {
                   <h4 className="mx-2">تعداد موجودی در انبار:</h4>
                   <p>{product.countInStock} عدد</p>
                 </div>
-                {product.freeDelivery ? (
+                {product.isFreeDelivery ? (
                   <div className="flex items-center my-1">
                     <FiGift size={15} color="#2c9c16" />
                     <h4 className="mr-2 text-green-600 dark:text-green-300">

@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema(
     category: { type: String, required: true },
     quantity: { type: Number, required: true, default: 0 },
     countInStock: { type: Number, required: true, default: 0 },
-    freeDelivery: { type: Boolean, required: true },
+    isFreeDelivery: { type: Boolean, required: true },
   },
   {
     timestamps: true,

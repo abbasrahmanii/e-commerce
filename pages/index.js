@@ -66,13 +66,6 @@ export default function Home(props) {
   );
 }
 
-// export async function getStaticProps() {
-//   const popularProductsList = getPopularProduct();
-//   return {
-//     props: { selectedProducts: popularProductsList },
-//     revalidate: 2000,
-//   };
-// }
 export async function getServerSideProps() {
   await db.connect();
   const products = await Product.find({}).lean();

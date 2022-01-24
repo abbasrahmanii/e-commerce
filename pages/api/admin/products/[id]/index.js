@@ -25,7 +25,7 @@ handler.put(async (req, res) => {
     product.brand = req.body.brand;
     product.category = req.body.category;
     product.countInStock = req.body.countInStock;
-    product.freeDelivery = req.body.freeDelivery;
+    product.isFreeDelivery = req.body.isFreeDelivery;
     await product.save();
     await db.disconnect();
     res.send({ message: "Product Updated Successfully" });
