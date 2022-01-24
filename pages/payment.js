@@ -94,7 +94,7 @@ const Payment = () => {
               <Button
                 fullWidth
                 type="button"
-                variant="contained"
+                variant="outlined"
                 onClick={() => router.push("/shipping")}
               >
                 مرحله قبل

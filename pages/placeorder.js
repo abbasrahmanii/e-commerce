@@ -166,7 +166,6 @@ function PlaceOrder() {
                                 </Link>
                               </NextLink>
                             </TableCell>
-
                             <TableCell align="center">
                               <NextLink href={`products/${item.id}`} passHref>
                                 <Link>

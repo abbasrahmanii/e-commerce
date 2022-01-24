@@ -81,6 +81,12 @@ function AdminDashboard() {
     };
     fetchData();
   }, []);
+
+  //add comma
+  const numberWithCommas = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <Layout>
       <Grid container spacing={1}>
@@ -95,6 +101,11 @@ function AdminDashboard() {
               <NextLink href="/admin/orders" passHref>
                 <ListItem button component="a">
                   <ListItemText primary="سفارش ها"></ListItemText>
+                </ListItem>
+              </NextLink>
+              <NextLink href="/admin/products" passHref>
+                <ListItem button component="a">
+                  <ListItemText primary="محصولات"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -114,7 +125,7 @@ function AdminDashboard() {
                       <Card raised>
                         <CardContent>
                           <Typography variant="h4">
-                            {summary.ordersPrice} تومان
+                            {numberWithCommas(summary.ordersPrice)} تومان
                           </Typography>
                           <Typography>فروش</Typography>
                         </CardContent>

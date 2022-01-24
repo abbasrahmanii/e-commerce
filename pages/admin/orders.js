@@ -4,25 +4,25 @@ import { useRouter } from "next/router";
 import NextLink from "next/link";
 import React, { useEffect, useContext, useReducer } from "react";
 import {
+  Button,
+  Card,
   CircularProgress,
   Grid,
   List,
   ListItem,
-  TableContainer,
-  Typography,
-  Card,
+  ListItemText,
   Table,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
-  Button,
-  ListItemText,
+  Typography,
 } from "@mui/material";
-import { getError } from "../utils/error";
-import { Store } from "../context/Store";
-import Layout from "../components/Layout";
-import useStyles from "../utils/styles";
+import { getError } from "../../utils/error";
+import { Store } from "../../context/Store";
+import Layout from "../../components/Layout";
+import useStyles from "../../utils/styles";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -37,7 +37,7 @@ function reducer(state, action) {
   }
 }
 
-const OrderHistory = () => {
+function AdminDashboard() {
   const { state } = useContext(Store);
   const router = useRouter();
   const classes = useStyles();
@@ -53,10 +53,10 @@ const OrderHistory = () => {
     if (!userInfo) {
       router.push("/login");
     }
-    const fetchOrders = async () => {
+    const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
-        const { data } = await axios.get(`/api/orders/history`, {
+        const { data } = await axios.get(`/api/admin/orders`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: "FETCH_SUCCESS", payload: data });
@@ -64,7 +64,7 @@ const OrderHistory = () => {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
-    fetchOrders();
+    fetchData();
   }, []);
 
   //add comma
@@ -73,19 +73,24 @@ const OrderHistory = () => {
   };
 
   return (
-    <Layout title="Order History">
+    <Layout>
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
           <Card className={classes.section}>
             <List>
-              <NextLink href="/profile" passHref>
+              <NextLink href="/admin/dashboard" passHref>
                 <ListItem button component="a">
-                  <ListItemText primary="پروفایل کاربر"></ListItemText>
+                  <ListItemText primary="داشبورد ادمین"></ListItemText>
                 </ListItem>
               </NextLink>
-              <NextLink href="/order-history" passHref>
+              <NextLink href="/admin/orders" passHref>
                 <ListItem selected button component="a">
-                  <ListItemText primary="تاریخچه سفارش ها"></ListItemText>
+                  <ListItemText primary="سفارش ها"></ListItemText>
+                </ListItem>
+              </NextLink>
+              <NextLink href="/admin/products" passHref>
+                <ListItem button component="a">
+                  <ListItemText primary="محصولات"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -94,18 +99,14 @@ const OrderHistory = () => {
         <Grid item md={9} xs={12}>
           <Card className={classes.section}>
             <List>
-              {/* <ListItem> */}
-              <Typography
-                component="h1"
-                variant="h4"
-                className={classes.alignCenter}
-              >
-                تاریخچه سفارش ها
-              </Typography>
-              {/* </ListItem> */}
+              <ListItem>
+                <Typography component="h1" variant="h4">
+                  سفارش ها
+                </Typography>
+              </ListItem>
               <ListItem>
                 {loading ? (
-                  <CircularProgress className={classes.alignCenter} />
+                  <CircularProgress />
                 ) : error ? (
                   <Typography className={classes.error}>{error}</Typography>
                 ) : (
@@ -114,6 +115,7 @@ const OrderHistory = () => {
                       <TableHead>
                         <TableRow>
                           <TableCell align="center">شناسه</TableCell>
+                          <TableCell align="center">کاربر</TableCell>
                           <TableCell align="center">تاریخ سفارش</TableCell>
                           <TableCell align="center">جمع قیمت</TableCell>
                           <TableCell align="center">وضعیت پرداخت</TableCell>
@@ -126,6 +128,9 @@ const OrderHistory = () => {
                           <TableRow key={order._id}>
                             <TableCell align="center">
                               {order._id.substring(20, 24)}
+                            </TableCell>
+                            <TableCell align="center">
+                              {order.user ? order.user.name : "کاربر حذف شده"}
                             </TableCell>
                             <TableCell align="center">
                               {order.createdAt}
@@ -161,6 +166,6 @@ const OrderHistory = () => {
       </Grid>
     </Layout>
   );
-};
+}
 
-export default dynamic(() => Promise.resolve(OrderHistory), { ssr: false });
+export default dynamic(() => Promise.resolve(AdminDashboard), { ssr: false });
