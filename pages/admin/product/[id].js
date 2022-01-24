@@ -85,7 +85,7 @@ function ProductEdit({ params }) {
           setValue("name", data.name);
           setValue("price", data.price);
           setValue("image", data.image);
-          setValue("popular", data.popular);
+          setValue("isPopular", data.isPopular);
           setValue("brand", data.brand);
           setValue("category", data.category);
           setValue("countInStock", data.countInStock);
@@ -123,7 +123,7 @@ function ProductEdit({ params }) {
     name,
     price,
     image,
-    popular,
+    isPopular,
     brand,
     category,
     countInStock,
@@ -139,7 +139,7 @@ function ProductEdit({ params }) {
           name,
           price,
           image,
-          popular,
+          isPopular,
           brand,
           category,
           countInStock,
@@ -298,7 +298,7 @@ function ProductEdit({ params }) {
                       </ListItem>
                       <ListItem>
                         <Controller
-                          name="popular"
+                          name="isPopular"
                           control={control}
                           defaultValue=""
                           rules={{
@@ -308,11 +308,11 @@ function ProductEdit({ params }) {
                             <TextField
                               variant="outlined"
                               fullWidth
-                              id="popular"
+                              id="isPopular"
                               label="Popular"
-                              error={Boolean(errors.popular)}
+                              error={Boolean(errors.isPopular)}
                               helperText={
-                                errors.popular ? "Popular is required" : ""
+                                errors.isPopular ? "Popular is required" : ""
                               }
                               {...field}
                             ></TextField>

@@ -77,7 +77,7 @@ export async function getServerSideProps() {
   await db.connect();
   const products = await Product.find({}).lean();
   await db.disconnect();
-  const popularProductsList = products.filter((p) => p.popular);
+  const popularProductsList = products.filter((p) => p.isPopular);
 
   return {
     props: {

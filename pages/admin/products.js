@@ -23,6 +23,7 @@ import { getError } from "../../utils/error";
 import { Store } from "../../context/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
+import { useSnackbar } from "notistack";
 
 function reducer(state, action) {
   switch (action.type) {

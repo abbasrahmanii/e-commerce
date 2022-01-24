@@ -21,7 +21,7 @@ const SHOP_DATA = {
       name: "دمپایی",
       price: 146250,
       image: "/images/asset21.jpeg",
-      popular: true,
+      isPopular: true,
       brand: "Nothing",
       category: "Clothing",
       quantity: 0,
@@ -33,7 +33,7 @@ const SHOP_DATA = {
       name: "کتاب",
       price: 45000,
       image: "/images/asset22.jpeg",
-      popular: false,
+      isPopular: false,
       brand: "Nothing",
       category: "Entertainment",
       quantity: 0,
@@ -45,7 +45,7 @@ const SHOP_DATA = {
       name: "ساعت هوشمند",
       price: 396000,
       image: "/images/asset23.jpeg",
-      popular: false,
+      isPopular: false,
       brand: "Nothing",
       category: "Clothing",
       quantity: 0,
@@ -57,7 +57,7 @@ const SHOP_DATA = {
       name: "پولوشرت",
       price: 159000,
       image: "/images/asset24.jpeg",
-      popular: true,
+      isPopular: true,
       brand: "Nothing",
       category: "Clothing",
       quantity: 0,
@@ -69,7 +69,7 @@ const SHOP_DATA = {
       name: "فرش",
       price: 1250000,
       image: "/images/asset28.jpeg",
-      popular: false,
+      isPopular: false,
       brand: "Nothing",
       category: "Home Appliances",
       quantity: 0,
@@ -81,7 +81,7 @@ const SHOP_DATA = {
       name: "چاقو آشپزخانه",
       price: 318000,
       image: "/images/asset30.jpeg",
-      popular: true,
+      isPopular: true,
       brand: "Nothing",
       category: "Home Appliances",
       quantity: 0,
@@ -93,7 +93,7 @@ const SHOP_DATA = {
       name: "پنکه",
       price: 1850000,
       image: "/images/asset32.jpeg",
-      popular: false,
+      isPopular: false,
       brand: "Nothing",
       category: "Home Appliances",
       quantity: 0,
@@ -105,7 +105,7 @@ const SHOP_DATA = {
       name: "کیف",
       price: 365250,
       image: "/images/asset33.jpeg",
-      popular: false,
+      isPopular: false,
       brand: "Nothing",
       category: "Clothing",
       quantity: 0,
@@ -118,7 +118,7 @@ const SHOP_DATA = {
       name: "شیشه شور",
       price: 23000,
       image: "/images/asset44.jpeg",
-      popular: true,
+      isPopular: true,
       brand: "Nothing",
       category: "Home Appliances",
       quantity: 0,
@@ -159,7 +159,7 @@ export const getAllProduct = () => {
 };
 
 export const getPopularProduct = () => {
-  return SHOP_DATA.products.filter((product) => product.popular);
+  return SHOP_DATA.products.filter((product) => product.isPopular);
 };
 
 // export const getProductById = (productId) => {

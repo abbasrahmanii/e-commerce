@@ -20,7 +20,7 @@ handler.post(async (req, res) => {
     name: "sample name",
     image: "/images/shirt1.jpg",
     price: 0,
-    popular: false,
+    isPopular: false,
     brand: "sample brand",
     category: "sample category",
     quantity: 0,
