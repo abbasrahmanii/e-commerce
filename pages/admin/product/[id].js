@@ -30,6 +30,22 @@ function reducer(state, action) {
       return { ...state, loading: false, error: "" };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
+    case "UPDATE_REQUEST":
+      return { ...state, loadingUpdate: true, errorUpdate: "" };
+    case "UPDATE_SUCCESS":
+      return { ...state, loadingUpdate: false, errorUpdate: "" };
+    case "UPDATE_FAIL":
+      return { ...state, loadingUpdate: false, errorUpdate: action.payload };
+    case "UPLOAD_REQUEST":
+      return { ...state, loadingUpload: true, errorUpload: "" };
+    case "UPLOAD_SUCCESS":
+      return {
+        ...state,
+        loadingUpload: false,
+        errorUpload: "",
+      };
+    case "UPLOAD_FAIL":
+      return { ...state, loadingUpload: false, errorUpload: action.payload };
     default:
       return state;
   }
@@ -38,10 +54,11 @@ function reducer(state, action) {
 function ProductEdit({ params }) {
   const productId = params.id;
   const { state } = useContext(Store);
-  const [{ loading, error }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: "",
-  });
+  const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: "",
+    });
   const {
     handleSubmit,
     control,
@@ -80,19 +97,61 @@ function ProductEdit({ params }) {
       fetchData();
     }
   }, []);
-  const submitHandler = async ({ name }) => {
+  const uploadHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+    try {
+      dispatch({ type: "UPLOAD_REQUEST" });
+      const { data } = await axios.post("/api/admin/upload", bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: "UPLOAD_SUCCESS" });
+      setValue("image", data.secure_url);
+      enqueueSnackbar("File uploaded successfully", { variant: "success" });
+    } catch (err) {
+      dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
+      enqueueSnackbar(getError(err), { variant: "error" });
+    }
+  };
+
+  const submitHandler = async ({
+    id,
+    name,
+    price,
+    image,
+    popular,
+    brand,
+    category,
+    countInStock,
+    freeDelivery,
+  }) => {
     closeSnackbar();
     try {
-      const { data } = await axios.put(
+      dispatch({ type: "UPDATE_REQUEST" });
+      await axios.put(
         `/api/admin/products/${productId}`,
         {
+          id,
           name,
+          price,
+          image,
+          popular,
+          brand,
+          category,
+          countInStock,
+          freeDelivery,
         },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
-
+      dispatch({ type: "UPDATE_SUCCESS" });
       enqueueSnackbar("Product updated successfully", { variant: "success" });
+      router.push("/admin/products");
     } catch (err) {
+      dispatch({ type: "UPDATE_FAIL", payload: getError(err) });
       enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
@@ -231,6 +290,13 @@ function ProductEdit({ params }) {
                         ></Controller>
                       </ListItem>
                       <ListItem>
+                        <Button variant="contained" component="label">
+                          Upload File
+                          <input type="file" onChange={uploadHandler} hidden />
+                        </Button>
+                        {loadingUpload && <CircularProgress />}
+                      </ListItem>
+                      <ListItem>
                         <Controller
                           name="popular"
                           control={control}
@@ -246,7 +312,7 @@ function ProductEdit({ params }) {
                               label="Popular"
                               error={Boolean(errors.popular)}
                               helperText={
-                                errors.brand ? "Popular is required" : ""
+                                errors.popular ? "Popular is required" : ""
                               }
                               {...field}
                             ></TextField>
@@ -340,7 +406,7 @@ function ProductEdit({ params }) {
                               label="Free Delivery"
                               error={Boolean(errors.freeDelivery)}
                               helperText={
-                                errors.description
+                                errors.freeDelivery
                                   ? "Free Delivery is required"
                                   : ""
                               }
@@ -357,8 +423,9 @@ function ProductEdit({ params }) {
                           fullWidth
                           color="primary"
                         >
-                          Update
+                          بروزرسـانی
                         </Button>
+                        {loadingUpdate && <CircularProgress />}
                       </ListItem>
                     </List>
                   </form>
