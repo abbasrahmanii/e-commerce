@@ -1,13 +1,17 @@
 import Card from "./Card";
 import CardTwo from "./CardTwo";
 
-const ListItems = (props) => {
-  const { products } = props;
+const ListItems = ({ products }) => {
+  // const { products } = props;
 
-  if (products.length === 0) {
-    return (
-      <p className="text-center dark:text-white">متاسفانه محصولی یافت نشد.</p>
-    );
+  // if (products.length === 0) {
+  //   return (
+  //     <p className="text-center dark:text-white">متاسفانه محصولی یافت نشد.</p>
+  //   );
+  // }
+
+  if (!products) {
+    <p>Loading...</p>;
   }
 
   return (

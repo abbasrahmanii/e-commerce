@@ -230,16 +230,21 @@ function AdminDashboard() {
                                 href={`/admin/product/${product._id}`}
                                 passHref
                               >
-                                <Button size="small" variant="contained">
-                                  Edit
+                                <Button
+                                  size="small"
+                                  variant="contained"
+                                  className=" text-base"
+                                >
+                                  ویرایش
                                 </Button>
                               </NextLink>{" "}
                               <Button
                                 onClick={() => deleteHandler(product._id)}
                                 size="small"
                                 variant="contained"
+                                className=" text-base"
                               >
-                                Delete
+                                حذف
                               </Button>
                             </TableCell>
                           </TableRow>
