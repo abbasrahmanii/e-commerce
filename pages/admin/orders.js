@@ -95,6 +95,11 @@ function AdminDashboard() {
                     <ListItemText primary="محصولات"></ListItemText>
                   </ListItem>
                 </NextLink>
+                <NextLink href="/admin/users" passHref>
+                  <ListItem button component="a">
+                    <ListItemText primary="کاربران"></ListItemText>
+                  </ListItem>
+                </NextLink>
               </List>
             </Card>
           </Grid>

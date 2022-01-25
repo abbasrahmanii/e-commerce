@@ -31,15 +31,10 @@ function reducer(state, action) {
     case "FETCH_REQUEST":
       return { ...state, loading: true, error: "" };
     case "FETCH_SUCCESS":
-      return { ...state, loading: false, products: action.payload, error: "" };
+      return { ...state, loading: false, users: action.payload, error: "" };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
-    case "CREATE_REQUEST":
-      return { ...state, loadingCreate: true };
-    case "CREATE_SUCCESS":
-      return { ...state, loadingCreate: false };
-    case "CREATE_FAIL":
-      return { ...state, loadingCreate: false };
+
     case "DELETE_REQUEST":
       return { ...state, loadingDelete: true };
     case "DELETE_SUCCESS":
@@ -53,20 +48,18 @@ function reducer(state, action) {
   }
 }
 
-function AdminDashboard() {
+function AdminUsers() {
   const { state } = useContext(Store);
   const router = useRouter();
   const classes = useStyles();
   const { userInfo } = state;
 
-  const [
-    { loading, error, products, loadingCreate, successDelete, loadingDelete },
-    dispatch,
-  ] = useReducer(reducer, {
-    loading: true,
-    products: [],
-    error: "",
-  });
+  const [{ loading, error, users, successDelete, loadingDelete }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      users: [],
+      error: "",
+    });
 
   useEffect(() => {
     if (!userInfo) {
@@ -75,7 +68,7 @@ function AdminDashboard() {
     const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
-        const { data } = await axios.get(`/api/admin/products`, {
+        const { data } = await axios.get(`/api/admin/users`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: "FETCH_SUCCESS", payload: data });
@@ -91,58 +84,32 @@ function AdminDashboard() {
   }, [successDelete]);
 
   const { enqueueSnackbar } = useSnackbar();
-  const createHandler = async () => {
-    if (!window.confirm("Are you sure?")) {
-      return;
-    }
-    try {
-      dispatch({ type: "CREATE_REQUEST" });
-      const { data } = await axios.post(
-        `/api/admin/products`,
-        {},
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-      dispatch({ type: "CREATE_SUCCESS" });
-      enqueueSnackbar("Product created successfully", { variant: "success" });
-      router.push(`/admin/product/${data.product._id}`);
-    } catch (err) {
-      dispatch({ type: "CREATE_FAIL" });
-      enqueueSnackbar(getError(err), { variant: "error" });
-    }
-  };
-  const deleteHandler = async (productId) => {
+
+  const deleteHandler = async (userId) => {
     if (!window.confirm("Are you sure?")) {
       return;
     }
     try {
       dispatch({ type: "DELETE_REQUEST" });
-      await axios.delete(`/api/admin/products/${productId}`, {
+      await axios.delete(`/api/admin/users/${userId}`, {
         headers: { authorization: `Bearer ${userInfo.token}` },
       });
       dispatch({ type: "DELETE_SUCCESS" });
-      enqueueSnackbar("Product deleted successfully", { variant: "success" });
+      enqueueSnackbar("User deleted successfully", { variant: "success" });
     } catch (err) {
       dispatch({ type: "DELETE_FAIL" });
       enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
-
-  //add comma
-  const numberWithCommas = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
   return (
-    <Layout>
+    <Layout title="Users">
       <RTL>
         <Grid container spacing={1}>
           <Grid item md={3} xs={12}>
             <Card className={classes.section}>
               <List>
                 <NextLink href="/admin/dashboard" passHref>
-                  <ListItem component="a">
+                  <ListItem button component="a">
                     <ListItemText primary="داشبورد ادمین"></ListItemText>
                   </ListItem>
                 </NextLink>
@@ -152,12 +119,12 @@ function AdminDashboard() {
                   </ListItem>
                 </NextLink>
                 <NextLink href="/admin/products" passHref>
-                  <ListItem selected button component="a">
+                  <ListItem button component="a">
                     <ListItemText primary="محصولات"></ListItemText>
                   </ListItem>
                 </NextLink>
                 <NextLink href="/admin/users" passHref>
-                  <ListItem button component="a">
+                  <ListItem selected button component="a">
                     <ListItemText primary="کاربران"></ListItemText>
                   </ListItem>
                 </NextLink>
@@ -168,24 +135,10 @@ function AdminDashboard() {
             <Card className={classes.section}>
               <List>
                 <ListItem>
-                  <Grid container alignItems="center">
-                    <Grid item xs={6}>
-                      <Typography component="h1" variant="h4">
-                        محصولات
-                      </Typography>
-                      {loadingDelete && <CircularProgress />}
-                    </Grid>
-                    <Grid align="left" item xs={6}>
-                      <Button
-                        onClick={createHandler}
-                        color="primary"
-                        variant="contained"
-                      >
-                        Create
-                      </Button>
-                      {loadingCreate && <CircularProgress />}
-                    </Grid>
-                  </Grid>
+                  <Typography component="h1" variant="h4">
+                    کاربران
+                  </Typography>
+                  {loadingDelete && <CircularProgress />}
                 </ListItem>
 
                 <ListItem>
@@ -199,59 +152,36 @@ function AdminDashboard() {
                         <TableHead>
                           <TableRow>
                             <TableCell align="center">شناسه</TableCell>
-                            <TableCell align="center">نام محصول</TableCell>
-                            <TableCell align="center">قیمت محصول</TableCell>
-                            <TableCell align="center">دسته بندی</TableCell>
-                            <TableCell align="center">برند</TableCell>
-                            <TableCell align="center">
-                              تعداد موجود در انبار
-                            </TableCell>
-                            <TableCell align="center">ارسال رایگان</TableCell>
+                            <TableCell align="center">نام</TableCell>
+                            <TableCell align="center">پست الکترونیکی</TableCell>
+                            <TableCell align="center">نوع حساب</TableCell>
                             <TableCell align="center">جزئیات</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {products.map((product) => (
-                            <TableRow key={product._id}>
+                          {users.map((user) => (
+                            <TableRow key={user._id}>
                               <TableCell align="center">
-                                {product._id.substring(20, 24)}
+                                {user._id.substring(20, 24)}
                               </TableCell>
+                              <TableCell align="center">{user.name}</TableCell>
+                              <TableCell align="center">{user.email}</TableCell>
                               <TableCell align="center">
-                                {product.name}
-                              </TableCell>
-                              <TableCell align="center">
-                                {numberWithCommas(product.price)} تومان
-                              </TableCell>
-                              <TableCell align="center">
-                                {product.category}
-                              </TableCell>
-                              <TableCell align="center">
-                                {product.brand}
-                              </TableCell>
-                              <TableCell align="center">
-                                {product.countInStock}
-                              </TableCell>
-                              <TableCell align="center">
-                                {product.isFreeDelivery ? "رایـگان" : "-"}
+                                {user.isAdmin ? "ادمین" : "مشتری"}
                               </TableCell>
                               <TableCell align="center">
                                 <NextLink
-                                  href={`/admin/product/${product._id}`}
+                                  href={`/admin/user/${user._id}`}
                                   passHref
                                 >
-                                  <Button
-                                    size="small"
-                                    variant="contained"
-                                    className=" text-base"
-                                  >
+                                  <Button size="small" variant="contained">
                                     ویرایش
                                   </Button>
                                 </NextLink>{" "}
                                 <Button
-                                  onClick={() => deleteHandler(product._id)}
+                                  onClick={() => deleteHandler(user._id)}
                                   size="small"
                                   variant="contained"
-                                  className=" text-base"
                                 >
                                   حذف
                                 </Button>
@@ -272,4 +202,4 @@ function AdminDashboard() {
   );
 }
 
-export default dynamic(() => Promise.resolve(AdminDashboard), { ssr: false });
+export default dynamic(() => Promise.resolve(AdminUsers), { ssr: false });

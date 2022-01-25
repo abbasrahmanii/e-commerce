@@ -114,7 +114,7 @@ const Header = () => {
                       onClick={loginClickHandler}
                       className={classes.navbarButton}
                     >
-                      {userInfo.name}
+                      {userInfo.name.split(" ", 1)}
                     </Button>
                   </>
                 ) : (
@@ -212,7 +212,7 @@ const Header = () => {
                         onClick={loginClickHandler}
                         className={classes.navbarButton}
                       >
-                        {userInfo.name}
+                        {userInfo.name.split(" ", 1)}
                       </Button>
                       <Menu
                         id="simple-menu"
