@@ -24,6 +24,7 @@ import { Store } from "../../context/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
 import { useSnackbar } from "notistack";
+import RTL from "../../components/RTL";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -135,129 +136,133 @@ function AdminDashboard() {
 
   return (
     <Layout>
-      <Grid container spacing={1}>
-        <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
-            <List>
-              <NextLink href="/admin/dashboard" passHref>
-                <ListItem component="a">
-                  <ListItemText primary="داشبورد ادمین"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/admin/orders" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="سفارش ها"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/admin/products" passHref>
-                <ListItem selected button component="a">
-                  <ListItemText primary="محصولات"></ListItemText>
-                </ListItem>
-              </NextLink>
-            </List>
-          </Card>
-        </Grid>
-        <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Grid container alignItems="center">
-                  <Grid item xs={6}>
-                    <Typography component="h1" variant="h1">
-                      Products
-                    </Typography>
-                    {loadingDelete && <CircularProgress />}
+      <RTL>
+        <Grid container spacing={1}>
+          <Grid item md={3} xs={12}>
+            <Card className={classes.section}>
+              <List>
+                <NextLink href="/admin/dashboard" passHref>
+                  <ListItem component="a">
+                    <ListItemText primary="داشبورد ادمین"></ListItemText>
+                  </ListItem>
+                </NextLink>
+                <NextLink href="/admin/orders" passHref>
+                  <ListItem button component="a">
+                    <ListItemText primary="سفارش ها"></ListItemText>
+                  </ListItem>
+                </NextLink>
+                <NextLink href="/admin/products" passHref>
+                  <ListItem selected button component="a">
+                    <ListItemText primary="محصولات"></ListItemText>
+                  </ListItem>
+                </NextLink>
+              </List>
+            </Card>
+          </Grid>
+          <Grid item md={9} xs={12}>
+            <Card className={classes.section}>
+              <List>
+                <ListItem>
+                  <Grid container alignItems="center">
+                    <Grid item xs={6}>
+                      <Typography component="h1" variant="h4">
+                        محصولات
+                      </Typography>
+                      {loadingDelete && <CircularProgress />}
+                    </Grid>
+                    <Grid align="left" item xs={6}>
+                      <Button
+                        onClick={createHandler}
+                        color="primary"
+                        variant="contained"
+                      >
+                        Create
+                      </Button>
+                      {loadingCreate && <CircularProgress />}
+                    </Grid>
                   </Grid>
-                  <Grid align="right" item xs={6}>
-                    <Button
-                      onClick={createHandler}
-                      color="primary"
-                      variant="contained"
-                    >
-                      Create
-                    </Button>
-                    {loadingCreate && <CircularProgress />}
-                  </Grid>
-                </Grid>
-              </ListItem>
+                </ListItem>
 
-              <ListItem>
-                {loading ? (
-                  <CircularProgress />
-                ) : error ? (
-                  <Typography className={classes.error}>{error}</Typography>
-                ) : (
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell align="center">شناسه</TableCell>
-                          <TableCell align="center">نام محصول</TableCell>
-                          <TableCell align="center">قیمت محصول</TableCell>
-                          <TableCell align="center">دسته بندی</TableCell>
-                          <TableCell align="center">برند</TableCell>
-                          <TableCell align="center">
-                            تعداد موجود در انبار
-                          </TableCell>
-                          <TableCell align="center">ارسال رایگان</TableCell>
-                          <TableCell align="center">جزئیات</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {products.map((product) => (
-                          <TableRow key={product._id}>
+                <ListItem>
+                  {loading ? (
+                    <CircularProgress />
+                  ) : error ? (
+                    <Typography className={classes.error}>{error}</Typography>
+                  ) : (
+                    <TableContainer>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell align="center">شناسه</TableCell>
+                            <TableCell align="center">نام محصول</TableCell>
+                            <TableCell align="center">قیمت محصول</TableCell>
+                            <TableCell align="center">دسته بندی</TableCell>
+                            <TableCell align="center">برند</TableCell>
                             <TableCell align="center">
-                              {product._id.substring(20, 24)}
+                              تعداد موجود در انبار
                             </TableCell>
-                            <TableCell align="center">{product.name}</TableCell>
-                            <TableCell align="center">
-                              {numberWithCommas(product.price)} تومان
-                            </TableCell>
-                            <TableCell align="center">
-                              {product.category}
-                            </TableCell>
-                            <TableCell align="center">
-                              {product.brand}
-                            </TableCell>
-                            <TableCell align="center">
-                              {product.countInStock}
-                            </TableCell>
-                            <TableCell align="center">
-                              {product.isFreeDelivery ? "رایـگان" : "-"}
-                            </TableCell>
-                            <TableCell align="center">
-                              <NextLink
-                                href={`/admin/product/${product._id}`}
-                                passHref
-                              >
+                            <TableCell align="center">ارسال رایگان</TableCell>
+                            <TableCell align="center">جزئیات</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {products.map((product) => (
+                            <TableRow key={product._id}>
+                              <TableCell align="center">
+                                {product._id.substring(20, 24)}
+                              </TableCell>
+                              <TableCell align="center">
+                                {product.name}
+                              </TableCell>
+                              <TableCell align="center">
+                                {numberWithCommas(product.price)} تومان
+                              </TableCell>
+                              <TableCell align="center">
+                                {product.category}
+                              </TableCell>
+                              <TableCell align="center">
+                                {product.brand}
+                              </TableCell>
+                              <TableCell align="center">
+                                {product.countInStock}
+                              </TableCell>
+                              <TableCell align="center">
+                                {product.isFreeDelivery ? "رایـگان" : "-"}
+                              </TableCell>
+                              <TableCell align="center">
+                                <NextLink
+                                  href={`/admin/product/${product._id}`}
+                                  passHref
+                                >
+                                  <Button
+                                    size="small"
+                                    variant="contained"
+                                    className=" text-base"
+                                  >
+                                    ویرایش
+                                  </Button>
+                                </NextLink>{" "}
                                 <Button
+                                  onClick={() => deleteHandler(product._id)}
                                   size="small"
                                   variant="contained"
                                   className=" text-base"
                                 >
-                                  ویرایش
+                                  حذف
                                 </Button>
-                              </NextLink>{" "}
-                              <Button
-                                onClick={() => deleteHandler(product._id)}
-                                size="small"
-                                variant="contained"
-                                className=" text-base"
-                              >
-                                حذف
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                )}
-              </ListItem>
-            </List>
-          </Card>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  )}
+                </ListItem>
+              </List>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
+      </RTL>
     </Layout>
   );
 }

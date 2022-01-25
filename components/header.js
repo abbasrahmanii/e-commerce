@@ -27,6 +27,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import useStyles from "../utils/styles";
 import RTL from "./RTL";
+import Dropdown from "./Dropdown";
 
 const Header = () => {
   const classes = useStyles();
@@ -162,31 +163,6 @@ const Header = () => {
                 <ListItemText secondary="فروشگاه" />
               </ListItem>
             </List>
-            {/* <ul onMouseLeave={closeMenuHandler}>
-            <li
-              className="p-2 hover:bg-green-500 h-10"
-              onClick={closeMenuHandler}
-            >
-              <NextLink href="/">
-                <a className="block px-5">خانه</a>
-              </NextLink>
-            </li>
-            <hr className="border-gray-600" />
-            <li
-              className="p-2 hover:bg-green-500 h-10"
-              onClick={closeMenuHandler}
-            >
-              <NextLink href="/products">
-                <a className="block px-5">فروشگاه</a>
-              </NextLink>
-            </li>
-            <hr className="border-gray-600" />
-            <li className="p-2 hover:bg-green-500 h-10 flex items-center">
-              <div className="flex items-center px-5">
-                <Switch />
-              </div>
-            </li>
-            </ul> */}
           </div>
         </header>
         <header className="hidden md:flex justify-center items-center shadow-2xl">
@@ -211,18 +187,12 @@ const Header = () => {
                 />
               </NextLink>
               <li className="mx-8 p-3 hidden md:flex justify-center items-center text-white text-xl hover:text-green-400 w-24">
-                <Switch />
+                {/* <Switch /> */}
+                <Dropdown />
               </li>
               <li className="text-white w-24 flex items-center justify-between">
-                {/* <div className="p-3 relative hover:text-green-400"> */}
                 <NextLink href="/cart">
                   <a>
-                    {/* <BsCart3 fontSize="1.3rem" />
-                      {cart.cartItems.length > 0 && (
-                        <div className="text-indigo-900 w-4 h-4 bg-green-400 rounded-full absolute top-0 right-1 flex justify-center items-center text-xs">
-                          {cart.cartItems.length}
-                        </div>
-                      )} */}
                     <Badge
                       badgeContent={cart.cartItems.length}
                       color="error"
@@ -251,47 +221,6 @@ const Header = () => {
                         open={Boolean(anchorEl)}
                         onClose={loginMenuCloseHandler}
                       >
-                        {/* <MenuItem
-                          onClick={(e) => loginMenuCloseHandler(e, "/profile")}
-                        >
-                          <AccountCircleIcon
-                            color="#fff"
-                            titleAccess="سبد خرید"
-                          />
-                          {""}
-                          پروفایل
-                        </MenuItem>
-                        <MenuItem
-                          onClick={(e) =>
-                            loginMenuCloseHandler(e, "/order-history")
-                          }
-                        >
-                          <ShoppingBasketIcon
-                            color="#fff"
-                            titleAccess="سبد خرید"
-                          />
-                          {""}
-                          تاریخچه سفارش ها
-                        </MenuItem>
-                        {userInfo.isAdmin && (
-                          <MenuItem
-                            onClick={(e) =>
-                              loginMenuCloseHandler(e, "/admin/dashboard")
-                            }
-                          >
-                            <DashboardIcon
-                              color="#fff"
-                              titleAccess="سبد خرید"
-                            />
-                            {""}
-                            داشبورد ادمین
-                          </MenuItem>
-                        )}
-                        <MenuItem onClick={logoutClickHandler}>
-                          <ExitToAppIcon color="#fff" titleAccess="سبد خرید" />
-                          {""}
-                          خروج
-                        </MenuItem> */}
                         <RTL>
                           <List
                             component="nav"

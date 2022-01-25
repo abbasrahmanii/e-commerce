@@ -39,9 +39,7 @@ const CartPage = () => {
     });
   };
   const removeItemHandler = (item) => {
-    // setTimeout(() => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
-    // }, 1000);
   };
   const checkOutHandler = () => {
     router.push("/shipping");

@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 const SHOP_DATA = {
   users: [
     {
-      name: "John",
+      name: "Abbas",
       email: "admin@example.com",
       password: bcrypt.hashSync("Abs123456"),
       isAdmin: true,
@@ -162,9 +162,6 @@ export const getPopularProduct = () => {
   return SHOP_DATA.products.filter((product) => product.isPopular);
 };
 
-// export const getProductById = (productId) => {
-//   return SHOP_DATA.products.filter((product) => product.id === productId);
-// };
 export const getProductById = (productId) => {
   return SHOP_DATA.products.find((product) => product.id === productId);
 };

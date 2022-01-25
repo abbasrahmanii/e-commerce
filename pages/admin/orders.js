@@ -23,6 +23,7 @@ import { getError } from "../../utils/error";
 import { Store } from "../../context/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
+import RTL from "../../components/RTL";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -74,96 +75,98 @@ function AdminDashboard() {
 
   return (
     <Layout>
-      <Grid container spacing={1}>
-        <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
-            <List>
-              <NextLink href="/admin/dashboard" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="داشبورد ادمین"></ListItemText>
+      <RTL>
+        <Grid container spacing={1}>
+          <Grid item md={3} xs={12}>
+            <Card className={classes.section}>
+              <List>
+                <NextLink href="/admin/dashboard" passHref>
+                  <ListItem button component="a">
+                    <ListItemText primary="داشبورد ادمین"></ListItemText>
+                  </ListItem>
+                </NextLink>
+                <NextLink href="/admin/orders" passHref>
+                  <ListItem selected button component="a">
+                    <ListItemText primary="سفارش ها"></ListItemText>
+                  </ListItem>
+                </NextLink>
+                <NextLink href="/admin/products" passHref>
+                  <ListItem button component="a">
+                    <ListItemText primary="محصولات"></ListItemText>
+                  </ListItem>
+                </NextLink>
+              </List>
+            </Card>
+          </Grid>
+          <Grid item md={9} xs={12}>
+            <Card className={classes.section}>
+              <List>
+                <ListItem>
+                  <Typography component="h1" variant="h4">
+                    سفارش ها
+                  </Typography>
                 </ListItem>
-              </NextLink>
-              <NextLink href="/admin/orders" passHref>
-                <ListItem selected button component="a">
-                  <ListItemText primary="سفارش ها"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/admin/products" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="محصولات"></ListItemText>
-                </ListItem>
-              </NextLink>
-            </List>
-          </Card>
-        </Grid>
-        <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography component="h1" variant="h4">
-                  سفارش ها
-                </Typography>
-              </ListItem>
-              <ListItem>
-                {loading ? (
-                  <CircularProgress />
-                ) : error ? (
-                  <Typography className={classes.error}>{error}</Typography>
-                ) : (
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell align="center">شناسه</TableCell>
-                          <TableCell align="center">کاربر</TableCell>
-                          <TableCell align="center">تاریخ سفارش</TableCell>
-                          <TableCell align="center">جمع قیمت</TableCell>
-                          <TableCell align="center">وضعیت پرداخت</TableCell>
-                          <TableCell align="center">وضعیت ارسال</TableCell>
-                          <TableCell align="center">جزئیات</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {orders.map((order) => (
-                          <TableRow key={order._id}>
-                            <TableCell align="center">
-                              {order._id.substring(20, 24)}
-                            </TableCell>
-                            <TableCell align="center">
-                              {order.user ? order.user.name : "کاربر حذف شده"}
-                            </TableCell>
-                            <TableCell align="center">
-                              {order.createdAt}
-                            </TableCell>
-                            <TableCell align="center">
-                              {numberWithCommas(order.totalPrice)} تومان
-                            </TableCell>
-                            <TableCell align="center">
-                              {order.isPaid
-                                ? `در تاریخ ${order.paidAt} پرداخت شد`
-                                : "پرداخت نشده"}
-                            </TableCell>
-                            <TableCell align="center">
-                              {order.isDelivered
-                                ? `در تاریخ ${order.deliveredAt} تحویل داده شد`
-                                : "تحویل داده نشده"}
-                            </TableCell>
-                            <TableCell align="center">
-                              <NextLink href={`/order/${order._id}`} passHref>
-                                <Button variant="contained">جزئیات</Button>
-                              </NextLink>
-                            </TableCell>
+                <ListItem>
+                  {loading ? (
+                    <CircularProgress />
+                  ) : error ? (
+                    <Typography className={classes.error}>{error}</Typography>
+                  ) : (
+                    <TableContainer>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell align="center">شناسه</TableCell>
+                            <TableCell align="center">کاربر</TableCell>
+                            <TableCell align="center">تاریخ سفارش</TableCell>
+                            <TableCell align="center">جمع قیمت</TableCell>
+                            <TableCell align="center">وضعیت پرداخت</TableCell>
+                            <TableCell align="center">وضعیت ارسال</TableCell>
+                            <TableCell align="center">جزئیات</TableCell>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                )}
-              </ListItem>
-            </List>
-          </Card>
+                        </TableHead>
+                        <TableBody>
+                          {orders.map((order) => (
+                            <TableRow key={order._id}>
+                              <TableCell align="center">
+                                {order._id.substring(20, 24)}
+                              </TableCell>
+                              <TableCell align="center">
+                                {order.user ? order.user.name : "کاربر حذف شده"}
+                              </TableCell>
+                              <TableCell align="center">
+                                {order.createdAt}
+                              </TableCell>
+                              <TableCell align="center">
+                                {numberWithCommas(order.totalPrice)} تومان
+                              </TableCell>
+                              <TableCell align="center">
+                                {order.isPaid
+                                  ? `در تاریخ ${order.paidAt} پرداخت شد`
+                                  : "پرداخت نشده"}
+                              </TableCell>
+                              <TableCell align="center">
+                                {order.isDelivered
+                                  ? `در تاریخ ${order.deliveredAt} تحویل داده شد`
+                                  : "تحویل داده نشده"}
+                              </TableCell>
+                              <TableCell align="center">
+                                <NextLink href={`/order/${order._id}`} passHref>
+                                  <Button variant="contained">جزئیات</Button>
+                                </NextLink>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  )}
+                </ListItem>
+              </List>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
+      </RTL>
     </Layout>
   );
 }
