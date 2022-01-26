@@ -2,7 +2,6 @@ import { useState, useContext, Fragment } from "react";
 import NextLink from "next/link";
 import Image from "next/image";
 import { Store } from "../context/Store";
-import Switch from "./Switch";
 import {
   Button,
   Menu,
