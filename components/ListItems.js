@@ -1,4 +1,3 @@
-import Card from "./Card";
 import CardTwo from "./CardTwo";
 
 const ListItems = ({ products }) => {

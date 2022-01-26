@@ -115,7 +115,8 @@ function UserEdit({ params }) {
     }
   };
   return (
-    <Layout title={`Edit User ${userId}`}>
+    <Layout>
+      {/* <Layout title={`Edit User ${userId}`}> */}
       <RTL>
         <Grid container spacing={1}>
           <Grid item md={3} xs={12}>

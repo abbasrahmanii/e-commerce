@@ -156,7 +156,8 @@ function ProductEdit({ params }) {
     }
   };
   return (
-    <Layout title={`Edit Product ${productId}`}>
+    <Layout>
+      {/* <Layout title={`Edit Product ${productId}`}> */}
       <RTL>
         <Grid container spacing={1}>
           <Grid item md={3} xs={12}>

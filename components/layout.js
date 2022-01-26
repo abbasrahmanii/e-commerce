@@ -1,8 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { Store } from "../context/Store";
-import { useContext } from "react";
+import { CssBaseline } from "@mui/material";
 
 const Layout = ({ children }) => {
   //dark mode
