@@ -8,6 +8,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { Rating } from "@mui/lab";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { Store } from "../context/Store";
@@ -74,6 +75,7 @@ const CartTwo = ({ product }) => {
             <Typography variant="body2" color="textSecondary" component="p">
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است.
             </Typography>
+            <Rating value={product.rating} readOnly></Rating>
           </CardContent>
         </CardActionArea>
       </Link>

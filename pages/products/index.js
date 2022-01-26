@@ -25,7 +25,7 @@ const ProductsPage = (props) => {
 
 export async function getStaticProps() {
   await db.connect();
-  const products = await Product.find({}).lean();
+  const products = await Product.find({}, "-reviews").lean();
   await db.disconnect();
   return {
     props: {

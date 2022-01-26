@@ -17,6 +17,7 @@
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
     "@mui/icons-material": "^5.2.5",
+    "@mui/lab": "^5.0.0-alpha.66",
     "@mui/material": "^5.3.0",
     "@mui/styles": "^5.3.0",
     "@next-auth/mongodb-adapter": "^1.0.1",

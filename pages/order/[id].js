@@ -101,7 +101,7 @@ function Order({ params }) {
     }
   }, [order, successDeliver]);
 
-  const { closeSnackbar, enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   async function deliverOrderHandler() {
     try {
@@ -128,8 +128,8 @@ function Order({ params }) {
 
   return (
     <Layout title={`Order ${orderId}`}>
-      <Typography component="h5" variant="h5">
-        Order {orderId}
+      <Typography component="h1" variant="h4">
+        سفارش {orderId}
       </Typography>
       {loading ? (
         <CircularProgress />
@@ -323,7 +323,7 @@ function Order({ params }) {
                       color="primary"
                       onClick={deliverOrderHandler}
                     >
-                      Deliver Order
+                      تحویل سفارش
                     </Button>
                   </ListItem>
                 )}

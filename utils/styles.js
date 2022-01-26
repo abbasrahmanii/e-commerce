@@ -49,9 +49,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   reviewItem: {
-    marginRight: "1rem",
-    borderRight: "1px #808080 solid",
-    paddingRight: "1rem",
+    marginLeft: "1rem",
+    borderLeft: "1px #808080 solid",
+    paddingLeft: "1rem",
   },
   toolbar: {
     justifyContent: "space-between",

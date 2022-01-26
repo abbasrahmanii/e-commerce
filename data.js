@@ -27,6 +27,8 @@ const SHOP_DATA = {
       quantity: 0,
       countInStock: 18,
       isFreeDelivery: true,
+      rating: 0,
+      numReviews: 0,
     },
     {
       id: "p2",
@@ -39,6 +41,8 @@ const SHOP_DATA = {
       quantity: 0,
       countInStock: 22,
       isFreeDelivery: false,
+      rating: 4.3,
+      numReviews: 0,
     },
     {
       id: "p3",
@@ -51,6 +55,8 @@ const SHOP_DATA = {
       quantity: 0,
       countInStock: 5,
       isFreeDelivery: false,
+      rating: 0,
+      numReviews: 0,
     },
     {
       id: "p4",
@@ -63,6 +69,8 @@ const SHOP_DATA = {
       quantity: 0,
       countInStock: 17,
       isFreeDelivery: true,
+      rating: 0,
+      numReviews: 0,
     },
     {
       id: "p5",
@@ -75,6 +83,8 @@ const SHOP_DATA = {
       quantity: 0,
       countInStock: 4,
       isFreeDelivery: false,
+      rating: 0,
+      numReviews: 0,
     },
     {
       id: "p6",
@@ -87,6 +97,8 @@ const SHOP_DATA = {
       quantity: 0,
       countInStock: 12,
       isFreeDelivery: true,
+      rating: 0,
+      numReviews: 0,
     },
     {
       id: "p7",
@@ -99,6 +111,8 @@ const SHOP_DATA = {
       quantity: 0,
       countInStock: 10,
       isFreeDelivery: false,
+      rating: 0,
+      numReviews: 0,
     },
     {
       id: "p8",
@@ -111,6 +125,8 @@ const SHOP_DATA = {
       quantity: 0,
       countInStock: 13,
       isFreeDelivery: true,
+      rating: 0,
+      numReviews: 0,
     },
 
     {
@@ -124,6 +140,8 @@ const SHOP_DATA = {
       quantity: 0,
       countInStock: 0,
       isFreeDelivery: false,
+      rating: 0,
+      numReviews: 0,
     },
   ],
   sliders: [
