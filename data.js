@@ -64,7 +64,7 @@ const SHOP_DATA = {
       price: 159000,
       image: "/images/asset24.jpeg",
       isPopular: true,
-      brand: "Nothing",
+      brand: "Lebas",
       category: "Clothing",
       quantity: 0,
       countInStock: 17,

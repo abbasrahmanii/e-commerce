@@ -49,22 +49,15 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   reviewItem: {
-    marginLeft: "1rem",
-    borderLeft: "1px #808080 solid",
-    paddingLeft: "1rem",
+    marginRight: "1rem",
+    borderRight: "1px #808080 solid",
+    paddingRight: "1rem",
   },
   toolbar: {
     justifyContent: "space-between",
   },
   menuButton: { padding: 0 },
   mt1: { marginTop: "1rem" },
-  // search
-  searchSection: {
-    display: "none",
-    // [theme.breakpoints.up("md")]: {
-    //   display: "flex",
-    // },
-  },
   searchForm: {
     border: "1px solid #ffffff",
     backgroundColor: "#ffffff",
@@ -88,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
   sort: {
     marginRight: 5,
   },
+
   fullContainer: { height: "100vh" },
   mapInputBox: {
     position: "absolute",

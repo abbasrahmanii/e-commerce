@@ -8,7 +8,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { Rating } from "@mui/lab";
+import { Rating } from "@mui/material";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { Store } from "../context/Store";

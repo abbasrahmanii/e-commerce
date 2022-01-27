@@ -1,7 +1,10 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import { CssBaseline } from "@mui/material";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { getError } from "../utils/error";
+import { useSnackbar } from "notistack";
+import axios from "axios";
 
 const Layout = ({ children }) => {
   //dark mode
@@ -10,6 +13,23 @@ const Layout = ({ children }) => {
   //     type: darkMode ? "dark" : "light",
   //   },
   // });
+
+  const [categories, setCategories] = useState([]);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const fetchCategories = async () => {
+    try {
+      const { data } = await axios.get(`/api/products/categories`);
+      setCategories(data);
+    } catch (err) {
+      enqueueSnackbar(getError(err), { variant: "error" });
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   return (
     <Fragment>
       <CssBaseline />

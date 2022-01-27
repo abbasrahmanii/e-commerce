@@ -12,11 +12,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Rating } from "@mui/lab";
+import { Rating } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { Store } from "../../context/Store";
-import { FiberManualRecord, LocalShipping, Reviews } from "@mui/icons-material";
-import { getAllProduct, getProductById } from "../../data";
+import { FiberManualRecord, LocalShipping } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import RTL from "../../components/RTL";
 import { Box } from "@mui/system";

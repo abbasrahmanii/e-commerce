@@ -12,6 +12,7 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
+  InputBase,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -21,12 +22,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import SearchIcon from "@mui/icons-material/Search";
 import { FiLogIn } from "react-icons/fi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import useStyles from "../utils/styles";
 import RTL from "./RTL";
-import Dropdown from "./Dropdown";
+// import Dropdown from "./Dropdown";
 
 const Header = () => {
   const classes = useStyles();
@@ -45,6 +47,15 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const loginClickHandler = (e) => {
     setAnchorEl(e.currentTarget);
+  };
+
+  const [query, setQuery] = useState("");
+  const queryChangeHandler = (e) => {
+    setQuery(e.target.value);
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    router.push(`/search?query=${query}`);
   };
 
   const loginMenuCloseHandler = (e, redirect) => {
@@ -185,9 +196,27 @@ const Header = () => {
                   className="cursor-pointer"
                 />
               </NextLink>
-              <li className="mx-8 p-3 hidden md:flex justify-center items-center text-white text-xl hover:text-green-400 w-24">
+              {/* <li className="mx-8 p-3 hidden md:flex justify-center items-center text-white text-xl hover:text-green-400 w-24"> */}
+              <li className="mx-8 p-3 hidden md:flex justify-center items-center text-white text-xl hover:text-green-400">
                 {/* <Switch /> */}
-                <Dropdown />
+                {/* <Dropdown /> */}
+                {/* <div className={classes.searchSection}> */}
+                <form onSubmit={submitHandler} className={classes.searchForm}>
+                  <InputBase
+                    name="query"
+                    className={classes.searchInput}
+                    placeholder="جستـجو"
+                    onChange={queryChangeHandler}
+                  />
+                  <IconButton
+                    type="submit"
+                    className={classes.iconButton}
+                    aria-label="search"
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                </form>
+                {/* </div> */}
               </li>
               <li className="text-white w-24 flex items-center justify-between">
                 <NextLink href="/cart">
