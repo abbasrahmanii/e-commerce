@@ -1,18 +1,24 @@
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
+import NextLink from "next/link";
 import Image from "next/image";
 import ListItems from "../components/ListItems";
 import Slider from "../components/Slider";
 import Layout from "../components/Layout";
 import db from "../utils/db";
 import Product from "../models/Product";
+import { CircularProgress, Typography, Link, Grid } from "@mui/material";
+import { ClassNames } from "@emotion/react";
+import useStyles from "../utils/styles";
+import Carousel from "react-material-ui-carousel";
 
 export default function Home(props) {
-  const popularProductsList = props.selectedProducts;
+  const classes = useStyles();
 
-  if (!popularProductsList) {
-    <p>Loading...</p>;
+  const { topRatedProducts, featuredProducts } = props;
+
+  if (!topRatedProducts) {
+    <CircularProgress></CircularProgress>;
   }
 
   return (
@@ -54,12 +60,35 @@ export default function Home(props) {
           </div>
         </main>
         <main className="flex flex-col w-3/4 md:w-2/3">
-          <h1 className="p-2 m-4 text-xl text-center dark:text-white">
-            محبوب ترین محصولات
-          </h1>
+          {/* <Grid container>
+          <Grid item sx={12}> */}
+          <Carousel className={classes.mt1} animation="slide">
+            {featuredProducts.map((product) => (
+              <NextLink
+                key={product._id}
+                href={`/products/${product.id}`}
+                passHref
+              >
+                <Link>
+                  <Image
+                    src={product.featuredImage}
+                    alt={product.name}
+                    className={classes.featuredImage}
+                    width={1650}
+                    height={660}
+                  />
+                </Link>
+              </NextLink>
+            ))}
+          </Carousel>
+          {/* </Grid> */}
+          {/* <Grid item sx={12}> */}
+          <Typography variant="h4"> محبوب ترین محصولات</Typography>
           <section className="flex justify-between mb-8">
-            <ListItems products={popularProductsList} />
+            <ListItems products={topRatedProducts} />
           </section>
+          {/* </Grid>
+        </Grid> */}
         </main>
       </div>
     </Layout>
@@ -68,13 +97,23 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   await db.connect();
-  const products = await Product.find({}, "-reviews").lean();
+  const featuredProductsDocs = await Product.find(
+    { isFeatured: true },
+    "-reviews"
+  )
+    .lean()
+    .limit(3);
+  const topRatedProductsDocs = await Product.find({}, "-reviews")
+    .lean()
+    .sort({ rating: -1 })
+    .limit(6);
   await db.disconnect();
-  const popularProductsList = products.filter((p) => p.isPopular);
+  // const popularProductsList = products.filter((p) => p.isPopular);
 
   return {
     props: {
-      selectedProducts: popularProductsList.map(db.convertDocToObj),
+      featuredProducts: featuredProductsDocs.map(db.convertDocToObj),
+      topRatedProducts: topRatedProductsDocs.map(db.convertDocToObj),
     },
   };
 }

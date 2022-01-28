@@ -8,7 +8,7 @@ import {
   Grid,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Layout from "../components/Layout";
 import { Store } from "../context/Store";
 import Cookies from "js-cookie";
@@ -17,6 +17,7 @@ import CheckoutWizard from "../components/CheckoutWizard";
 import useStyles from "../utils/styles";
 import dynamic from "next/dynamic";
 import RTL from "../components/RTL";
+import { getAllProvince } from "../data";
 
 const ShippingPage = () => {
   const classes = useStyles();
@@ -26,6 +27,7 @@ const ShippingPage = () => {
     control,
     formState: { errors },
     setValue,
+    getValues,
     watch,
   } = useForm();
   const watchProvince = watch("province");
@@ -49,6 +51,15 @@ const ShippingPage = () => {
       setValue("phoneNumber", shippingAddress.phoneNumber);
     }
   }, []);
+
+  const [cities, setCities] = useState(null);
+
+  const getVal = getValues("province");
+  useEffect(() => {
+    if (getVal) {
+      setCities(getAllProvince().find((prov) => prov.province === getVal));
+    }
+  }, [getVal]);
 
   const submitHandler = ({
     fullName,
@@ -220,13 +231,11 @@ const ShippingPage = () => {
                         helperText={errors.province ? "استان الزامی است" : ""}
                         {...field}
                       >
-                        <MenuItem value="قم">قم</MenuItem>
-                        <MenuItem value="تهران" disabled>
-                          تهران
-                        </MenuItem>
-                        <MenuItem value="مرکزی" disabled>
-                          مرکزی
-                        </MenuItem>
+                        {getAllProvince().map((d) => (
+                          <MenuItem value={d.province} key={d.province}>
+                            {d.province}
+                          </MenuItem>
+                        ))}
                       </TextField>
                     )}
                   ></Controller>
@@ -251,47 +260,19 @@ const ShippingPage = () => {
                         helperText={errors.city ? "شهرستان الزامی است" : ""}
                         {...field}
                       >
-                        <MenuItem value="قم">قم</MenuItem>
-                        <MenuItem value="سلفچگان">سلفچگان</MenuItem>
-                        <MenuItem value="جعفریه">جعفریه</MenuItem>
-                        <MenuItem value="کهک">کهک</MenuItem>
-                        <MenuItem value="قنوات">قنوات</MenuItem>
-                        <MenuItem value="دستجرد">دستجرد</MenuItem>
+                        {cities ? (
+                          cities.city.map((c) => (
+                            <MenuItem value={c}>{c}</MenuItem>
+                          ))
+                        ) : (
+                          <MenuItem value="null">null</MenuItem>
+                        )}
                       </TextField>
                     )}
                   ></Controller>
                 </Grid>
               </Grid>
             </ListItem>
-            {/* <ListItem>
-            <Controller
-              name="city"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="city"
-                  label="شهر"
-                  placeholder="قم"
-                  error={Boolean(errors.city)}
-                  helperText={
-                    errors.city
-                      ? errors.city.type === "minLength"
-                        ? "City length is more than 1"
-                        : "City is required"
-                      : ""
-                  }
-                  {...field}
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem> */}
             <ListItem>
               <Controller
                 name="address"
@@ -349,7 +330,7 @@ const ShippingPage = () => {
                           errors.postalCode.type === "maxLength"
                           ? "کد پستی باید 10 کاراکتر باشد"
                           : errors.postalCode.type === "pattern"
-                          ? "لطفاً الگوی تلفن ثابت را رعایت کنید"
+                          ? "لطفاً الگوی کد پستی را رعایت کنید"
                           : "کد پستی الزامی است"
                         : ""
                     }
