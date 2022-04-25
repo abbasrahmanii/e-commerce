@@ -20,6 +20,7 @@ import { Store } from "../context/Store";
 import axios from "axios";
 import { Rating, Pagination } from "@mui/material";
 import RTL from "../components/RTL";
+import CardTwo from "../components/CardTwo";
 
 const PAGE_SIZE = 3;
 
@@ -120,9 +121,9 @@ const Search = (props) => {
             <List>
               <ListItem>
                 <Box className={classes.fullWidth}>
-                  <Typography>Categories</Typography>
+                  <Typography>دسته بندی ها</Typography>
                   <Select fullWidth value={category} onChange={categoryHandler}>
-                    <MenuItem value="all">All</MenuItem>
+                    <MenuItem value="all">همه</MenuItem>
                     {categories &&
                       categories.map((category) => (
                         <MenuItem key={category} value={category}>
@@ -134,9 +135,9 @@ const Search = (props) => {
               </ListItem>
               <ListItem>
                 <Box className={classes.fullWidth}>
-                  <Typography>Brands</Typography>
+                  <Typography>برند ها</Typography>
                   <Select value={brand} onChange={brandHandler} fullWidth>
-                    <MenuItem value="all">All</MenuItem>
+                    <MenuItem value="all">همه</MenuItem>
                     {brands &&
                       brands.map((brand) => (
                         <MenuItem key={brand} value={brand}>
@@ -148,9 +149,9 @@ const Search = (props) => {
               </ListItem>
               <ListItem>
                 <Box className={classes.fullWidth}>
-                  <Typography>Prices</Typography>
+                  <Typography>قیمت ها</Typography>
                   <Select value={price} onChange={priceHandler} fullWidth>
-                    <MenuItem value="all">All</MenuItem>
+                    <MenuItem value="all">همه</MenuItem>
                     {prices.map((price) => (
                       <MenuItem key={price.value} value={price.value}>
                         {price.name}
@@ -161,13 +162,13 @@ const Search = (props) => {
               </ListItem>
               <ListItem>
                 <Box className={classes.fullWidth}>
-                  <Typography>Ratings</Typography>
+                  <Typography>امتیازات</Typography>
                   <Select value={rating} onChange={ratingHandler} fullWidth>
-                    <MenuItem value="all">All</MenuItem>
+                    <MenuItem value="all">همه</MenuItem>
                     {ratings.map((rating) => (
                       <MenuItem dispaly="flex" key={rating} value={rating}>
                         <Rating value={rating} readOnly />
-                        <Typography component="span">&amp; Up</Typography>
+                        <Typography component="span">و بالاتر</Typography>
                       </MenuItem>
                     ))}
                   </Select>
@@ -178,12 +179,12 @@ const Search = (props) => {
           <Grid item md={9}>
             <Grid container justifyContent="space-between" alignItems="center">
               <Grid item>
-                {products.length === 0 ? "No" : countProducts} Results
+                {products.length === 0 ? "بدون" : countProducts} نتیجه
                 {query !== "all" && query !== "" && " : " + query}
                 {category !== "all" && " : " + category}
                 {brand !== "all" && " : " + brand}
-                {price !== "all" && " : Price " + price}
-                {rating !== "all" && " : Rating " + rating + " & up"}
+                {price !== "all" && " : قیمت " + price}
+                {rating !== "all" && " : امتیاز " + rating + " و بالاتر"}
                 {(query !== "all" && query !== "") ||
                 category !== "all" ||
                 brand !== "all" ||
@@ -196,24 +197,21 @@ const Search = (props) => {
               </Grid>
               <Grid item>
                 <Typography component="span" className={classes.sort}>
-                  Sort by
+                  مرتب سازی بر اساس
                 </Typography>
                 <Select value={sort} onChange={sortHandler}>
-                  <MenuItem value="featured">Featured</MenuItem>
-                  <MenuItem value="lowest">Price: Low to High</MenuItem>
-                  <MenuItem value="highest">Price: High to Low</MenuItem>
-                  <MenuItem value="toprated">Customer Reviews</MenuItem>
-                  <MenuItem value="newest">Newest Arrivals</MenuItem>
+                  <MenuItem value="featured">ویژه ترین</MenuItem>
+                  <MenuItem value="lowest">ارزان ‌ترین</MenuItem>
+                  <MenuItem value="highest">گران ‌ترین</MenuItem>
+                  <MenuItem value="toprated">پربازدید ترین</MenuItem>
+                  <MenuItem value="newest">جدید ترین</MenuItem>
                 </Select>
               </Grid>
             </Grid>
             <Grid className={classes.mt1} container spacing={3}>
               {products.map((product) => (
                 <Grid item md={4} key={product.name}>
-                  <ProductItem
-                    product={product}
-                    addToCartHandler={addToCartHandler}
-                  />
+                  <CardTwo key={product.id} product={product} />
                 </Grid>
               ))}
             </Grid>
